@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form id="form" >
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+
+                        <dir style="text-align: center">
+                            <h1>Supplier list</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <h:outputLabel for="txtApellido" value="Name:" style="font-weight:bold"/>
+                            <p:inputText id="txtApellido" value="#{grillaProveedoresController.nombreBuscar}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtTelefono" value="ABN:" style="font-weight:bold"/>
+                            <p:inputText id="txtTelefono" value="#{grillaProveedoresController.abnBuscar}"/>
+                            <p:column/>
+                            <p:column/>
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaProveedoresController.buscarPorFiltro()}"  update="alquilerTable labelResultado"/>
+                        </p:panelGrid>
+                        <p:commandButton style="width: auto" value="Add new supplier" icon="ui-icon-plusthick" action="DatosProveedor"/>
+                        <h:outputText id="labelResultado" value="Quantity: #{grillaProveedoresController.cantidadResultados}"/>                        
+                        <p:panel>
+                            <p:dataTable   var="cliente"  value="#{grillaProveedoresController.listaProveedoresResultado}"    id="alquilerTable" >
+                                <p:column headerText="Name" sortBy="#{cliente.apellido}" filterBy="#{cliente.apellido}" >
+                                    <h:commandLink action="DatosProveedor" actionListener="#{grillaProveedoresController.verDetalleProveedor(cliente.id)}" value="#{cliente.apellido}"/>
+                                </p:column>
+                                <p:column headerText="Address" sortBy="#{grillaProveedoresController.getAddress(cliente)}" filterBy="#{grillaProveedoresController.getAddress(cliente)}">
+                                    <h:outputText value="#{grillaProveedoresController.getAddress(cliente)}"/>
+                                </p:column>
+                                <p:column >
+                                    <p:commandLink value="Remove" action="#{grillaProveedoresController.eliminarProveedor()}" update=":form">
+                                        <p:confirm header="Confirmation"  message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                                    </p:commandLink>
+
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                    </p:confirmDialog>
+                                </p:column>                                
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

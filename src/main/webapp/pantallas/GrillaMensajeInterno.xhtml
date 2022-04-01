@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Internal note list</h1>
+                        </dir>
+                        <p:panel>
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                <h:outputLabel for="fechaInicio" value="From:" style="font-weight: bold"/>
+                                <p:calendar id="fechaInicio" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaMensajeInternoController.fechaDesde}" />
+                                <p:column/>
+                                <h:outputLabel for="fechaFin" value="To:" style="font-weight: bold"/>
+                                <p:calendar id="fechaFin" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaMensajeInternoController.fechaHasta}" />
+                                <p:column/>
+
+                                <h:outputLabel for="cmbUsuarioDesde" value="From user:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbUsuarioDesde" value="#{grillaMensajeInternoController.idUsuarioDe}" >
+                                    <f:selectItem itemLabel="All" itemValue="-1"/>
+                                    <f:selectItems value="#{grillaMensajeInternoController.listaUsuariosActivos}" var="usuarioDesddSelec" 
+                                                   itemLabel="#{usuarioDesddSelec.nombre}" itemValue="#{usuarioDesddSelec.id}" />
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <h:outputLabel for="cmbUsuarioPara" value="To user:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbUsuarioPara" disabled="#{grillaMensajeInternoController.usuarioSuper==false}" value="#{grillaMensajeInternoController.idUsuarioPara}" >
+                                    <f:selectItem itemLabel="All" itemValue="-1"/>
+                                    <f:selectItems value="#{grillaMensajeInternoController.listaUsuariosActivos}" var="usuarioParaSelec" 
+                                                   itemLabel="#{usuarioParaSelec.nombre}" itemValue="#{usuarioParaSelec.id}" />
+                                </p:selectOneMenu>
+                                <p:column/>
+
+
+                                <h:outputLabel for="txtPalabra" value="Word in the message:" style="font-weight: bold"/>
+                                <p:inputText id="txtPalabra" value="#{grillaMensajeInternoController.palabra}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtReferencia" value="Reference:" style="font-weight: bold"/>
+                                <p:inputText id="txtReferencia" value="#{grillaMensajeInternoController.idAlquiler}"/>
+                                <p:column/>
+
+                                <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaMensajeInternoController.buscarMensajesPorFiltro}"  update="noteTable"/>
+                            </p:panelGrid>
+                            <br/>
+                            <p:commandButton style="width: auto" action="DatosMensajeInterno" value="Add new conversation" icon="ui-icon-plusthick" />
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable    var="mensaje_int" value="#{grillaMensajeInternoController.listaMensajesGrilla}" id="noteTable" >
+                                <p:column headerText="Sent day" style="#{grillaMensajeInternoController.faltaLeer(mensaje_int)? 'background-color: #33cc33;':''}" >
+                                    <p:commandLink  value="#{grillaMensajeInternoController.getFechaFormato(mensaje_int)}" action="DatosMensajeInterno" actionListener="#{grillaMensajeInternoController.verMensaje(mensaje_int.id)}" />
+                                </p:column>
+
+                                <p:column headerText="Sent by">
+                                    <h:outputText value="#{mensaje_int.usuarioCreador.nombre} #{mensaje_int.usuarioCreador.apellido}" />
+                                </p:column>
+
+                                <p:column headerText="Reference">
+                                    <h:outputText  value="#{grillaMensajeInternoController.getReference(mensaje_int)}" />
+                                </p:column>
+
+                                <p:column headerText="Text">
+                                    <h:outputText value="#{mensaje_int.texto}" />
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:panel>
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

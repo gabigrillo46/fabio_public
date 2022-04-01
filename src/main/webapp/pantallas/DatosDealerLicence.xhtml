@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario">
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Dealer licence data</h1>
+                        </dir>
+                        <p:panel id="panelGrid">
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                <h:outputLabel value="Name:" for="txtNombre" style="font-weight: bold"/>
+                                <p:inputText id="txtNombre" value="#{datosDealerLicenceController.dealerLicenciaActual.nombre}" required="true" requiredMessage="Must enter a name"/>
+                                <p:message for="txtNombre"/>                                
+
+                                <h:outputLabel for="txtNumero" value="Number:" style="font-weight:bold"/>
+                                <p:inputText  id="txtNumero" value="#{datosDealerLicenceController.dealerLicenciaActual.numero}" required="true" requiredMessage="Must enter a number"/>
+                                <p:message for="txtNumero"/>
+
+                                <h:outputLabel for="fechaVencimiento" value="Expiry date:" style="font-weight: bold"/>
+                                <p:calendar mask="true" id="fechaVencimiento" navigator="true" pattern="dd-MM-yyyy" value="#{datosDealerLicenceController.dealerLicenciaActual.fecha_vencimiento}"/>
+                                <p:message for="fechaVencimiento"/>
+
+                            </p:panelGrid>
+
+                        </p:panel>
+
+                        <p:panel style="text-align: center">
+                            <p:panelGrid columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton value="Submit" style="width: auto" update="formulario:panelGrid"  rendered="#{datosDealerLicenceController.accion=='R'}" actionListener="#{datosDealerLicenceController.registrarLicencia()}"/>
+                                <p:commandButton value="Submit" style="width: auto" update="formulario:panelGrid" actionListener="#{datosDealerLicenceController.editarLicencia()}" rendered="#{datosDealerLicenceController.accion=='M'}"/>
+                                <p:commandButton value="Cancel" action="GrillaDealerLicencia" immediate="true" style="width: auto"/>
+                            </p:panelGrid>
+                        </p:panel>
+
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

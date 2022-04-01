@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                    
+                    <dir style="text-align: center">
+                        <h1>Branch list</h1>
+                    </dir>
+                    <p:panel>
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <h:outputLabel for="txtNombre" value="Name:" style="font-weight: bold"/>
+                            <p:inputText id="txtNombre" value="#{grillaSucursalesController.nombre}"/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaSucursalesController.buscarPorFiltro()}"  update="branchTable"/>
+                        </p:panelGrid>
+                        <br/>
+                        <p:commandButton value="Add new branch" icon="ui-icon-plusthick" action="DatosSucursales"/>
+                    </p:panel>
+                    <p:panel>
+                        <p:dataTable scrollable="true" scrollHeight="600" var="sucursal" value="#{grillaSucursalesController.listaSucursales}"    id="branchTable" >
+                            <p:column headerText="Number" sortBy="#{sucursal.id}" filterBy="#{sucursal.id}">
+                                <h:commandLink  action="DatosSucursales" actionListener="#{grillaSucursalesController.setSucursalSeleccionada(sucursal)}">
+                                    <h:outputText value="#{sucursal.id}" />
+                                </h:commandLink>
+                            </p:column>
+                            <p:column headerText="Branch" sortBy="#{sucursal.nombre}" filterBy="#{sucursal.nombre}">
+                                <h:outputText value="#{sucursal.nombre}" />
+                            </p:column>
+                            <p:column headerText="Address" sortBy="#{sucursal.direccion}" filterBy="#{sucursal.direccion}">
+                                <h:outputText value="#{sucursal.direccion}" />
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

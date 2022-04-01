@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form>
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Witness data</h1>
+                        </dir>
+                        <p:panel>
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:outputLabel value="Witness:" for="txtWitness" style="font-weight: bold"/>
+                                <p:inputText value="#{datosWitnessController.witnessActual.nombre}" id="txtWitness"
+                                             required="true" requiredMessage="Must enter a name"/>
+                                <p:message for="txtWitness"/>
+
+                                <p:outputLabel value="Tittle:" for="txtTittle" style="font-weight: bold"/>
+                                <p:inputText value="#{datosWitnessController.witnessActual.tittle}" id="txtTittle"/>
+                                <p:column/>
+
+                                <p:outputLabel value="Address:" for="txtAddress" style="font-weight: bold"/>
+                                <p:inputText value="#{datosWitnessController.witnessActual.direccion}" id="txtAddress"/>
+                                <p:column/>
+
+                                <p:outputLabel value="City:" for="txtCity" style="font-weight: bold"/>
+                                <p:inputText value="#{datosWitnessController.witnessActual.ciudad}" id="txtCity"/>
+                                <p:column/>
+
+                                <p:outputLabel value="Post Code:" for="txtPostCode" style="font-weight: bold"/>
+                                <p:inputText value="#{datosWitnessController.witnessActual.codigo_postal}" id="txtPostCode"/>
+                                <p:column/>
+
+                                <p:outputLabel value="State:" for="cmbState" style="font-weight: bold"/>
+                                <p:selectOneMenu id="cmbState" value="#{datosWitnessController.witnessActual.state.id}" 
+                                                 required="true" requiredMessage="Must select one">
+                                    <f:selectItems value="#{datosWitnessController.listaStates}" var="StateSelecc" 
+                                                   itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <p:outputLabel value="Country:" for="cmbPais" style="font-weight: bold"/>
+                                <p:selectOneMenu id="cmbPais" value="#{datosWitnessController.witnessActual.pais.id}" 
+                                                 required="true" requiredMessage="Must select one">
+                                    <f:selectItems value="#{datosWitnessController.listaPaises}" var="PaisSelecc" 
+                                                   itemLabel="#{PaisSelecc.nombre}" itemValue="#{PaisSelecc.id}" />
+                                </p:selectOneMenu>
+                                <p:column/>
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:panel style="text-align: center">
+                            <p:panelGrid columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton value="Cancel" action="GrillaWitness" immediate="true" style="width: auto"/>
+                                <p:commandButton value="Submit" update="grid"  rendered="#{datosWitnessController.accion=='R'}" actionListener="#{datosWitnessController.registrarWitness()}" style="width: auto"/>
+                                <p:commandButton value="Submit" update="grid" actionListener="#{datosWitnessController.editarWitness()}" rendered="#{datosWitnessController.accion=='M'}" style="width: auto"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

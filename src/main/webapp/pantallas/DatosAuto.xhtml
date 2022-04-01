@@ -1,0 +1,772 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <style type="text/css">
+            .panelGridCenter {
+                margin: 0 auto;
+            }            
+        </style>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario">
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" severity="info, warn" >
+                            <p:autoUpdate/>
+                        </p:growl>
+                        <dir style="text-align: center">
+                            <h1>Car data</h1>
+                        </dir>
+                        <p:commandButton style="width: auto" value="View agreement" icon="ui-icon-plusthick" actionListener="#{datosAutoController.verDetalleAlquiler()}" rendered="#{datosAutoController.mostrarVerAlquiler}"/>
+                        <p:outputLabel id="mensajeFormulario" value="#{datosAutoController.mensajeFormulario}" style="background-color: #ff4d4d" />
+                        <p:tabView id="tabvi">
+                            <p:tab title="Car detail" id="carDetail">
+
+                                <p:panel>
+                                    <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                        <h:outputLabel for="txtRego" value="REGO:" style="font-weight:bold"/>
+                                        <p:inputText id="txtRego"  value="#{datosAutoController.auto.rego}" >
+                                            <p:ajax event="blur" listener="#{datosAutoController.ponerRegoMayuscula()}" update="txtRego formulario:mensajeFormulario"/>
+                                        </p:inputText>
+                                        <p:column/>
+
+                                        <h:outputLabel for="fechaFin" value="Expiration date Rego:" style="font-weight: bold"/>
+                                        <p:calendar mask="true" id="fechaFin" navigator="true" pattern="dd-MM-yyyy" value="#{datosAutoController.auto.fecha_vencimiento_rego}"/>
+                                        <p:message for="fechaFin"/>
+                                        <h:outputLabel for="cmbState" value="State:" style="font-weight:bold"/>
+                                        <p:selectOneMenu id="cmbState" value="#{datosAutoController.auto.state.id}" 
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosAutoController.listaStates}" var="StateSelecc" 
+                                                           itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                                        </p:selectOneMenu>
+                                        <p:message for="cmbState"/>
+                                        <h:outputLabel for="VIN" value="VIN:" style="font-weight: bold"/>
+                                        <p:inputText id="VIN" value="#{datosAutoController.auto.VIN}" maxlength="40" >
+                                            <p:ajax event="blur" listener="#{datosAutoController.ponerVINMayuscula()}" update="nroChasis VIN formulario:mensajeFormulario"/>
+                                        </p:inputText>
+                                        <p:message for="VIN"/>
+                                        <h:outputLabel for="cmbDrivetra" value="Drivetrain:" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbDrivetra" value="#{datosAutoController.auto.drivetrain.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosAutoController.listaDrivetrain}" var="driveSelecc"
+                                                           itemLabel="#{driveSelecc.nombre}" itemValue="#{driveSelecc.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:column/>   
+                                        <h:outputLabel for="cmMarca" value="Brand:" style="font-weight:bold"/>
+                                        <p:selectOneMenu id="cmMarca" value="#{datosAutoController.auto.marca.id}" 
+                                                         required="true" requiredMessage="Must select one" >
+
+                                            <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                            <f:selectItems value="#{datosAutoController.listaMarcas}" var="marcaSelecc" 
+                                                           itemLabel="#{marcaSelecc.nombre}" itemValue="#{marcaSelecc.id}" />
+                                            <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                            <p:ajax update="cmbModelo"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cmMarca"/>
+                                        <h:outputLabel for="cmbModelo" value="Model:" style="font-weight:bold"/>
+                                        <p:selectOneMenu id="cmbModelo" value="#{datosAutoController.auto.modelo.id}" 
+                                                         required="true" requiredMessage="Must select one" >
+                                            <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                            <f:selectItems value="#{datosAutoController.modelosDeMarca}" var="modeloSelecc" 
+                                                           itemLabel="#{modeloSelecc.nombre}" itemValue="#{modeloSelecc.id}" />
+                                            <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cmbModelo"/>
+                                        <h:outputLabel for="nroMotor" value="Engine No.:" style="font-weight: bold"/>
+                                        <p:inputText id="nroMotor" value="#{datosAutoController.auto.nro_motor}" maxlength="40" >
+                                            <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                        </p:inputText>
+                                        <p:message for="nroMotor"/>
+                                        <h:outputLabel for="nroChasis" value="Chassis No:" style="font-weight: bold"/>
+                                        <p:inputText id="nroChasis" value="#{datosAutoController.auto.nro_chasis}" maxlength="40" />
+                                        <p:message for="nroChasis"/>
+
+                                        <h:outputLabel for="cmbTipoCombustible" value="Fuel Type:" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbTipoCombustible" value="#{datosAutoController.auto.tipo_combustible.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosAutoController.listaTipoCombustibles}" var="tipoCombustibleSelecc"
+                                                           itemLabel="#{tipoCombustibleSelecc.nombre}" itemValue="#{tipoCombustibleSelecc.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:column/>
+                                        <h:outputLabel for="año" value="Year:" style="font-weight: bold"/>
+                                        <p:inputMask mask="9999" id="año" value="#{datosAutoController.auto.año}" >
+                                            <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                        </p:inputMask>
+                                        <p:column/>
+                                        <h:outputLabel for="color" value="Colour:" style="font-weight: bold"/>
+                                        <p:inputText id="color" value="#{datosAutoController.auto.color}" />
+                                        <p:column/>
+                                        <h:outputLabel for="kms" value="Current Mileage:" style="font-weight: bold"/>
+                                        <p:inputText id="kms" value="#{datosAutoController.auto.kilometraje}" >
+                                            <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                        </p:inputText>
+                                        <p:column/>
+                                        <h:outputLabel for="cmbBodyType" value="Body Type:" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbBodyType" value="#{datosAutoController.auto.tipo_body.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosAutoController.listaTipoAutos}" var="tipoBody"
+                                                           itemLabel="#{tipoBody.nombre}" itemValue="#{tipoBody.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:column/>
+                                        <h:outputLabel for="cmbSucursal" value="Branch:" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbSucursal" value="#{datosAutoController.auto.sucursal.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosAutoController.listaSucursales}" var="sucursalSelecc"
+                                                           itemLabel="#{sucursalSelecc.nombre}" itemValue="#{sucursalSelecc.id}"/>                                            
+                                        </p:selectOneMenu>
+                                        <p:column/>    
+                                        <h:outputLabel for="txtStockAuto" value="Number Stock:" style="font-weight: bold"/>
+                                        <p:inputText id="txtStockAuto" value="#{datosAutoController.auto.stock}">
+                                            <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                        </p:inputText>
+                                        <p:message for="txtStockAuto"/>
+                                        <h:outputLabel for="cmbTransmision" value="Transmission:" style="font-weight: bold"/>
+                                        <p:selectOneRadio id="cmbTransmision" value="#{datosAutoController.auto.transmision}"
+                                                          >
+                                            <f:selectItem itemLabel="Auto" itemValue="0"/>
+                                            <f:selectItem itemLabel="Manual" itemValue="1"/>
+                                        </p:selectOneRadio>
+                                        <p:column/>
+
+                                        <h:outputLabel for="cmbAire" value="Air conditioning:" style="font-weight: bold"/>
+                                        <p:selectOneRadio id="cmbAire" value="#{datosAutoController.auto.aire_acondicionado}"
+                                                          >
+                                            <f:selectItem itemLabel="Yes" itemValue="0"/>
+                                            <f:selectItem itemLabel="No" itemValue="1"/>
+                                        </p:selectOneRadio>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtGrabado" value="Car encumbered:" style="font-weight: bold"/>
+                                        <p:inputText id="txtGrabado" value="#{datosAutoController.auto.grabado}" />
+                                        <p:message for="txtGrabado"/>
+
+                                        <h:outputLabel for="txtCilindros" value="Cylinders:" style="font-weight: bold"/>
+                                        <p:inputText id="txtCilindros" value="#{datosAutoController.auto.cilindros}"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtPuertas" value="Doors:" style="font-weight: bold"/>
+                                        <p:inputNumber id="txtPuertas" value="#{datosAutoController.auto.puertas}" decimalPlaces="0"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtAsientos" value="Seat capacity" style="font-weight: bold"/>
+                                        <p:inputNumber id="txtAsientos" value="#{datosAutoController.auto.asientos}" decimalPlaces="0"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtMotor" value="Engine Size" style="font-weight: bold"/>
+                                        <p:inputText id="txtMotor" value="#{datosAutoController.auto.motor}"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="buildDate" value="Build date:" style="font-weight: bold"/>
+                                        <p:calendar id="buildDate" mask="true" navigator="true" pattern="MM-yyyy" value="#{datosAutoController.auto.buildDate}"
+                                                    required="true" requiredMessage="You have to enter the build date">
+                                            <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                        </p:calendar>
+                                        <p:message for="buildDate"/>
+
+                                        <h:outputLabel for="complianceDate" value="Compliance date:" style="font-weight: bold"/>
+                                        <p:calendar id="complianceDate"  mask="true" navigator="true" pattern="MM-yyyy" value="#{datosAutoController.auto.compliance}"
+                                                    required="true" requiredMessage="You have to enter the compliance date"/>
+                                        <p:message for="complianceDate"/>
+
+                                    </p:panelGrid>
+
+                                </p:panel>
+                            </p:tab>
+                            <p:tab id="features" title="Features">
+                                <p:selectManyCheckbox id="grid2" value="#{datosAutoController.listaOpcionesSeleccionadas}" layout="responsive" columns="3">
+                                    <f:selectItems value="#{datosAutoController.listaOpciones}" var="opcion" itemLabel="#{opcion.nombre}" itemValue="#{opcion.id}" />
+                                </p:selectManyCheckbox>
+                            </p:tab>
+                            <p:tab id="detail" title="Advertising">   
+                                <h:panelGrid id="gridAdv"   columns="5" >
+                                    <p:selectBooleanCheckbox value="#{datosAutoController.auto.usoDescripcionEspecifica}" itemLabel="Use specific description for this car"/>
+
+                                    <p:selectBooleanCheckbox value="#{datosAutoController.auto.disponible}" itemLabel="Available"/>
+
+                                    <h:outputLabel for="cmbLabel" value="Label:" />
+                                    <p:selectOneMenu id="cmbLabel" style="width: auto" value="#{datosAutoController.auto.label.id}">
+                                        <f:selectItem itemLabel="None" itemValue="-1" />
+                                        <f:selectItems value="#{datosAutoController.listaLabels}" var="labelSelecc"
+                                                       itemLabel="#{labelSelecc.nombre}" itemValue="#{labelSelecc.id}"/>
+                                    </p:selectOneMenu>
+                                    <p:column/>
+                                </h:panelGrid>
+
+                                <h3 class="first">Custom Toolbar</h3>
+                                <p:textEditor secure="false"  widgetVar="editor2" value="#{datosAutoController.auto.descripcion}" height="300" placeholder="Enter your content" >
+                                    <f:facet name="toolbar">
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                            <button class="ql-strike"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-font"></select>
+                                            <select class="ql-size"></select>
+                                        </span>
+                                    </f:facet>
+                                </p:textEditor>
+                            </p:tab>
+                            <p:tab id="pictures" title="Pictures">
+                                <p:dataTable id="archivos" var="autoImagen" value="#{datosAutoController.listaAutoImagenes}" draggableRows="true">
+                                    <p:ajax event="rowReorder" listener="#{datosAutoController.onRowReorder}"  update="formulario:tabvi:galeria" />
+
+                                    <p:column headerText="Name">
+                                        <p:graphicImage name="#{autoImagen.url}" 
+                                                        width="45" style="vertical-align: middle"/>
+                                        <h:outputText value="#{autoImagen.url}" />
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectBooleanCheckbox value="#{autoImagen.publico}" itemLabel="Public">
+                                            <p:ajax listener="#{datosAutoController.imagenInterna(autoImagen)}"/>
+                                        </p:selectBooleanCheckbox>
+                                    </p:column>
+
+                                    <p:column>
+                                        <p:commandButton immediate="true" value="Remove" style="width: auto" update="archivos formulario:tabvi:galeria"  actionListener="#{datosAutoController.eliminarImagenProducto(autoImagen)}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <p:fileUpload listener="#{datosAutoController.handleFileUpload}" mode="advanced" dragDropSupport="false" multiple="true" 
+                                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update="galeria archivos" />
+                                <p:galleria id="galeria" value="#{datosAutoController.listaAutoImagenes}" style="margin: 0" var="image" panelWidth="900" panelHeight="900" >
+                                    <p:graphicImage name="#{image.url}" style="vertical-align: middle"  />
+                                </p:galleria>
+
+                                <p:growl id="messages" showDetail="true"/>
+                            </p:tab>
+                            <p:tab id="precios" title="Price">
+                                <p:panelGrid id="gridPrecios" columns="9" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                    <h:outputLabel for="txtDescripcionPrecio" value="Description:" style="font-weight: bold"/>
+                                    <p:inputText id="txtDescripcionPrecio" value="#{datosAutoController.autoPrecioActual.descripcion}"/>
+                                    <p:message for="txtDescripcionPrecio"/>
+
+                                    <h:outputLabel for="txtMontoPrecio" value="Amount:" style="font-weight: bold"/>
+                                    <p:inputNumber id="txtMontoPrecio" decimalPlaces="2" value="#{datosAutoController.autoPrecioActual.monto}" maxValue="2000000" label="$" />
+                                    <p:message for="txtMontoPrecio"/>
+                                    <h:outputLabel value="Time:" for="cmbTime" style="font-weight:bold"/>
+                                    <p:selectOneMenu id="cmbTime" value="#{datosAutoController.autoPrecioActual.tipo_tiempo}" style="width: auto">
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <f:selectItem itemLabel="Retail" itemValue="5" />
+                                        <f:selectItem itemLabel="Daily" itemValue="1" />
+                                        <f:selectItem itemLabel="Weekly" itemValue="2" />                                        
+                                        <f:selectItem itemLabel="Monthly" itemValue="3" />                                        
+                                        <f:selectItem itemLabel="Annually" itemValue="4" />
+                                    </p:selectOneMenu>
+                                    <p:selectBooleanCheckbox  id="defectoPrecio" style="font-weight: bold" value="#{datosAutoController.autoPrecioActual.defecto}" itemLabel="Default"/>
+                                    <p:commandButton value="Add" style="width: auto" update="tablaPrecios gridPrecios"   actionListener="#{datosAutoController.agregarPrecioAuto()}"/>
+                                </p:panelGrid>
+                                <p:dataTable id="tablaPrecios" var="autoPrecio" value="#{datosAutoController.listaAutosPrecio}" >
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{autoPrecio.descripcion}" />
+                                    </p:column>
+                                    <p:column headerText="Amount">
+                                        <h:outputText value="$ #{autoPrecio.monto}" />
+                                    </p:column>
+                                    <p:column headerText="Time">
+                                        <h:outputText value="#{datosAutoController.getDescripcionTipoTiempo(autoPrecio.tipo_tiempo)}" />
+                                    </p:column>
+                                    <p:column headerText="Default">
+                                        <h:outputText value="#{datosAutoController.getStrDefecto(autoPrecio)}" />
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton immediate="true" value="Remove" style="width: auto" update="tablaPrecios"  actionListener="#{datosAutoController.eliminarPrecioAuto(autoPrecio)}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <h2>Estimated Profit</h2>
+                                <p:panelGrid columns="2"  layout="grid" style="width: 40%; margin-top: 10px"   >
+                                    <h:outputLabel value="Car cost"  />
+                                    <h:outputLabel value="$ #{datosAutoController.precioCostoAuto}" />
+
+                                    <h:outputLabel for="txtLoad" value="Lot Load Fund" />
+                                    <p:inputNumber id="txtLoad" decimalPlaces="2" symbol="$" symbolPosition="p" value="#{datosAutoController.precioLoad}" maxValue="2000000" label="$" >
+                                        <p:ajax event="blur"  update="precioTotalAuto profitConGST profitSinGST"/>
+                                    </p:inputNumber>
+
+                                    <h:outputLabel for="txtWarranty" value="Warranty Allowance" />
+                                    <p:inputNumber id="txtWarranty" decimalPlaces="2" symbol="$" symbolPosition="p" value="#{datosAutoController.precioWarranty}" maxValue="2000000" label="$" >
+                                        <p:ajax event="blur"  update="precioTotalAuto profitConGST profitSinGST"/>
+                                    </p:inputNumber>
+
+                                    <h:outputLabel value="Expenses"  />
+                                    <h:outputLabel value="$ #{datosAutoController.precioExpenses}" />
+
+                                    <p:column/>
+                                    <p:separator/>
+
+                                    <h:outputLabel value="Total Cost car"  style="font-weight:bold"/>
+                                    <h:outputLabel id="precioTotalAuto" value="$ #{datosAutoController.precioTotalCost}" style="font-weight:bold"/>
+
+                                    <p:column/>
+                                    <p:column/>
+
+
+                                    <h:outputLabel value="Net Selling Price"  style="font-weight:bold"/>
+                                    <h:outputLabel value="$ #{datosAutoController.precioDefectoAuto}" style="font-weight:bold"/>
+
+                                    <p:column/>
+                                    <p:separator/>
+
+                                    <h:outputLabel value="Profit (Inc GST)"  style="font-weight:bold"/>
+                                    <h:outputLabel id="profitConGST" value="$ #{datosAutoController.precioProfitConGST}" style="font-weight:bold"/>
+
+                                    <p:column/>
+                                    <p:column/>
+
+                                    <h:outputLabel value="GST Credit from Purchases"  />
+                                    <h:outputLabel value="$ #{datosAutoController.precioGstCreditFromCost}" />
+
+                                    <h:outputLabel value="GST Debit from Sales"  />
+                                    <h:outputLabel value="$ #{datosAutoController.precioGstDebitFromSale}" />
+
+                                    <p:column/>
+                                    <p:separator/>
+
+                                    <h:outputLabel value="Profit (Ex GST)" style="#{datosAutoController.esProfitPositivo()? 'color: #db1818;':'color: #2eb86a;'};font-weight:bold"/>
+                                    <h:outputLabel id="profitSinGST" value="$ #{datosAutoController.precioProfitSinGST}" style="#{datosAutoController.esProfitPositivo()? 'color: #db1818;':'color: #2eb86a;'};font-weight:bold"/>
+                                </p:panelGrid>
+
+
+                            </p:tab>
+                            <p:tab id="compra" title="Purchase">
+                                <p:panelGrid id="gridPurchase" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                    <h:outputLabel for="txtNombre" value="Supplier name:" style="font-weight: bold"/>
+                                    <p:autoComplete id="txtNombre" value="#{datosAutoController.proveedorActual.apellido}"  completeMethod="#{datosAutoController.completeTextNombreProveedor}">
+                                        <p:ajax event="itemSelect" listener="#{datosAutoController.onProveedorSelectNombre}" update="formulario:tabvi:gridPurchase" />                                 
+                                    </p:autoComplete>
+                                    <p:commandButton  style="width: auto" value="Add new supplier" icon="ui-icon-plusthick" action="#{datosAutoController.nuevoProveedor()}"/>
+
+                                    <h:outputLabel for="txtDireccionContacto" value="Address" style="font-weight: bold"/>
+                                    <p:inputText id="txtDireccionContacto" value="#{datosAutoController.proveedorActual.direccion}" readonly="true"/>
+                                    <p:column/>
+                                    <h:outputLabel for="valorCompra" value="Acquisition Cost" style="font-weight: bold"/>                                    
+                                    <p:inputNumber id="valorCompra" value="#{datosAutoController.auto.valor_compra}" symbol="$" 
+                                                   symbolPosition="p" required="true" emptyValue="empty">
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:inputNumber>
+                                    <p:message for="valorCompra"/>
+                                    <h:outputLabel for="fechaCompra" value="Purchase date:" style="font-weight: bold"/>
+                                    <p:calendar mask="true" id="fechaCompra" navigator="true" pattern="dd-MM-yyyy" value="#{datosAutoController.auto.fecha_compra}"/>
+                                    <p:message for="fechaCompra"/>
+                                    <h:outputLabel for="cmbTipoCompra" value="Type:" style="font-weight: bold"/>
+                                    <p:selectOneMenu id="cmbTipoCompra" style="width: auto" value="#{datosAutoController.auto.tipoCompra.id}">
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <f:selectItems value="#{datosAutoController.listaTipoCompra}" var="tipoCompra"
+                                                       itemLabel="#{tipoCompra.nombre}" itemValue="#{tipoCompra.id}"/>
+                                    </p:selectOneMenu>
+                                    <p:column/>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="ppsr" title="PPSR">
+                                <p:panelGrid id="gridppsr" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                    <h:outputLabel for="txtNumeroCertificado" value="Certificate Number" style="font-weight: bold"/>
+                                    <p:inputText id="txtNumeroCertificado" value="#{datosAutoController.auto.certificate_number}" >
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:inputText>
+                                    <p:column/>
+                                    <h:outputLabel for="fechaCertificado" value="Certificate date:" style="font-weight: bold"/>
+                                    <p:calendar mask="true" id="fechaCertificado" navigator="true" pattern="dd-MM-yyyy" value="#{datosAutoController.auto.certificate_date}"/>
+                                    <p:message for="fechaCertificado"/>
+                                    <p:column/>
+                                    <p:selectBooleanCheckbox  id="writtenOff" style="font-weight: bold" value="#{datosAutoController.auto.written_off}" itemLabel="Written off">
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:selectBooleanCheckbox>
+                                    <p:column/>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="notice" title="Notice" >
+                                <p:column/>
+                                <p:selectBooleanCheckbox  id="waterDamage" style="font-weight: bold" value="#{datosAutoController.auto.water_damage}" itemLabel="Water damage">
+                                    <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                </p:selectBooleanCheckbox>
+                                <p:column/>
+                                <p:column/>
+                                <p:selectBooleanCheckbox  id="majorModifications" style="font-weight: bold" value="#{datosAutoController.auto.major_damage}" itemLabel="Major modifications">
+                                    <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                </p:selectBooleanCheckbox>
+                                <p:column/>
+                                <p:column/>
+                                <p:selectBooleanCheckbox  id="importedSecondHand" style="font-weight: bold" value="#{datosAutoController.auto.imported_second_hand}" itemLabel="Imported second hand">
+                                    <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                </p:selectBooleanCheckbox>
+                                <p:column/>
+                                <p:panel>
+                                    <p:commandButton value="Add new notice" icon="ui-icon-plusthick" actionListener="#{datosAutoController.generarNotice(true)}" rendered="#{datosAutoController.mostrarGenerarNotice}" update="formTable formulario:mensajeFormulario" style="width: auto">
+                                        <p:confirm header="Confirmation"  message="Are you sure?" icon="pi pi-exclamation-triangle" /> 
+                                    </p:commandButton>
+
+                                </p:panel>
+                                <p:panel>
+                                    <p:dataTable var="formulario" value="#{datosAutoController.listaFormulariosAuto}"    id="formTable" >
+                                        <p:column headerText="Number" sortBy="#{formulario.id}" filterBy="#{formulario.id}">
+                                            <h:outputText value="#{formulario.id}" />
+                                        </p:column>
+                                        <p:column headerText="Status" sortBy="#{datosAutoController.getEstadoStrFormulario(formulario)}" filterBy="#{datosAutoController.getEstadoStrFormulario(formulario)}">
+                                            <h:outputText value="#{datosAutoController.getEstadoStrFormulario(formulario)}" />
+                                        </p:column>
+                                        <p:column headerText="Date of creation" sortBy="#{datosAutoController.getFechaCreacionFormulario(formulario)}" filterBy="#{datosAutoController.getFechaCreacionFormulario(formulario)}">
+                                            <h:outputText value="#{datosAutoController.getFechaCreacionFormulario(formulario)}" />
+                                        </p:column>
+                                        <p:column headerText="Rego" sortBy="#{formulario.rego}" filterBy="#{formulario.rego}">
+                                            <h:outputText value="#{formulario.rego}" />
+                                        </p:column>
+                                        <p:column>   
+                                            <p:commandButton  value="Print" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{datosAutoController.imprimir(formulario.id)}" style="width: auto"  />
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panel>                                
+                            </p:tab>
+                            <p:tab id="sale" title="Sale">
+                                <p:commandButton value="Add new sale" style="width: auto" update="formulario"  rendered="#{datosAutoController.mostrarBotonNuevaVenta}" actionListener="#{datosAutoController.nuevaVenta()}"/>
+                                <p:panelGrid id="gridSale" rendered="#{datosAutoController.mostrarGrillaVenta}" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                    <h:outputLabel for="proposalDate" value="Proposal date:" style="font-weight: bold"/>
+                                    <p:calendar mask="true" id="proposalDate" navigator="true" pattern="dd-MM-yyyy" value="#{datosAutoController.ventaActual.proposal_date}"/>
+                                    <p:message for="proposalDate"/>
+                                    <h:outputLabel for="fechaVenta" value="Sale date:" style="font-weight: bold"/>
+                                    <p:calendar mask="true" id="fechaVenta" navigator="true" pattern="dd-MM-yyyy" value="#{datosAutoController.ventaActual.fecha}">
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:calendar>
+                                    <p:message for="fechaVenta"/>
+
+                                    <h:outputLabel for="valorVenta" value="Sale price" style="font-weight: bold"/>                                    
+                                    <p:inputNumber id="valorVenta" value="#{datosAutoController.ventaActual.valor}" symbol="$" 
+                                                   symbolPosition="p" required="true" emptyValue="empty">
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:inputNumber>
+                                    <p:message for="valorVenta"/>
+
+                                    <h:outputLabel for="saleKMS" value="Sale Mileage:" style="font-weight: bold"/>
+                                    <p:inputText id="saleKMS" value="#{datosAutoController.ventaActual.car_odometer}" >
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:inputText>
+                                    <p:column/>
+
+                                    <h:outputLabel for="montoPagado" value="Amount paid" style="font-weight: bold"/>                                    
+                                    <p:inputNumber id="montoPagado" value="#{datosAutoController.ventaActual.monto_pagado}" symbol="$" 
+                                                   symbolPosition="p" required="true" emptyValue="empty">
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:inputNumber>
+                                    <p:message for="montoPagado"/>                                    
+                                    <h:outputLabel for="EstDeliveryDate" value="Delivery date:" style="font-weight: bold"/>
+                                    <p:calendar mask="true" id="EstDeliveryDate" navigator="true" pattern="dd-MM-yyyy" value="#{datosAutoController.ventaActual.fecha_delivery}"/>
+                                    <p:message for="EstDeliveryDate"/>
+
+                                    <h3>RMS</h3>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <h:outputLabel for="RMSNumber" value="RMS certificate number:" style="font-weight: bold"/>
+                                    <p:inputText id="RMSNumber" value="#{datosAutoController.ventaActual.rms_codigo}" >
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:inputText>
+                                    <p:column/>
+                                    <h:outputLabel for="RMSDate" value="RMS certificate date:" style="font-weight: bold"/>
+                                    <p:calendar mask="true" id="RMSDate" navigator="true" pattern="dd-MM-yyyy" value="#{datosAutoController.ventaActual.rms_fecha}">
+                                        <p:ajax event="blur" listener="#{datosAutoController.actualizarMensaje()}" update="formulario:mensajeFormulario"/>
+                                    </p:calendar>
+                                    <p:message for="RMSDate"/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                </p:panelGrid>
+
+                                <h:panelGrid columns="2"  rendered="#{datosAutoController.mostrarGrillaVenta}" style="margin-bottom:10px" cellpadding="5">
+                                    <p:outputLabel for="tipoCliente" value="Type client:" />
+                                    <p:selectOneRadio id="tipoCliente" value="#{datosAutoController.tipoCliente}" >
+                                        <p:ajax update="gridCliente"/>
+                                        <f:selectItem itemLabel="Customer" itemValue="0" />
+                                        <f:selectItem itemLabel="Dealer" itemValue="1" />
+                                        <f:selectItem itemLabel="Corporation" itemValue="2" />
+                                    </p:selectOneRadio>
+                                </h:panelGrid>
+
+                                <p:panelGrid id="gridCliente" rendered="#{datosAutoController.mostrarGrillaVenta}" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                    <h3>Client</h3>
+
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+
+
+                                    <p:outputLabel  value="Last  name:" for="txtApellidoCliente" style="font-weight: bold " rendered="#{datosAutoController.esCustomer}"/>
+                                    <p:outputLabel  value="Name:" for="txtApellidoCliente" style="font-weight: bold " rendered="#{datosAutoController.esCustomer==false}"/>
+                                    <p:autoComplete  id="txtApellidoCliente"   value="#{datosAutoController.clienteActualVenta.apellido}" completeMethod="#{datosAutoController.completeTextCliente}" >
+                                        <p:ajax event="itemSelect" listener="#{datosAutoController.onClienteSeleccionado}" update="gridCliente" />
+                                    </p:autoComplete>
+                                    <p:message for="txtApellidoCliente"/>
+
+                                    <h:outputLabel value="First name" for="txtNombreCliente" style="font-weight: bold" rendered="#{datosAutoController.esCustomer}"/>
+                                    <p:inputText id="txtNombreCliente" value="#{datosAutoController.clienteActualVenta.nombre}"  rendered="#{datosAutoController.esCustomer}" >
+                                        <p:ajax event="blur" listener="#{datosAutoController.buscarClienteApellidoNombre}" update="gridCliente" />
+                                    </p:inputText>
+                                    <p:message for="txtNombreCliente" rendered="#{datosAutoController.esCustomer}"/>		
+
+                                    <h:outputLabel for="fechaNacimientoCliente" value="DOB:" style="font-weight: bold" rendered="#{datosAutoController.esCustomer}" />
+                                    <p:calendar  mask="true" yearRange="c-100:c" id="fechaNacimientoCliente" navigator="true" rendered="#{datosAutoController.esCustomer}" pattern="dd-MM-yyyy" value="#{datosAutoController.clienteActualVenta.DOB}" />
+                                    <p:column rendered="#{datosAutoController.esCustomer}"/>     
+
+
+                                    <h:outputLabel value="Phone:" for="txtTelefonoCliente" style="font-weight: bold"/>
+                                    <p:inputText id="txtTelefonoCliente" value="#{datosAutoController.clienteActualVenta.telefono}"/>
+                                    <p:message for="txtTelefonoCliente" />
+
+                                    <h:outputLabel value="Mobile:"  for="txtMovilCliente" style="font-weight: bold"/>
+                                    <p:inputText id="txtMovilCliente" value="#{datosAutoController.clienteActualVenta.movil}"/>
+                                    <p:column/>
+
+                                    <h:outputLabel value="License No:" for="txtNumeroLicenciaCliente" style="font-weight: bold" rendered="#{datosAutoController.esCustomer}"/>
+                                    <p:inputText id="txtNumeroLicenciaCliente" value="#{datosAutoController.clienteActualVenta.licencia_numero}" rendered="#{datosAutoController.esCustomer}"/>
+                                    <p:message for="txtNumeroLicenciaCliente" rendered="#{datosAutoController.esCustomer}"/>
+
+                                    <h:outputLabel for="txtOtorgadaEN" rendered="#{datosAutoController.esCustomer}" value="Granted in" style="font-weight:bold"/>
+                                    <p:inputText id="txtOtorgadaEN" value="#{datosAutoController.clienteActualVenta.otorgadaEN}" rendered="#{datosAutoController.esCustomer}" />
+                                    <p:message for="txtOtorgadaEN" rendered="#{datosAutoController.esCustomer}"  />
+
+                                    <h:outputLabel for="txtDireccion" value="Address:" style="font-weight: bold"/>
+                                    <p:inputText id="txtDireccion" value="#{datosAutoController.clienteActualVenta.direccion}"/>
+                                    <p:message for="txtDireccion"/>
+
+                                    <h:outputLabel for="txtSuburbio" value="Suburb:" style="font-weight: bold"/>
+                                    <p:inputText id="txtSuburbio" value="#{datosAutoController.clienteActualVenta.suburbio}" />
+                                    <p:message for="txtSuburbio"/>
+
+                                    <h:outputLabel for="cmbStateCliente" value="State" style="font-weight:bold"/>
+                                    <p:selectOneMenu id="cmbStateCliente" value="#{datosAutoController.clienteActualVenta.state.id}">
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <f:selectItems value="#{datosAutoController.listaStates}" var="StateSelecc" 
+                                                       itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                                    </p:selectOneMenu>
+                                    <p:column/>
+
+                                    <h:outputLabel for="txtPostCode" value="Postcode:" style="font-weight: bold"/>
+                                    <p:inputText id="txtPostCode" value="#{datosAutoController.clienteActualVenta.codigo_postal}"/>
+                                    <p:message for="txtPostCode"/>
+
+                                    <h:outputLabel value="Country:" for="txtPais" style="font-weight: bold"/>
+                                    <p:inputText id="txtPais" value="#{datosAutoController.clienteActualVenta.pais}"/>
+                                    <p:message for="txtPais"/>
+
+                                    <h:outputLabel value="ABN:" for="txtABN" style="font-weight: bold" rendered="#{datosAutoController.esCustomer==false}"/>
+                                    <p:inputText id="txtABN" value="#{datosAutoController.clienteActualVenta.abn}" rendered="#{datosAutoController.esCustomer==false}"/>
+                                    <p:message for="txtABN" rendered="#{datosAutoController.esCustomer==false}"/>
+
+                                    <h:outputLabel value="ACN:" for="txtACN" rendered="#{datosAutoController.esCustomer==false}" style="font-weight: bold"/>
+                                    <p:inputText id="txtACN" value="#{datosAutoController.clienteActualVenta.acn}" rendered="#{datosAutoController.esCustomer==false}"/>
+                                    <p:message for="txtACN" rendered="#{datosAutoController.esCustomer==false}"/>
+
+                                    <h:outputLabel value="Dealer licence:" rendered="#{datosAutoController.esCustomer==false}" for="txtDealerLicence" style="font-weight: bold"/>
+                                    <p:inputText id="txtDealerLicence" value="#{datosAutoController.clienteActualVenta.dealer_licence}" rendered="#{datosAutoController.esCustomer==false}" />
+                                    <p:message for="txtDealerLicence" rendered="#{datosAutoController.esCustomer==false}"/>
+
+                                    <p:column/>
+                                    <p:column rendered="#{datosAutoController.esCustomer==false}" />
+                                    <p:column rendered="#{datosAutoController.esCustomer==false}"/>
+                                    <p:column rendered="#{datosAutoController.esCustomer==false}"/>                                    
+
+
+
+                                </p:panelGrid> 
+                                <p:panelGrid id="gridDeliveryTo" rendered="#{datosAutoController.mostrarGrillaVenta}" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                    <h3>Delivery To</h3>
+
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <h:outputLabel value="Name:"  for="txtDeliveryName" style="font-weight: bold"/>
+                                    <p:inputText id="txtDeliveryName" value="#{datosAutoController.ventaActual.delivery_name}"/>
+                                    <p:message for="txtDeliveryName" />
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <h:outputLabel value="Address:"  for="txtDeliveryAddress" style="font-weight: bold"/>
+                                    <p:inputText id="txtDeliveryAddress" value="#{datosAutoController.ventaActual.delivery_address}"/>
+                                    <p:message for="txtDeliveryAddress" />
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <h:outputLabel value="ABN:"  for="txtDeliveryABN" style="font-weight: bold"/>
+                                    <p:inputText id="txtDeliveryABN" value="#{datosAutoController.ventaActual.delivery_abn}"/>
+                                    <p:message for="txtDeliveryABN" />
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:column/>
+                                    <p:commandButton value="Submit sale" style="width: auto" update="formulario" actionListener="#{datosAutoController.aceptarVenta()}"/>
+                                    <p:column/>
+                                    <p:commandButton value="Cancel sale" style="width: auto" update="formulario" actionListener="#{datosAutoController.cancelarVenta()}">
+                                        <p:confirm header="Confirmation"  message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                                    </p:commandButton>
+                                    <p:column/>
+                                    <p:commandButton value="Print forms" style="width: auto" onclick="PF('dlg2').show();"  rendered="#{datosAutoController.mostrarBotonImprimirFormulario}"/>
+
+
+
+
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="gastos" title="Expenses">
+
+                                <p:commandButton  style="width: auto" value="Add new expense" icon="ui-icon-plusthick" action="#{datosAutoController.nuevoExpense()}" update="formulario"/>
+                                <p:panel id="panelExpenses" rendered="#{datosAutoController.mostrarExpensesDatos}">
+                                    <p:panelGrid id="gridExpenses" columns="3" layout="grid" style="width: 900px">
+
+                                        <h:outputLabel for="txtNombreProveedor" value="Supplier name:" style="font-weight: bold"/>
+                                        <p:autoComplete id="txtNombreProveedor" value="#{datosAutoController.proveedorActualExpenses.apellido}"  completeMethod="#{datosAutoController.completeTextNombreProveedorExpenses}">
+                                            <p:ajax event="itemSelect" listener="#{datosAutoController.onProveedorExpensesSelectNombre}" update="formulario" />                                 
+                                        </p:autoComplete>
+                                        <p:column/>
+
+                                        <h:outputLabel for="fechaOrden" value="Order Date:" style="font-weight: bold"/>
+                                        <p:calendar mask="true" id="fechaOrden" navigator="true" pattern="dd-MM-yyyy" value="#{datosAutoController.invoiceMecanicoActual.fecha}"/>
+                                        <p:column/>
+
+                                        <p:commandButton value="New supplier" style="width: auto" action="#{datosAutoController.nuevoProveedor()}" />
+                                        <p:column/>
+                                        <p:column/>
+                                        <h:outputLabel for="montoExpenses" value="Amount" style="font-weight: bold"/>                                    
+                                        <p:inputNumber id="montoExpenses" value="#{datosAutoController.invoiceMecanicoDetalleActual.subtotal_sin_gst}" symbol="$" 
+                                                       symbolPosition="p" required="true" emptyValue="empty">
+                                            <p:ajax update="messages"/>
+                                        </p:inputNumber>
+                                        <p:column/>
+                                        <h:outputLabel for="checkGST" value="Inc GST:" style="font-weight: bold" />
+                                        <p:selectBooleanCheckbox value="#{datosAutoController.invoiceMecanicoDetalleActual.inc_gst}" >
+                                            <p:ajax listener="#{datosAutoController.seleccionoIncGST()}" update="txtGST txtSubtotal montoExpenses"/>
+                                        </p:selectBooleanCheckbox>
+                                        <p:column/>
+                                        <h:outputLabel for="txtGST" value="Gst:" style="font-weight: bold" />
+                                        <p:inputNumber id="txtGST" value="#{datosAutoController.invoiceMecanicoDetalleActual.gst}" symbol="$" 
+                                                       symbolPosition="p" required="true" emptyValue="empty"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtSubtotal" value="Total:" style="font-weight: bold" />
+                                        <p:inputNumber id="txtSubtotal" value="#{datosAutoController.invoiceMecanicoDetalleActual.subtotal}" symbol="$" 
+                                                       symbolPosition="p" required="true" emptyValue="empty">
+                                            <p:ajax update="messages"/>
+                                        </p:inputNumber>
+                                        <p:column/>
+                                        <h:outputLabel for="txtDescription" value="Description:" style="font-weight: bold" />
+                                        <p:inputText id="txtDescription" value="#{datosAutoController.invoiceMecanicoDetalleActual.descripcion}" />
+                                        <p:column/>
+                                        <h:outputLabel for="txtInvoiceNumber" value="Invoice Number:" style="font-weight: bold" />
+                                        <p:inputText id="txtInvoiceNumber" value="#{datosAutoController.invoiceMecanicoActual.invoice_number}" />
+                                        <p:column/>
+
+                                        <p:commandButton value="Submit" style="width: auto" actionListener="#{datosAutoController.confirmAndCloseDialog()}"  update="formulario" />
+                                        <p:commandButton value="Cancel" style="width: auto" actionListener="#{datosAutoController.closeDialogExpenses()}"  update="formulario" />
+                                        <p:commandButton value="Delete" style="width: auto" actionListener="#{datosAutoController.deleteExpense()}"  update="formulario" >
+                                            <p:confirm header="Confirmation"  message="Are you sure?" icon="pi pi-exclamation-triangle" /> 
+                                        </p:commandButton>
+                                    </p:panelGrid>
+                                </p:panel>
+                                <p:dataTable   var="detalleInvoice"  value="#{datosAutoController.listaDetalleInvoiceAuto}"    id="Tablegastos" sortBy="#{detalleInvoice.nuestro}" >
+
+                                    <p:column headerText="Reference" sortBy="#{detalleInvoice.invoiceMecanico.invoice_number}" filterBy="#{detalleInvoice.invoiceMecanico.invoice_number}" >
+                                        <p:commandLink  actionListener="#{datosAutoController.editarExpenses(detalleInvoice)}" value="#{detalleInvoice.invoiceMecanico.invoice_number}" update="formulario"/>
+                                    </p:column>
+                                    <p:column headerText="Date" >
+                                        <h:outputText value="#{detalleInvoice.invoiceMecanico.fecha}">
+                                            <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Detail">
+                                        <h:outputText value="#{detalleInvoice.descripcion}" />
+                                    </p:column>
+                                    <p:column headerText="Spent money">
+                                        <h:outputText value="#{detalleInvoice.subtotal}" >
+                                            <f:convertNumber type="currency" currencySymbol="$" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:summaryRow>
+                                        <p:column colspan="3" style="text-align:right">
+                                            <h:outputText value="Total:" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{datosAutoController.getGastosTotal()}">
+                                                <f:convertNumber type="currency" currencySymbol="$" />
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:summaryRow>
+                                </p:dataTable>                                
+                            </p:tab>
+                        </p:tabView>
+
+                        <p:panel style="text-align: center">
+                            <p:panelGrid id="grillaBotonesAceptar" columns="2" rendered="#{datosAutoController.mostrarBotonesAceptar}" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton value="Submit" style="width: auto" update="formulario:tabvi"  rendered="#{datosAutoController.accion=='R'}" actionListener="#{datosAutoController.registrar()}"/>
+                                <p:commandButton value="Submit" style="width: auto" update="formulario:tabvi" actionListener="#{datosAutoController.editarAuto(true)}" rendered="#{datosAutoController.accion=='M'}"/>
+                                <p:commandButton value="Cancel" action="GrillaAutos" immediate="true" style="width: auto"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </div>
+
+
+
+                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="400" width="800">
+                        <p:dataTable editable="true" editMode="cell" var="formulario"  value="#{datosAutoController.listaFormulariosImprimir}" selection="#{datosAutoController.listaFormulariosImprimirSeleccionados}" rowKey="#{formulario.id}"   id="formularioImpTable" >
+                            <f:facet name="header">
+                                Checkbox
+                            </f:facet>
+                            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                            <p:column headerText="Label"  >
+                                <h:outputLabel value="#{formulario.label}"/>
+                            </p:column>
+                            <p:column headerText="Copias" >
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{formulario.copias}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{formulario.copias}" style="width:96%" label="Number of copies"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                        </p:dataTable>
+                        <p:panelGrid  columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <p:commandButton value="Print" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{datosAutoController.imprimirFormularios()}" style="width: auto"  />
+                        </p:panelGrid>
+
+                    </p:dialog> 
+
+
+                    <p:dialog id="myDialogID" modal="true" header="Attention" widgetVar="myDialogVar">
+
+                        <h:outputText value="#{datosAutoController.mensajeNuevaVenta}" style="font-weight: bold"/>
+                        <br/>
+                        <br/>
+                        <h:panelGrid  columns="2" >
+                            <p:commandButton value="Yes" update="formulario" actionListener="#{datosAutoController.nuevaVentaSinImportarNada()}"  style="width: auto" onclick="PF('myDialogVar').hide();"/>
+                            <p:commandButton value="No"   style="width: auto" onclick="PF('myDialogVar').hide();"/>
+                        </h:panelGrid>
+
+
+                    </p:dialog>
+
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+                    </p:confirmDialog>
+
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

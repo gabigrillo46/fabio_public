@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+          
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Gabriel Grillo</title>
+
+        <style type="text/css">
+            .cuadro {
+                margin: 0 auto;
+            }
+        </style>
+    </h:head>
+    <h:body id="principal">
+
+        <p:panel id="imagen"
+                 style="width: 200px; margin: 0 auto;border: none;margin-top: 50px">
+            <h:panelGrid  columns="1"  cellpadding="10">
+
+                <h:graphicImage value="/resources/imagenes/logo.png"  />
+
+
+            </h:panelGrid>
+        </p:panel>
+
+
+        <h:form id="loginForm">
+            <p:growl id="msg" showDetail="true" life="4000"  />
+            <p:panel id="loginPnl" header="Login" rendered="#{indexController.mostrarLogin}"
+                     style="width: 500px; margin: 0 auto;">
+                <h:panelGrid id="loginPanel" columns="3" cellpadding="5" width="100%">
+                    <h:outputText value="Email" />
+                    <p:inputText id="txtUsuario"  value="#{indexController.usuario.email}" style="width: 100%"/>
+                    <p:message for="txtUsuario"/>
+
+                    <h:outputText value="Password" />
+                    <p:password  id="txtClave"  value="#{indexController.usuario.password}" toggleMask="true" redisplay="true" style="width: 100%"/>
+                    
+
+                </h:panelGrid>
+                <h:panelGrid columns="3" cellpadding="10" width="100%">
+                    <p:commandButton  
+                        value="Login" action="#{indexController.iniciarSesion()}" update="loginForm">
+                    </p:commandButton>
+                    <p:commandButton  
+                        value="Forgot password?" style="width: 200px"  action="#{indexController.olvidoLaContrasena()}" update="loginForm" >
+                    </p:commandButton>
+                    <p:commandButton  
+                        value="Register" action="#{indexController.registroNuevoUsuario()}" update="loginForm">
+                    </p:commandButton>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel id="olvidoContra" rendered="#{indexController.mostrarPregunta}" header="Question"
+                     style="width: 500px; margin: 0 auto;">
+                <h:panelGrid  columns="2" cellpadding="5" width="100%">
+                    <h:outputText value="Email:" />
+                    <p:inputText  id="txtPregunta" value="#{indexController.usuarioCambioContra.email}" style="width: 100%"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="10" width="100%">
+                    <p:commandButton 
+                        value="Summit" action="#{indexController.aceptoRespuestaPregunta()}" update="loginForm" style="float: right;">
+                    </p:commandButton>
+
+                    <p:commandButton 
+                        value="Cancel" immediate="true" action="#{indexController.cancelarPreguntaRespuesta()}" update="loginForm" style="float: right;">
+                    </p:commandButton>
+                </h:panelGrid>                
+
+            </p:panel>
+            <p:panel id="registroNuevo" rendered="#{indexController.mostrarRegistro}" header="Register"
+                     style="width: 500px; margin: 0 auto;">
+                <h:panelGrid  columns="2" cellpadding="5" rendered="#{indexController.mostrarEmail}" width="100%" style="height: 100px">
+                    <h:outputText value="Email: " />
+                    <p:inputText  id="txtEmailRegistro" value="#{indexController.usuarioNuevo.email}" style="width: 100%"/>
+                </h:panelGrid>
+                <h:panelGrid  columns="2" cellpadding="5" rendered="#{indexController.mostrarCodigoVerificacion}" width="100%" style="height: 100px">
+                    <h:outputText value="Enter the verification code that was sent to your email: " />
+                    <p:inputText  id="txtVerificationCode" value="#{indexController.usuarioNuevo.codigo_validacion}" />
+                </h:panelGrid>
+                <h:panelGrid  columns="2" cellpadding="5" rendered="#{indexController.mostrarPassword}" width="100%" style="height: 100px">
+                    <h:outputText value="Password: " />
+                    <p:password  id="txtPasswordRegistro" value="#{indexController.usuarioNuevo.password}" toggleMask="true" redisplay="true" />
+                    <h:outputText value="Repeat password: " />
+                    <p:password   id="txtPasswordRegistro2" value="#{indexController.confirmacionPassword}" toggleMask="true" redisplay="true" />
+                    
+                </h:panelGrid>
+                <h:panelGrid  columns="2" cellpadding="5"  width="100%" style=" margin: 0 auto;align-items: center">
+                    <p:commandButton 
+                        value="Summit" action="#{indexController.aceptoRegistro()}" update="loginForm" >
+                    </p:commandButton>
+                    <p:commandButton 
+                        value="Cancel" action="#{indexController.cancelarRegistro()}" update="loginForm" >
+                    </p:commandButton>                    
+                </h:panelGrid>                
+            </p:panel>            
+        </h:form>
+
+    </h:body>
+</html>
+

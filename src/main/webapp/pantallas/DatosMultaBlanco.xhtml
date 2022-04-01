@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form>                        
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Infringement data</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <p:outputLabel for="txtNombreCliente" value="Name:" style="font-weight: bold"/>
+                            <p:inputText id="txtNombreCliente" value="#{datosMultaBlancoController.nombreCompleto}" required="true" requiredMessage="Must enter the full name"/>
+                            <p:message for="txtNombreCliente"/>
+
+                            <p:outputLabel for="txtDireccion" value="Address:" style="font-weight: bold"/>
+                            <p:inputText id="txtDireccion" value="#{datosMultaBlancoController.direccion}" required="true" requiredMessage="Must enter the address"/>
+                            <p:message for="txtDireccion"/>
+
+                            <p:outputLabel for="txtSuburb" value="Suburb:" style="font-weight: bold"/>
+                            <p:inputText id="txtSuburb" value="#{datosMultaBlancoController.suburb}" required="true" requiredMessage="Must enter the suburb"/>
+                            <p:message for="txtSuburb"/>
+
+                            <p:outputLabel for="txtState" value="State:" style="font-weight: bold"/>
+                            <p:inputText id="txtState" value="#{datosMultaBlancoController.state}" required="true" requiredMessage="Must enter the state"/>
+                            <p:message for="txtState"/>
+
+                            <p:outputLabel for="txtCodPost" value="Postal Code:" style="font-weight: bold"/>
+                            <p:inputText id="txtCodPost" value="#{datosMultaBlancoController.codPost}" required="true" requiredMessage="Must enter the postal code"/>
+                            <p:message for="txtCodPost"/>
+
+                            <p:outputLabel for="txtPais" value="Country:" style="font-weight: bold"/>
+                            <p:inputText id="txtPais" value="#{datosMultaBlancoController.pais}" required="true" requiredMessage="Must enter the country"/>
+                            <p:message for="txtPais"/>
+
+                            <h:outputLabel for="dob" value="DOB:" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="dob" navigator="true" pattern="dd-MM-yyyy" value="#{datosMultaBlancoController.dob}"
+                                        required="true" requiredMessage="You have to enter the date of bird"/>
+                            <p:message for="dob"/>
+
+                            <p:outputLabel for="txtLicense" value="License number:" style="font-weight: bold"/>
+                            <p:inputText id="txtLicense" value="#{datosMultaBlancoController.licencia}" required="true" requiredMessage="Must enter the license number"/>
+                            <p:message for="txtLicense"/>
+
+                            <p:outputLabel for="txtIssuedIn" value="Issued in:" style="font-weight: bold"/>
+                            <p:inputText id="txtIssuedIn" value="#{datosMultaBlancoController.paisIssued}" required="true" requiredMessage="Must enter the country issued in"/>
+                            <p:message for="txtIssuedIn"/>
+
+                            <p:outputLabel for="txtReservationNumber" value="Reservation #:" style="font-weight: bold"/>
+                            <p:inputText id="txtReservationNumber" value="#{datosMultaBlancoController.rentalNumber}" required="true" requiredMessage="Must enter the reservation number"/>
+                            <p:message for="txtReservationNumber"/>
+
+
+                            <p:outputLabel for="txtRego" value="Rego:" style="font-weight: bold"/>
+                            <p:inputText id="txtRego" value="#{datosMultaBlancoController.rego}" required="true" requiredMessage="Must enter the rego"/>
+                            <p:message for="txtRego"/>
+
+
+                            <p:outputLabel value="Infringement Authority:" for="cmbAutoridades" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbAutoridades" value="#{datosMultaBlancoController.multaActual.autoridad.id}" 
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosMultaBlancoController.listaAutoridades}" var="AutoridadSelec" 
+                                               itemLabel="#{AutoridadSelec.nombre}" itemValue="#{AutoridadSelec.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:outputLabel for="fechaMulta" value="Date of offence:" style="font-weight: bold" />
+                            <p:inputMask id="fechaMulta" value="#{datosMultaBlancoController.multaActual.fechaMulta}" mask="99/99/9999 99:99"/>                              
+                            <p:column/>
+
+                            <p:outputLabel for="txtNumeroMulta" value="Infringement#:" style="font-weight: bold"/>
+                            <p:inputText id="txtNumeroMulta" value="#{datosMultaBlancoController.multaActual.numero}" required="true" requiredMessage="Must enter the number of the infringement"/>
+                            <p:message for="txtNumeroMulta"/>
+
+                            <h:outputLabel for="cmbTipoMulta" value="Type:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbTipoMulta" value="#{datosMultaBlancoController.multaActual.tipo.id}" 
+                                             required="true" requiredMessage="Must select one" >
+                                <f:selectItems value="#{datosMultaBlancoController.listaTipoMulta}" var="modeloSelecc" 
+                                               itemLabel="#{modeloSelecc.nombre}" itemValue="#{modeloSelecc.id}" />
+                            </p:selectOneMenu>
+                            <p:message for="cmbTipoMulta"/>
+
+                            <p:outputLabel for="cmbTrabajadoresMulta" value="Declared by:" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbTrabajadoresMulta" value="#{datosMultaBlancoController.multaActual.usuario.id}" 
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosMultaBlancoController.listaUsuarios}" var="trabajadorSelec" 
+                                               itemLabel="#{trabajadorSelec.nombre} #{trabajadorSelec.apellido}" itemValue="#{trabajadorSelec.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:outputLabel for="fechaCargada" value="Declaration date:" style="font-weight: bold" />
+                            <p:calendar yearRange="c-100:c" id="fechaCargada" navigator="true" pattern="dd-MM-yyyy" value="#{datosMultaBlancoController.multaActual.fechaCargada}" />
+                            <p:column/>
+
+                            <p:outputLabel for="cmbWitness" value="Witness:" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbWitness" value="#{datosMultaBlancoController.multaActual.witness.id}" 
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosMultaBlancoController.listaWitness}" var="witnessSelec" 
+                                               itemLabel="#{witnessSelec.nombre}" itemValue="#{witnessSelec.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:outputLabel for="letterNotes" value="Customer Letter Notes:" style="font-weight: bold"/>
+                            <p:inputTextarea cols="50" rows="3" maxlength="100" id="letterNotes" value="#{datosMultaBlancoController.multaActual.letra_cliente}"/>
+                            <p:column/>
+
+                            <p:outputLabel for="internalNotes" value="Internal notes:" style="font-weight: bold"/>
+                            <p:inputTextarea cols="50" rows="3" maxlength="100" id="internalNotes" value="#{datosMultaBlancoController.multaActual.internal_notes}"/>
+                            <p:column/>
+
+                        </p:panelGrid>                            
+
+                        <p:panel style="text-align: center">
+                            <p:panelGrid   columns="3" layout="grid" >
+                                <p:commandButton value="Return" action="AddInfringement"  immediate="true" style="width: auto"/>
+                                <p:commandButton value="Print" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{datosMultaBlancoController.imprimir}" style="width: auto"  />
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

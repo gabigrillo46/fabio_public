@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+
+
+                <div class="ui-fluid">
+                    <h:form id="form" >
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+
+                        <dir style="text-align: center">
+                            <h1>Rental list</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <h:outputLabel for="txtApellido" value="Last name:" style="font-weight:bold"/>
+                            <p:inputText id="txtApellido" value="#{grillaAlquileresController.apellido}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtReferencia" value="Reference number:" style="font-weight:bold"/>
+                            <p:inputText id="txtReferencia" value="#{grillaAlquileresController.referencia}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtRego" value="Rego:" style="font-weight:bold"/>
+                            <p:inputText id="txtRego" value="#{grillaAlquileresController.rego}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtTelefono" value="Phone number / Number GPS:" style="font-weight:bold"/>
+                            <p:inputText id="txtTelefono" value="#{grillaAlquileresController.telefono}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="fechaInicio" value="From (date pickup):" style="font-weight: bold"/>
+                            <p:calendar id="fechaInicio" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaAlquileresController.fechaDesde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="To (date pickup):" style="font-weight: bold"/>
+                            <p:calendar id="fechaFin" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaAlquileresController.fechaHasta}" />
+                            <p:column/>
+
+                            <h:outputLabel value="Branch:" for="cmbSucursal" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbSucursal"  value="#{grillaAlquileresController.idSucural}"
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItems value="#{grillaAlquileresController.listaSucursales}" var="sucursalInicioSelecc"
+                                               itemLabel="#{sucursalInicioSelecc.nombre}" itemValue="#{sucursalInicioSelecc.id}"/>
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <h:outputLabel value="Type:" for="cmbType" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbType" value="#{grillaAlquileresController.estado}" style="width:125px">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItem itemLabel="Hired" itemValue="2" />
+                                <f:selectItem itemLabel="Reservation" itemValue="1" />
+                                <f:selectItem itemLabel="Returned" itemValue="3" />
+                                <f:selectItem itemLabel="Cancelled" itemValue="4" />
+                                <f:selectItem itemLabel="Sold" itemValue="6" />
+                                <f:selectItem itemLabel="Repo" itemValue="7" />
+                                <f:selectItem itemLabel="Loading" itemValue="5" />
+                                <f:selectItem itemLabel="Courtesy" itemValue="8" />
+                            </p:selectOneMenu>
+                            <p:column/>
+                            <p:column/>
+                            <p:selectBooleanCheckbox value="#{grillaAlquileresController.deudaCurrentMayor0}"  style="font-weight: bold" itemLabel="Current debt greater than 0"/>
+                            <p:column/>
+                            <p:column/>
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaAlquileresController.buscarPorFiltro}"  update="alquilerTable labelResultado"/>
+                        </p:panelGrid>
+                        <p:panel>
+
+                            <p:outputLabel id="labelResultado" value="Number of results returned: #{grillaAlquileresController.resultado}"/>
+                            <div align="right">
+
+
+                                <p:commandButton style="width: auto" actionListener="#{grillaAlquileresController.crearNuevoContrato()}" value="Add new rental" icon="ui-icon-plusthick" action="DatosRentalNew">
+                                    <p:confirm  message="#{grillaAlquileresController.mensaje}" header="Confirmation"  icon="pi pi-exclamation-triangle" escape="false" />
+                                </p:commandButton>
+
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"/>
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+                                </p:confirmDialog> 
+                            </div>
+                        </p:panel>
+
+                        <p:panel>
+                            <p:dataTable   var="alquiler"  value="#{grillaAlquileresController.listaAlquileres}"    id="alquilerTable" >
+                                <p:column headerText="Reference" sortBy="#{alquiler.id}" filterBy="#{alquiler.id}" >
+                                    <h:commandLink  actionListener="#{grillaAlquileresController.verDetalleAlquiler(alquiler.id)}" value="#{alquiler.id}"/>
+                                </p:column>
+                                <p:column style="#{grillaAlquileresController.esReservado(alquiler.estado)? 'background-color: #ff6600;':''} ;#{grillaAlquileresController.esAlquilado(alquiler.estado)? 'background-color: #6600ff;':''};#{grillaAlquileresController.esCancelado(alquiler.estado)? 'background-color: #F21414;':''}; width: 200px" headerText="Status" sortBy="#{grillaAlquileresController.getEstadoStr(alquiler)}" filterBy="#{grillaAlquileresController.getEstadoStr(alquiler)}">
+                                    <h:outputText value="#{grillaAlquileresController.getEstadoStr(alquiler)}" />
+                                </p:column>
+                                <p:column headerText="Customer Name"  filterBy="#{alquiler.apellido}">
+                                    <h:commandLink action="DatosCliente" actionListener="#{grillaAlquileresController.verClienteAlquiler(alquiler.id)}" value="#{alquiler.apellido}" />
+                                </p:column>
+                                <p:column headerText="Rego" sortBy="#{alquiler.rego}" filterBy="#{alquiler.rego}">
+                                    <h:outputText value="#{alquiler.rego}" />
+                                </p:column>
+                                <p:column headerText="Pick up date" sortBy="#{alquiler.fecha_inicio}" filterBy="#{alquiler.fecha_inicio}">
+                                    <h:outputText value="#{alquiler.fecha_inicio}">
+                                        <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Drop off date" sortBy="#{alquiler.fecha_fin}" filterBy="#{alquiler.fecha_fin}">
+                                    <h:outputText value="#{alquiler.fecha_fin}">
+                                        <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Debt until today" sortBy="#{alquiler.deudaCurrent}" filterBy="#{alquiler.deudaCurrent}">
+                                    <h:outputText value="#{alquiler.deudaCurrent}" />
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value="Payment" action="SummaryAlquilerPagos" actionListener="#{grillaAlquileresController.registrarPago(alquiler.id)}" rendered="#{grillaAlquileresController.esAlquilado(alquiler.estado)}"/>
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

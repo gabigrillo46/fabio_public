@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+
+            <ui:define name="content">
+                <p align="center">
+                    <h:form>
+                        <h1>Bienvenido: #{pantallaPrincipalController.usuario.email}</h1>
+                    </h:form>
+                </p>
+
+                <p:growl id="msgs" showDetail="true"  />   
+                <div style="height:800px">
+                    <h:form>
+
+
+                        <p:dashboard id="board" model="#{pantallaPrincipalController.model}">
+                            <p:ajax event="reorder" listener="#{pantallaPrincipalController.handleReorder}" update="msgs" />
+
+                            <p:panel id="logo" header="Certified Autos">
+                                <p:graphicImage url="/resources/imagenes/logo.png" />
+                                <p:commandButton action="ContactUs" value="Contact us"  immediate="true" style="width: auto" />
+                            </p:panel>
+
+                            <p:panel id="tareas" header="Task">
+                                <p:dataList value="#{pantallaPrincipalController.listaTareas}" id="listaTareas" var="car" emptyMessage="No pending tasks">
+                                    <p:commandButton style="#{car.caducado? 'background-color: red;':''};width: auto" value="Done" action="#{pantallaPrincipalController.tareaRealizada(car.id)}" update="listaTareas" />
+                                    <h:commandLink action="DatosTarea" actionListener="#{pantallaPrincipalController.verDetalleTarea(car.id)}" value="#{pantallaPrincipalController.getmensajeDueTo(car)}"/>
+                                    <br/>
+                                    <p:outputLabel value="#{car.nombre}"/>
+                                    <br/>
+                                    <br/>
+                                </p:dataList>
+                                <p:commandButton  value="View all task" action="GrillaTareas"/>
+                            </p:panel>
+
+                            <p:panel id="regos" header="Registration Expiry">
+                                <p:dataList value="#{pantallaPrincipalController.listaAutoRego}" id="listasAutos" var="auto">
+                                    <h:commandLink action="DatosAuto" actionListener="#{pantallaPrincipalController.verDetalleAuto(auto.id)}" value="#{pantallaPrincipalController.getMensajeRego(auto)}" style="#{pantallaPrincipalController.regoVenceJuntoContrato(auto)? 'background-color: #fcba03;':''}"/>               
+                                </p:dataList>
+                            </p:panel>
+
+                            <p:panel id="terminando" header="Agreements ending">
+                                <p:dataList value="#{pantallaPrincipalController.listaAlquileresTerminando}" id="listaAlquilerTerminando" var="alquiler">
+                                    <h:commandLink action="DatosRentalNew" actionListener="#{pantallaPrincipalController.verDetalleAlquiler(alquiler.id)}" value="#{pantallaPrincipalController.getMensajeTerminando(alquiler)}" style="background-color: #00FA9A"/>
+                                </p:dataList>
+                            </p:panel>
+
+                            <p:panel id="transferencia" header="Transfer must be done">
+                                <p:dataList value="#{pantallaPrincipalController.listaAutosDeberiaTransferir}" id="listaTransferenciaAutos" var="auto">
+                                    <h:commandLink action="ReportTransfer" actionListener="#{pantallaPrincipalController.verTransferenciaSucursal(auto.sucursal.id)}" value="#{pantallaPrincipalController.getMensajeTransferencia(auto)}" style="background-color: red"/>               
+                                </p:dataList>
+                            </p:panel>
+
+                            <p:panel id="graficos"  header="Sales Summary">
+                                <br/><br/>
+                                <p:outputLabel value="#{pantallaPrincipalController.tituloBarModel}"/>
+                                <br/><br/>                                
+                                <p:chart type="bar" model="#{pantallaPrincipalController.barMes}" style="height: 150px; width: 150px"/>
+                                <br/><br/>
+                                <p:outputLabel style="color: #33A5FF; font-weight:  bold" value="Last Year: #{pantallaPrincipalController.montoMesAnioAntFormat} Number of agreements: #{pantallaPrincipalController.contratosMesAnterios}"/>
+                                <br/><br/>
+                                <p:outputLabel style="color: #56B21E; font-weight:  bold" value="This Year: #{pantallaPrincipalController.montoMesAnioActualFormat} Number of agreements: #{pantallaPrincipalController.contratosMesActual}"/>
+                            </p:panel>
+
+                            <p:panel id="graficos1"  header="Sales Summary 2">
+                                <br/><br/>
+                                <p:outputLabel value="#{pantallaPrincipalController.tituloBarAcumulado}"/>
+                                <br/><br/>
+                                <p:chart type="bar" model="#{pantallaPrincipalController.barAcumulado}" style="height: 150px; width: 150px"/>
+                                <br/><br/>
+                                <p:outputLabel style="color: #33A5FF; font-weight: bold" value="Last Year: #{pantallaPrincipalController.montoAcumuladoAnteriorFormat} Number of agreements: #{pantallaPrincipalController.contratosAcumuladosAnterior}"/>
+                                <br/><br/>
+                                <p:outputLabel style="color: #56B21E; font-weight:  bold" value="This Year: #{pantallaPrincipalController.montoAcumuladoActualFormat} Number of agreements: #{pantallaPrincipalController.contratosAcumuladosActual}"/>                                
+                            </p:panel>
+
+                            <p:panel id="graficos2"  header="Payments Summary">
+                                <br/><br/>
+                                <p:outputLabel value="#{pantallaPrincipalController.tituloBarPagoMes}"/>
+                                <br/><br/>
+                                <p:chart type="bar" model="#{pantallaPrincipalController.barPagoMes}" style="height: 150px; width: 150px"/>
+                                <br/><br/>
+                                <p:outputLabel style="color: #33A5FF; font-weight:  bold" value="Last Year: #{pantallaPrincipalController.montoPagoMesAnioAnteriorFormat}"/>
+                                <br/><br/>
+                                <p:outputLabel  style="color: #56B21E; font-weight:  bold" value="This Year: #{pantallaPrincipalController.montoPagoMesAnioActualFormat}"/>
+                            </p:panel>
+                            <p:panel id="totales"  header="Totals">
+                                <br/>
+                                <p:outputLabel  style="color: #56B21E; font-weight:  bold" value="Number of rented deals: #{pantallaPrincipalController.cantidadContratosActivos}"/>
+                                <br/><br/>
+                                <p:outputLabel  style="color: #56B21E; font-weight:  bold" value="Total amount owed: #{pantallaPrincipalController.montoTotalAdeudadoFormat}"/>
+                            </p:panel>
+
+                        </p:dashboard>
+                        <div style="clear:both" />
+  
+
+
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

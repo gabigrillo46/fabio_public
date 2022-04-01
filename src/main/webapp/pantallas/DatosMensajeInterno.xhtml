@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario">
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                    
+                    <p:commandButton value="Back to my inbox" style="width: auto" action="GrillaMensajeInterno"/>
+                    <p:commandButton value="Add note" rendered="#{datosMensajeInternoController.accion=='M'}"  icon="ui-icon-plusthick" actionListener="#{datosMensajeInternoController.setMostrarNuevaNota(true)}" update="panelNota gridNuevaNota listaMensajes consultaMensaje" />
+
+                    <p:panel id="panelNota"  >
+                        <p:panelGrid  id="gridNuevaNota" rendered="#{datosMensajeInternoController.mostrarNuevaNota}" columns="3" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel for="multiple" value="To: " style="width: auto" />
+                            <p:selectCheckboxMenu id="multiple" value="#{datosMensajeInternoController.listaIDUsuariosDestinatarios}"  style="width: 350px" label="Users" multiple="true"
+                                                  panelStyle="width:350px">
+                                <f:selectItem itemLabel="All" itemValue="-1"/>
+                                <f:selectItems value="#{datosMensajeInternoController.listaUsuarios}" var="usuarioSelect" 
+                                               itemLabel="#{usuarioSelect.nombre}" itemValue="#{usuarioSelect.id}"/>
+                            </p:selectCheckboxMenu>
+                            <p:column/>
+                            <h:outputLabel  for="txtMensajeCustom" value="Message: " />
+                            <p:inputTextarea rows="2" cols="50" id="txtMensajeCustom" value="#{datosMensajeInternoController.mensajeInternoActual.texto}"/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:commandButton value="Send" rendered="#{datosMensajeInternoController.accion=='M'}"  actionListener="#{datosMensajeInternoController.enviarMensaje()}" update="panelNota listaMensajes notasInternas"  />
+                            <p:commandButton  value="Cancel" rendered="#{datosMensajeInternoController.accion=='M'}"  actionListener="#{datosMensajeInternoController.cancelatEnviarMensaje()}" update="panelNota"   />
+
+                            <p:commandButton value="Send" rendered="#{datosMensajeInternoController.accion=='R'}"  actionListener="#{datosMensajeInternoController.crearMensaje()}" update="listaMensajes notasInternas"  />
+                            <p:commandButton  value="Cancel" rendered="#{datosMensajeInternoController.accion=='R'}"  action="GrillaMensaje" />
+
+                        </p:panelGrid>
+                        <p:dataList rendered="#{datosMensajeInternoController.mostrarNuevaNota}" id="listaMensajes" value="#{datosMensajeInternoController.listaMensajes}" var="car" type="ordered" emptyMessage="">
+                            <f:facet name="header">
+                                Outcome
+                            </f:facet>
+                            #{car}
+                        </p:dataList>                
+
+                        <p:panelGrid  id="consultaMensaje" rendered="#{datosMensajeInternoController.mostrarMensajeConsulta}" columns="3" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel for="multipleConsulta" value="To: " style="width: auto" />
+                            <p:selectCheckboxMenu id="multipleConsulta" value="#{datosMensajeInternoController.listaUsuarioMensajeCOnsulta}"   style="width: 350px" label="Users" multiple="true"
+                                                  panelStyle="width:350px">
+                            </p:selectCheckboxMenu>
+                            <p:column/>
+                            <h:outputLabel  for="txtMensajeConsulta" value="Message: " />
+                            <p:inputTextarea rows="2" cols="50" id="txtMensajeConsulta" value="#{datosMensajeInternoController.mensajeInternoConsulta.texto}"/>
+                            <p:column/>
+                        </p:panelGrid>
+                    </p:panel>
+
+                    <p:dataTable id="notasInternas" var="mensaje" value="#{datosMensajeInternoController.listaMensajesInternosRelacionados}">
+                        <p:column headerText="Sent day">
+                            <p:commandLink  value="#{datosMensajeInternoController.getFechaFormato(mensaje)}" actionListener="#{datosMensajeInternoController.verMensaje(mensaje.id)}" update="formulario:panelNota"/>
+                        </p:column>
+
+                        <p:column headerText="Sent by">
+                            <h:outputText value="#{mensaje.usuarioCreador.nombre} #{mensaje.usuarioCreador.apellido}" />
+                        </p:column>
+
+                        <p:column headerText="Reference">
+                            <h:outputText  value="#{datosMensajeInternoController.getReference(mensaje)}" />
+                        </p:column>
+
+
+                        <p:column headerText="Text">
+                            <h:outputText value="#{mensaje.texto}" />
+                        </p:column>
+                    </p:dataTable>            
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

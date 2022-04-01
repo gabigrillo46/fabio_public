@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Reportes_fabio2</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>SubReportImpuestos_1.jrxml</name>
+			<type>1</type>
+			<location>C:/glassfish4/glassfish/domains/domain1/config/reportesMios/SubReportImpuestos.jrxml</location>
+		</link>
+	</linkedResources>
+</projectDescription>

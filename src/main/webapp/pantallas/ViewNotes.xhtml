@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+        <title>Note List</title>
+    </h:head>
+    <h:body>
+        <h:form id="formulario">
+            <p:growl id="messages" showDetail="true" >
+                <p:autoUpdate/>
+            </p:growl>                    
+            <p:panel id="panelNuevaNota" >
+                <p:commandButton style="width: auto"  value="Add new note"  icon="ui-icon-plusthick"  actionListener="#{viewNotesController.setMostrarNuevaNota(true)}" update="panelNuevaNota formulario:panelConsultaMensaje" />
+                <p:panelGrid rendered="#{viewNotesController.mostrarNuevaNota}" id="nuevoPago"  columns="3" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                    <h:outputLabel for="multiple" value="To: " style="width: auto" />
+                    <p:selectCheckboxMenu id="multiple" value="#{viewNotesController.listaUsuariosDestinatarios}"  style="width: 350px" label="Users" multiple="true"
+                                          panelStyle="width:350px">
+                        <f:selectItem itemLabel="All" itemValue="-1"/>
+                        <f:selectItems value="#{viewNotesController.listaUsuario}" var="usuarioSelect" 
+                                       itemLabel="#{usuarioSelect.nombre}" itemValue="#{usuarioSelect.id}"/>
+                    </p:selectCheckboxMenu>
+                    <p:column/>
+                    <h:outputLabel  for="txtMensajeCustom" value="Message: " />
+                    <p:inputTextarea rows="2" cols="50" id="txtMensajeCustom" value="#{viewNotesController.mensajeInternoActual.texto}"/>
+                    <p:column/>
+
+                    <p:column/>
+                    <p:commandButton value="Send"  actionListener="#{viewNotesController.enviarMensaje()}" update="panelNuevaNota listaMensajes notasInternas"  />
+
+                    <p:commandButton  value="Cancel"  actionListener="#{viewNotesController.cancelatEnviarMensaje()}" update="panelNuevaNota"   />
+                </p:panelGrid>
+                <p:dataList id="listaMensajes" value="#{viewNotesController.listaMensajes}" var="car" type="ordered" emptyMessage="">
+                    <f:facet name="header">
+                        Outcome
+                    </f:facet>
+                    #{car}
+                </p:dataList>                
+            </p:panel>
+            <p:panel id="panelConsultaMensaje" >               
+                <p:panelGrid  id="consultaMensaje" rendered="#{viewNotesController.mostrarMensajeConsulta}" columns="3" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                    <h:outputLabel for="multipleConsulta" value="To: " style="width: auto" />
+                    <p:selectCheckboxMenu id="multipleConsulta" value="#{viewNotesController.listaUsuarioMensajeCOnsulta}"   style="width: 350px" label="Users" multiple="true"
+                                          panelStyle="width:350px">
+                    </p:selectCheckboxMenu>
+                    <p:column/>
+                    <h:outputLabel  for="txtMensajeConsulta" value="Message: " />
+                    <p:inputTextarea rows="2" cols="50" id="txtMensajeConsulta" value="#{viewNotesController.mensajeInternoConsulta.texto}"/>
+                    <p:column/>
+
+                    <p:column/>
+                    <p:commandButton value="OK"  actionListener="#{viewNotesController.OKConsulta()}" update="panelConsultaMensaje"/>
+                </p:panelGrid>
+            </p:panel>
+
+            <p:dataTable id="notasInternas" var="mensaje" value="#{viewNotesController.listaMensajesInternos}">
+                <p:column headerText="Sent day">
+                    <p:commandLink  value="#{viewNotesController.getFechaFormato(mensaje)}" actionListener="#{viewNotesController.verMensaje(mensaje.id)}" update="formulario:panelConsultaMensaje formulario:panelNuevaNota"/>
+                </p:column>
+
+                <p:column headerText="Sent by">
+                    <h:outputText value="#{mensaje.usuarioCreador.nombre} #{mensaje.usuarioCreador.apellido}" />
+                </p:column>
+
+                <p:column headerText="Text">
+                    <h:outputText value="#{mensaje.texto}" />
+                </p:column>
+            </p:dataTable>            
+        </h:form>
+    </h:body>
+</html>

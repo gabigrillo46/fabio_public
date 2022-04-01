@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+            <ui:define name="content">
+                <p:growl id="messages" showDetail="true" >
+                    <p:autoUpdate/>
+                </p:growl>                    
+                <h:form enctype="multipart/form-data" style="width:500px">
+                    <p:fileUpload  fileUploadListener="#{mergePDFController.handleFileUpload}" mode="advanced" 
+                                   dragDropSupport="false" multiple="false" update="formulario:archivos" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>
+                </h:form>
+                <h:form id="formulario">
+
+                    <h:outputLabel for="txtNombreMerge" value="Name:" style="font-weight: bold"/>
+                    <p:inputText id="txtNombreMerge" value="#{mergePDFController.mergeActual.nombre}" required="true" requiredMessage="You have to enter the name" />
+                    <p:message for="txtNombreMerge"/>
+
+
+                    <p:dataTable id="archivos" var="product" value="#{mergePDFController.listaFiles}" draggableRows="true">
+                        <p:ajax event="rowReorder" listener="#{mergePDFController.onRowReorder}" />
+
+                        <p:column headerText="Name">
+                            <h:outputText value="#{product.name}" />
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:commandButton action="#{mergePDFController.merge()}" value="Merge" update="formulario archivos"/>
+
+                    <p:commandButton value="Print" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{mergePDFController.print()}" style="width: auto" rendered="#{mergePDFController.mostrarBotonDescargar}" />
+
+
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

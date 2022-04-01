@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario">
+
+                    <dir style="text-align: center">
+                        <h1>Brand data</h1>
+                    </dir>
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                    
+                    <p:panel>
+                        <h:panelGrid id="grid" columns="3">
+                            <h:outputLabel for="nombre" value="Name:" style="font-weight:bold"/>
+                            <p:inputText id="nombre" value="#{datosMarcaController.marca.nombre}" required="true" requiredMessage="Must enter the name" label="Name"/>
+                            <p:message for="nombre"/>
+
+
+                            <p:commandButton value="Cancel" action="GrillaMarcas" immediate="true"/>
+                            <p:commandButton value="Submit" update="grid" actionListener="#{datosMarcaController.registrar()}" rendered="#{datosMarcaController.accion=='R'}"/>
+                            <p:commandButton value="Submit" onkeydown="if (event.keyCode === 13) {
+                                        datosMarcaController.editarMarca();
+                                        return false;
+                                    }" actionListener="#{datosMarcaController.editarMarca()}" rendered="#{datosMarcaController.accion=='M'}" update="formulario"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Template data</h1>
+                        </dir>
+                        <h:panelGrid id="gridNombre" columns="2" >
+                            <h:outputLabel for="txtNombre" value="Name:" style="font-weight:bold"/>
+                            <p:inputText id="txtNombre" value="#{datosTemplateController.templateActual.nombre}" required="true" requiredMessage="You have to enter the rego"/>
+                        </h:panelGrid>
+
+                        <p:panelGrid id="grid"   columns="2"   layout="grid" >
+                            <p:dataTable  reflow="true" scrollable="true"   var="campo" value="#{datosTemplateController.listaCampos}"    id="templateTable"  
+                                          selectionMode="single" 
+                                          selection="#{datosTemplateController.campoSelecc}" 
+                                          rowKey="#{campo}">
+                                <p:ajax 
+                                    event="rowDblselect" 
+                                    listener="#{datosTemplateController.onRowDoubleClick}" 
+                                    update="formulario:notes" 
+                                    global="false" />
+                                <p:column  headerText="Name" sortBy="#{campo}" filterBy="#{campo}">
+                                    <h:outputText value="#{campo}" />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:inputTextarea value="#{datosTemplateController.templateActual.texto}" id="notes" rows="5" cols="150"   maxlength="1000"  autoResize="false" >
+                                <p:ajax event="keyup" />
+                            </p:inputTextarea>
+
+
+                        </p:panelGrid>
+
+                        <p:panel style="text-align: center">
+                            <p:panelGrid columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton value="Submit" style="width: auto" update="grid"  rendered="#{datosTemplateController.accion=='R'}" actionListener="#{datosTemplateController.registrarTemplate()}"/>
+                                <p:commandButton value="Submit" style="width: auto" update="grid" actionListener="#{datosTemplateController.modificarTemplate()}" rendered="#{datosTemplateController.accion=='M'}"/>
+                                <p:commandButton value="Cancel" action="GrillaTemplate" immediate="true" style="width: auto"/>
+                            </p:panelGrid>
+                        </p:panel>
+
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

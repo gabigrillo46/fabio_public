@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                    
+                    <dir style="text-align: center">
+                        <h1>User list</h1>
+                    </dir>
+                    <p:panel>
+                        <p:commandButton value="Add new user" icon="ui-icon-plusthick" action="DatosUsuario"/>
+                    </p:panel>
+                    <p:panel>
+                        <p:dataTable var="usuario" value="#{grillaUsuariosController.listaUsuario}"    id="carTable" >
+                            <p:column headerText="Number" sortBy="#{usuario.id}" filterBy="#{usuario.id}">
+                                <h:commandLink  action="DatosUsuario" actionListener="#{grillaUsuariosController.verDetalleUsuario(usuario.id)}">
+                                    <h:outputText value="#{usuario.id}" />
+                                </h:commandLink>
+                            </p:column>
+                            <p:column headerText="Username" sortBy="#{usuario.nombre_usuario}" filterBy="#{usuario.nombre_usuario}">
+                                <h:outputText value="#{usuario.nombre_usuario}" />
+                            </p:column>
+                            <p:column headerText="Name" sortBy="#{usuario.nombre} #{usuario.apellido}" filterBy="#{usuario.nombre} #{usuario.apellido}">
+                                <h:outputText value="#{usuario.nombre} #{usuario.apellido}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

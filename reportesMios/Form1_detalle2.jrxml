@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Form1_detalle2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="aca2c01c-90d2-4bbf-9a2a-3ac3c3c03044">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="cantidadRegistrosSubreport2" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="fechaVenta" class="java.lang.String"/>
+	<field name="estadoAuto" class="java.lang.String"/>
+	<field name="numeroForm5" class="java.lang.String"/>
+	<field name="precioVenta" class="java.lang.String"/>
+	<field name="odometerVenta" class="java.lang.String"/>
+	<field name="datosComprador" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="68" splitType="Stretch">
+			<rectangle>
+				<reportElement x="56" y="17" width="107" height="51" uuid="0b4dc2ac-9eed-4225-a370-edb9bac03ba7">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="17" width="56" height="51" uuid="e6ce3c79-1e0f-4485-a3ef-6e9f64d7928e">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="800" height="17" forecolor="#FFFFFF" backcolor="#000000" uuid="2f75bed3-b23c-41dc-b0c8-27b91bc06a65">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Details of disposal]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="163" y="17" width="70" height="51" uuid="5a6116de-b64e-4389-9a68-1df1d84f4dae">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="233" y="17" width="70" height="51" uuid="d9a8c9a2-260a-4983-9a98-d6d5d0ee6164">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="20" width="56" height="40" uuid="d54a6d5c-7ac6-4882-8910-e3c6baab0642"/>
+				<textElement textAlignment="Center">
+					<font size="9" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Date of disposal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="59" y="20" width="62" height="12" uuid="eea6bcae-e1b4-4be5-a3bf-63312113e947">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[How disposed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="20" width="35" height="12" uuid="5752bd8b-4a1b-466d-8206-0346243637a0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[(or Trust]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="32" width="107" height="30" uuid="e51db2ef-4c23-42f6-b724-bcab3d59f422"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Account entry Number for vehicles consignment)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="19" width="70" height="12" uuid="8601203b-86b0-4491-b481-54dc69e83e43">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="32" width="70" height="12" uuid="5feac850-1916-44d9-856a-d40d3860aa19">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="44" width="70" height="24" uuid="8c51aaec-2fd8-45ad-adfb-0cb5397acd8c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Serial number of Disposal form]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="19" width="70" height="49" uuid="cab7b12a-7493-4e26-a418-1901b0bbc654"/>
+				<textElement textAlignment="Center">
+					<font size="9" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Cash Price at which vehicle disposed]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="303" y="17" width="85" height="51" uuid="766327b3-4a1f-40a0-bdb7-aa15b7905800">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="303" y="19" width="85" height="30" uuid="04ab49a0-5a63-47e0-bbfb-e75defd22382"/>
+				<textElement textAlignment="Center">
+					<font size="9" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Odometer reading]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="388" y="17" width="411" height="51" uuid="d023daea-2c4a-471a-82c6-540e6e747f44">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="388" y="34" width="412" height="12" uuid="bf7d8c06-1091-4f4d-b122-3d3d03134f74">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[(if trade owner also insert motor dealer Licence No.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="49" width="412" height="12" uuid="5fde9e59-ba3b-4ead-bab3-4967811f4fc1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[(if private purchaser at auction also insert driver Licence No.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="19" width="410" height="12" uuid="ac6cae64-6f68-42e6-98ec-59a3d1bd5986">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Name and address of person to whom vehicle disposed]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<break>
+				<reportElement x="0" y="19" width="100" height="1" uuid="017f18ed-ebab-4936-ab5e-97f5cc6c7a6c">
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT}%8==0 || $V{REPORT_COUNT}==$P{cantidadRegistrosSubreport2}]]></printWhenExpression>
+				</reportElement>
+			</break>
+			<rectangle>
+				<reportElement x="0" y="0" width="56" height="40" uuid="f5667869-c2d3-48f0-9e09-38d821281a32">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="56" y="0" width="107" height="40" uuid="6e88290c-7e19-43c4-bb55-dc969a5902a9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="163" y="0" width="70" height="40" uuid="d4df15aa-ce04-4a64-96df-8d12ba697c88">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="233" y="0" width="70" height="40" uuid="17d99925-5df0-40ef-b576-2848bd2c24de">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="303" y="0" width="85" height="40" uuid="4deee886-d01a-4356-93a7-fc84f3cb01a5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="388" y="0" width="411" height="40" uuid="2b261577-3535-408a-bb81-66e6d36047ce">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="4" width="56" height="30" uuid="313c29ac-f5ac-4104-859d-6b91972f554d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fechaVenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="4" width="106" height="30" uuid="61011482-4a05-45cc-95f8-780e617daf8c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{estadoAuto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="4" width="70" height="30" uuid="f9c411d0-59be-4dda-a171-da88cc5427c7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{numeroForm5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="233" y="4" width="70" height="30" uuid="8689e7d2-6995-4472-8bbb-2b60083c0cad"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{precioVenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="4" width="84" height="30" uuid="951e3cd5-6883-4f6f-8d85-15afa50f73e7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{odometerVenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="0" width="410" height="34" uuid="1591a42e-a8b5-493d-bdc2-fa071c01aff1"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{datosComprador}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

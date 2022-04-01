@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario">
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                    
+                    <dir style="text-align: center">
+                        <h1>Fee data</h1>
+                    </dir>
+                    <p:panel>
+                        <h:panelGrid id="grid" cellpadding="5"  columns="3" style="width:80%;margin:0px auto;">
+
+                            <h:outputLabel for="txtNombre" value="Name:" style="font-weight:bold"/>
+                            <p:inputText id="txtNombre" value="#{datosImpuestoController.impuestoActual.nombre}" style="width: 250px"/>
+                            <p:message for="txtNombre"/>
+
+                            <h:outputLabel for="txtPrice" value="Price:" style="font-weight: bold"/>
+                            <p:inputNumber id="txtPrice" value="#{datosImpuestoController.impuestoActual.price}" decimalPlaces="2" minValue="0" maxValue="100000" style="width: 250px"/>
+                            <p:message for="txtPrice"/>
+
+                            <h:outputLabel for="txtMaxPrice" value="Price Max:" style="font-weight: bold"/>
+                            <p:inputNumber id="txtMaxPrice" value="#{datosImpuestoController.impuestoActual.max_price}" decimalPlaces="2" minValue="0" maxValue="100000" style="width: 250px"/>
+                            <p:message for="txtMaxPrice"/>
+
+                            <h:outputLabel for="cmbType" value="Type:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbType" value="#{datosImpuestoController.impuestoActual.tipo_impuesto.id}" 
+                                             style="width:250px" required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosImpuestoController.listaTiposImpuesto}" var="StateSelecc" 
+                                               itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                            </p:selectOneMenu>
+                            <p:message for="cmbType"/>
+
+                            <h:outputLabel for="cmbSucursal" value="Branch:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbSucursal" value="#{datosImpuestoController.impuestoActual.sucursal.id}" 
+                                             style="width:250px" required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosImpuestoController.listaSucursales}" var="StateSelecc" 
+                                               itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                            </p:selectOneMenu>
+                            <p:message for="cmbSucursal"/>
+
+                            <h:outputLabel for="cmbCategoriaAuto" value="Car category:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbCategoriaAuto" value="#{datosImpuestoController.impuestoActual.categoriaAuto.id}" 
+                                             style="width:250px" required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosImpuestoController.listaCategorias}" var="StateSelecc" 
+                                               itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                            </p:selectOneMenu>
+                            <p:message for="cmbCategoriaAuto"/>
+
+
+                            <p:selectBooleanCheckbox style="font-weight:bold" id="chkEditable" value="#{datosImpuestoController.impuestoActual.editable}" itemLabel="Editable"/>
+                            <p:message for="chkEditable"/>
+                            <p:column/>
+
+                            <p:selectBooleanCheckbox style="font-weight:bold" id="chkGst" value="#{datosImpuestoController.impuestoActual.gst_inc}" itemLabel="Inc GST"/>
+                            <p:message for="chkGst"/>
+                            <p:column/>
+                            <p:selectBooleanCheckbox style="font-weight:bold" id="chkObligatorio" value="#{datosImpuestoController.impuestoActual.obligatorio}" itemLabel="Mandatory"/>
+                            <p:message for="chkObligatorio"/>
+                            <p:column/>
+                        </h:panelGrid>
+
+                    </p:panel>
+                    <p:panel style="text-align: center">
+                        <h:panelGrid columns="2" style="width:80%;margin:0px auto;">
+                            <p:commandButton value="Cancel" action="GrillaImpuestos" immediate="true"/>
+                            <p:commandButton value="Submit" update="grid"  rendered="#{datosImpuestoController.accion=='R'}" actionListener="#{datosImpuestoController.registrar()}"/>
+                            <p:commandButton value="Submit" update="grid" actionListener="#{datosImpuestoController.editarImpuesto()}" rendered="#{datosImpuestoController.accion=='M'}"/>
+
+
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

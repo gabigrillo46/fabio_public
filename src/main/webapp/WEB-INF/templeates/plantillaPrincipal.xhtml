@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <title>Certified Autos</title>
+        <f:event type="preRenderView" listener="#{plantillaPrincipalController.verificarSesion}"/>
+                  
+		<style type="text/css">
+			
+			.ui-dashboard-column {
+                             margin: 10px;
+				width:400px;
+			}
+		</style>
+
+	
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+   
+    
+            <h:form>
+                <p:panelGrid columns="2"   style="width: 100%" >
+                    <p:column  style="width:50px; border: none" >
+                        <p:link outcome="/pantallas/pantallaPrincipal"   >
+                        <h:graphicImage value="/resources/imagenes/logo.png"  />
+</p:link>
+                                 </p:column>
+                    <p:column  style="border: none"  >
+                        <p:menubar  model="#{menuController.model}"  style="border: none; background-color: #c2dfef">
+      
+                    <f:facet name="options">
+                        <p:commandButton actionListener="#{menuController.cerrarSesion()}" value="Logout" action="/pantallas/index.xhtml"/>     
+                        <p:outputLabel value="User: #{plantillaPrincipalController.usuario}" style="font-weight: boldt; font-size: 22px"/>
+                    </f:facet>                    
+                </p:menubar>
+                             </p:column>
+            </p:panelGrid>
+    
+                
+            </h:form>
+
+
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom" align="center" style="margin-top: 10px">
+            
+        </div>
+
+    </h:body>
+
+</html>

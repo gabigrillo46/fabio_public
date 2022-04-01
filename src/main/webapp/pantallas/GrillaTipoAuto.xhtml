@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                    
+                    <dir style="text-align: center">
+                        <h1>List of car bodies</h1>
+                    </dir>
+                    <p:panel>
+                        <p:commandButton value="Add new Type" icon="ui-icon-plusthick" action="DatosTipoAuto"/>
+                    </p:panel>
+                    <p:panel>
+                        <p:dataTable var="tipo" value="#{grillaTipoAutosController.listaTipo_autos}"    id="carTable" >
+                            <p:column headerText="Number" sortBy="#{tipo.id}" filterBy="#{tipo.id}">
+                                <h:commandLink  action="DatosTipoAuto" actionListener="#{grillaTipoAutosController.setTipo_autoSeleccionada(tipo)}">
+                                <h:outputText value="#{tipo.id}" />
+                                </h:commandLink>
+                            </p:column>
+                            <p:column headerText="Type" sortBy="#{tipo.nombre}" filterBy="#{tipo.nombre}">
+                                <h:outputText value="#{tipo.nombre}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

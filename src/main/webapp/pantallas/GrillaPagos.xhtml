@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Payments list</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <h:outputLabel for="txtReferencia" value="Reference:" style="font-weight:bold"/>
+                            <p:inputText id="txtReferencia" value="#{grillaPagosController.referencia}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtNumeroComp" value="Receipt Number" style="font-weight:bold"/>
+                            <p:inputText id="txtNumeroComp" value="#{grillaPagosController.numeroComprobante}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="fechaInicio" value="Date from:" style="font-weight: bold"/>
+                            <p:calendar id="fechaInicio" navigator="true" pattern="dd-MM-yyyy" value="#{grillaPagosController.fechaDesde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="Date to:" style="font-weight: bold"/>
+                            <p:calendar id="fechaFin" navigator="true" pattern="dd-MM-yyyy" value="#{grillaPagosController.fechaHasta}" />
+                            <p:column/>
+
+                            <h:outputLabel value="Status:" for="cmbStatus" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbStatus" value="#{grillaPagosController.status}" style="width:200px">
+                                <f:selectItem itemLabel="All" itemValue="" />
+                                <f:selectItem itemLabel="Approved" itemValue="Approved" />
+                                <f:selectItem itemLabel="Declined" itemValue="Declined" />   
+                                <f:selectItem itemLabel="Approved Warning" itemValue="Approved Warning" /> 
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <h:outputLabel value="Type:" for="cmbType" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbType" value="#{grillaPagosController.tipo}" style="width:125px">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItem itemLabel="Manual" itemValue="0" />
+                                <f:selectItem itemLabel="Automatic" itemValue="1" />            
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaPagosController.buscarPorFiltro}" update="carTable"/>
+                        </p:panelGrid>
+                        <p:panel id="panelPago">
+                            <p:panelGrid rendered="#{grillaPagosController.mostrarPago}" id="nuevoPago"  columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <h:outputLabel value="Branch:" for="cmbSucursalPago" style="font-weight: bold "/>
+                                <p:selectOneMenu id="cmbSucursalPago"  value="#{grillaPagosController.pagoActual.sucursal.id}"
+                                                 required="true" requiredMessage="Must select one">
+                                    <f:selectItems value="#{grillaPagosController.listaSucursales}" var="sucursalInicioSelecc"
+                                                   itemLabel="#{sucursalInicioSelecc.nombre}" itemValue="#{sucursalInicioSelecc.id}"/>
+                                </p:selectOneMenu>
+                                <p:column/>
+                                <h:outputLabel value="Type:" for="cmbTypePago" style="font-weight: bold"/>
+                                <p:selectOneMenu id="cmbTypePago"  value="#{grillaPagosController.pagoActual.tipoPago.id}"
+                                                 required="true" requiredMessage="Must select one">
+                                    <f:selectItems value="#{grillaPagosController.listaTipoPago}" var="tipoPagoSelecc"
+                                                   itemLabel="#{tipoPagoSelecc.nombre}" itemValue="#{tipoPagoSelecc.id}"/>
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <h:outputLabel value="Amount:"  for="txtMontoPago" style="font-weight: bold"/>
+                                <p:inputNumber id="txtMontoPago" disabled="#{grillaPagosController.pagoActual.automatico==1}" decimalPlaces="2" value="#{grillaPagosController.pagoActual.monto}" maxValue="2000000" label="$" />
+                                <p:message for="txtMontoPago"/>
+
+                                <h:outputLabel for="fechaPago"  value="Date:"  style="font-weight: bold"/>
+                                <p:calendar id="fechaPago" mask="true"  yearRange="c:c+20"  navigator="true" pattern="dd-MM-yyyy" value="#{grillaPagosController.pagoActual.fecha_hora}" />
+                                <p:column/>
+
+                                <h:outputLabel for="txtReference" value="Reference:" style="font-weight: bold"/>
+                                <p:inputText id="txtReference" value="#{grillaPagosController.pagoActual.nota}"  />
+                                <p:message for="txtReference"/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <p:column/>
+                                <p:commandButton value="Save"  actionListener="#{grillaPagosController.guardarPago}" update="form:carTable"  />
+                                <p:column/>
+                                <p:commandButton  value="Cancel"  actionListener="#{grillaPagosController.cancelarPago}" update="panelPago"   />
+                                <p:column/>
+
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable  resizableColumns="true" scrollable="true"   var="pago" value="#{grillaPagosController.listaPagos}"    id="carTable" 
+                                          >
+                                <p:column  headerText="Fecha" sortBy="#{pago.fecha_hora}" filterBy="#{pago.fecha_hora}" style="width: ">                                               
+                                    <h:outputText value="#{pago.fecha_hora}" >
+                                        <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Reference" sortBy="#{pago.alquiler.id}" filterBy="#{pago.alquiler.id}">
+                                    <h:commandLink action="SummaryAlquilerPagos" actionListener="#{grillaPagosController.verContrato(pago.alquiler.id)}" value="#{pago.alquiler.id}"/>
+                                </p:column>
+                                <p:column headerText="Status" style="#{grillaPagosController.esPagoAprovado(pago)? 'background-color: #33cc33;':''} ;#{grillaPagosController.esPagoDeclined(pago)? 'background-color: #ff3300;':''} ;#{grillaPagosController.esPagoWarning(pago)? 'background-color: #f0fc03;':''};#{grillaPagosController.esPagoWarningBalanceado(pago)? 'background-color: #42cef5;':''}"  sortBy="#{pago.status}" filterBy="#{pago.status}">
+                                    <h:outputText  value="#{pago.status}" />
+                                </p:column>
+                                <p:column headerText="Note" sortBy="#{pago.nota}" filterBy="#{pago.nota}" style="width: 400px">
+                                    <h:outputText value="#{pago.nota} By: (#{pago.usuario.nombre} #{pago.usuario.apellido})" />                                    
+                                </p:column>
+                                <p:column headerText="Rate per week" sortBy="#{pago.alquiler.rate_per_day}" filterBy="#{pago.alquiler.rate_per_day}">
+                                    <h:outputText value="$#{pago.alquiler.rate_per_day}" />
+                                </p:column>
+                                <p:column headerText="Amount" sortBy="#{pago.monto}" filterBy="#{pago.monto}">
+                                    <h:outputText value="$#{pago.monto}" />
+                                </p:column>
+                                <p:column>
+                                    <p:commandLink  value="Edit" actionListener="#{grillaPagosController.editarPago(pago.id)}" update="form:panelPago"/>
+                                </p:column>
+
+
+                            </p:dataTable>
+                        </p:panel>
+                    </div>
+
+
+                </h:form>
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>

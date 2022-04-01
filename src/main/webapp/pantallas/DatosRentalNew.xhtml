@@ -1,0 +1,1052 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+
+    <body>
+
+
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+
+                    <h:form id="formulariol">
+                        <p:messages id="msgs" showDetail="true" closable="true" severity="info,warn"/>
+                        <p:growl id="mensajes" showDetail="true" severity="info, warn">
+                            <p:autoUpdate/>
+                        </p:growl>
+
+                        <p:panelGrid columns="2" id="gridBotones" style="width: 100%" >
+                            <p:column style="width:60%; border: none"  >
+                                <p:outputLabel value="Booking number: #{datosRentalNewController.alquilerActual.id}" style="margin: 5px"/>    
+                                <p:outputLabel value="Created by: #{datosRentalNewController.alquilerActual.usuario.nombre} #{datosRentalNewController.alquilerActual.usuario.apellido}, on: #{datosRentalNewController.alquilerActual.fecha}" style="margin: 5px" />
+
+
+                            </p:column>
+                            <p:column style="width: 30%; border: none">
+                                <p:commandButton style="width: auto" value="View car" icon="ui-icon-plusthick" rendered="#{datosRentalNewController.mostrarVerAuto}" actionListener="#{datosRentalNewController.verDetalleAuto}" action="DatosAuto"/>
+                                <p:commandButton value="Unlock" style="width: auto" immediate="true" action="GrillaAlquileres" actionListener="#{datosRentalNewController.desbloquear}" rendered="#{datosRentalNewController.mostrarLimpiar}"  />                                
+                                <p:commandButton value="View Summary"  icon="pi pi-home" rendered="#{datosRentalNewController.mostrarBotonSummary}" actionListener="#{datosRentalNewController.viewSummary()}" action="SummaryAlquilerPagos" style="width: auto" />
+                                <p:commandButton value="Submmit" style="width: auto" actionListener="#{datosRentalNewController.summit()}" update="msgs" />
+                                <p:commandButton value="Cancel" style="width: auto" action="GrillaAlquileres" immediate="true" />
+                            </p:column>
+                        </p:panelGrid>
+                        <!--      <p:inputText id="VIN2" value="{datosRentalNewController.autoActual.VIN}" maxlength="40" required="true" requiredMessage="You must enter the VIN" >
+                                                                     <p:ajax event="keyup" update=":formulariol:msgs " />
+                                                                 </p:inputText>
+                                                                 <p:message for="VIN2"/>-->
+
+                        <!--     <h:outputLabel for="txtRego" value="REGO:" style="font-weight:bold"/>
+                             <p:autoComplete  id="txtRego"   value="{datosRentalNewController.autoActual.rego}" required="true" requiredMessage="You must enter the rego"  completeMethod="{datosRentalNewController.completeTextRego}"  >
+                                 <p:ajax event="itemSelect" listener="{datosRentalNewController.onAutoSelect}" update="tabvi" />
+                                 <p:ajax event="keyup" listener="{datosRentalNewController.ponerMayusculaRego}" update="grid"/>
+                             </p:autoComplete>
+                             <p:message for="txtRego"/>-->     
+
+                        <!--    <p:wizard widgetVar="myWizard" id="tabvi"  flowListener="{datosRentalNewController.onFlowProcess}" showNavBar="false" > -->
+                        <p:tabView id="tabvi" activeIndex="#{datosRentalNewController.tabIndex}">
+                            <p:ajax event="tabChange" listener="#{datosRentalNewController.onTabChange}" update=":formulariol:msgs  formulariol:gridBotones tabvi"   />
+                            <p:ajax event="tabClose" listener="#{datosRentalNewController.onTabClose}" update="formulariol:msgs"/>
+                            <p:tab  id="auto" title="#{datosRentalNewController.TAB_AUTO}" >
+                                <p:panelGrid id="grid" columns="6" layout="grid" style="border: none !important">
+
+                                    <h:outputLabel for="txtRego" value="Rego:" style="font-weight: bold" />
+                                    <p:autoComplete id="txtRego" value="#{datosRentalNewController.autoActual.rego}" completeMethod="#{datosRentalNewController.completeTextRego}">
+                                        <p:ajax event="itemSelect" listener="#{datosRentalNewController.onAutoSelect}" update="tabvi" />
+                                        <p:ajax event="blur" listener="#{datosRentalNewController.ponerMayusculaRego()}" update="tabvi"/>
+                                    </p:autoComplete>
+                                    <p:message for="txtRego"/>
+
+                                    <h:outputLabel for="VIN" value="VIN:" style="font-weight: bold"/>
+                                    <p:inputText id="VIN" value="#{datosRentalNewController.autoActual.VIN}" required="true" requiredMessage="You must enter the VIN" >                                      
+                                        <p:ajax event="blur" listener="#{datosRentalNewController.handleKeyEvent()}" update="tabvi"/>
+                                    </p:inputText>
+                                    <p:message for="VIN"/>
+
+
+
+
+                                    <h:outputLabel for="fechaFinRego" value="Expiration date Rego:" style="font-weight: bold"/>
+                                    <p:calendar mask="true" id="fechaFinRego" navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.autoActual.fecha_vencimiento_rego}" 
+                                                required="true" requiredMessage="You have to enter the expiration date" >
+                                        <p:ajax event="dateSelect"  update=":formulariol:msgs " />
+                                        <p:ajax event="keyup" update=":formulariol:msgs " />
+                                    </p:calendar>
+                                    <p:message for="fechaFinRego"/>
+
+                                    <h:outputLabel for="cmbState" value="State:" style="font-weight:bold"/>
+                                    <p:selectOneMenu id="cmbState" value="#{datosRentalNewController.autoActual.state.id}" 
+                                                     required="true" requiredMessage="Must select one">
+                                        <p:ajax event="change" update=":formulariol:msgs " />
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <f:selectItems value="#{datosRentalNewController.listaEstadosTerritorio}" var="StateSelecc" 
+                                                       itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                                    </p:selectOneMenu>
+                                    <p:message for="cmbState"/>
+
+
+                                    <h:outputLabel for="cmMarca" value="Brand:" style="font-weight:bold"/>
+                                    <p:selectOneMenu id="cmMarca" value="#{datosRentalNewController.autoActual.marca.id}" 
+                                                     required="true" requiredMessage="Must select one" >
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <f:selectItems value="#{datosRentalNewController.listaMarca}" var="marcaSelecc" 
+                                                       itemLabel="#{marcaSelecc.nombre}" itemValue="#{marcaSelecc.id}" />
+                                        <p:ajax update="cmbModelo"/>
+                                    </p:selectOneMenu>
+                                    <p:message for="cmMarca"/>
+
+                                    <h:outputLabel for="cmbModelo" value="Model:" style="font-weight:bold"/>
+                                    <p:selectOneMenu id="cmbModelo" value="#{datosRentalNewController.autoActual.modelo.id}" 
+                                                     required="true" requiredMessage="Must select one" >
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <p:ajax event="change" update=":formulariol:msgs " />
+                                        <f:selectItems value="#{datosRentalNewController.listaModelosMarca}" var="modeloSelecc" 
+                                                       itemLabel="#{modeloSelecc.nombre}" itemValue="#{modeloSelecc.id}" />
+                                    </p:selectOneMenu>
+                                    <p:message for="cmbModelo"/>
+
+                                    <h:outputLabel for="nroMotor" value="Engine No.:" style="font-weight: bold"/>
+                                    <p:inputText id="nroMotor" value="#{datosRentalNewController.autoActual.nro_motor}" maxlength="40" >
+                                        <p:ajax event="keyup" update=":formulariol:msgs " />
+                                    </p:inputText>
+                                    <p:message for="nroMotor"/>
+
+                                    <h:outputLabel for="nroChasis" value="Chassis No:" style="font-weight: bold"/>
+                                    <p:inputText id="nroChasis" value="#{datosRentalNewController.autoActual.nro_chasis}" maxlength="40" >
+                                        <p:ajax event="keyup" update=":formulariol:msgs " />
+                                    </p:inputText>
+                                    <p:message for="nroChasis"/>
+
+                                    <h:outputLabel for="cmbTipoCombustible" value="Fuel Type:" style="font-weight: bold"/>
+                                    <p:selectOneMenu id="cmbTipoCombustible" value="#{datosRentalNewController.autoActual.tipo_combustible.id}"
+                                                     required="true" requiredMessage="Must select one">
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <p:ajax event="change" update=":formulariol:msgs " />
+                                        <f:selectItems value="#{datosRentalNewController.listaTipoCombustible}" var="tipoCombustibleSelecc"
+                                                       itemLabel="#{tipoCombustibleSelecc.nombre}" itemValue="#{tipoCombustibleSelecc.id}"/>
+                                    </p:selectOneMenu>
+                                    <p:column/>
+
+                                    <h:outputLabel for="año" value="Year:" style="font-weight: bold"/>
+                                    <p:inputMask mask="9999" id="año" value="#{datosRentalNewController.autoActual.año}" >
+                                        <p:ajax event="keyup" update=":formulariol:msgs " />
+                                    </p:inputMask>
+                                    <p:column/>
+
+                                    <h:outputLabel for="color" value="Colour:" style="font-weight: bold"/>
+                                    <p:inputText id="color" value="#{datosRentalNewController.autoActual.color}" >
+                                        <p:ajax event="keyup" update=":formulariol:msgs " />
+                                    </p:inputText>
+                                    <p:column/>
+
+                                    <h:outputLabel for="kms" value="Current Mileage:" style="font-weight: bold"/>
+                                    <p:inputText id="kms" value="#{datosRentalNewController.autoActual.kilometraje}" >
+                                        <p:ajax event="keyup" update=":formulariol:msgs " />
+                                    </p:inputText>
+                                    <p:column/>
+
+                                    <h:outputLabel for="cmbBodyType" value="Body Type:" style="font-weight: bold"/>
+                                    <p:selectOneMenu id="cmbBodyType" value="#{datosRentalNewController.autoActual.tipo_body.id}"
+                                                     required="true" requiredMessage="Must select one">
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <p:ajax event="change" update=":formulariol:msgs " />
+                                        <f:selectItems value="#{datosRentalNewController.listaTipoAuto}" var="tipoBody"
+                                                       itemLabel="#{tipoBody.nombre}" itemValue="#{tipoBody.id}"/>
+                                    </p:selectOneMenu>
+                                    <p:column/>
+
+                                    <h:outputLabel for="cmbSucursal" value="Branch:" style="font-weight: bold"/>
+                                    <p:selectOneMenu id="cmbSucursal" value="#{datosRentalNewController.autoActual.sucursal.id}"
+                                                     required="true" requiredMessage="Must select one">
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <p:ajax event="change" update=":formulariol:msgs " />
+                                        <f:selectItems value="#{datosRentalNewController.listaSucursales}" var="sucursalSelecc"
+                                                       itemLabel="#{sucursalSelecc.nombre}" itemValue="#{sucursalSelecc.id}"/>
+                                    </p:selectOneMenu>
+                                    <p:column/>    
+
+                                    <h:outputLabel for="txtStockAuto" value="Number Stock:" style="font-weight: bold"/>
+                                    <p:inputText id="txtStockAuto" value="#{datosRentalNewController.autoActual.stock}" required="true" requiredMessage="You must enter the stock number">
+                                        <p:ajax event="keyup" update=":formulariol:msgs " />
+                                    </p:inputText>
+                                    <p:message for="txtStockAuto"/>
+
+                                    <h:outputLabel for="cmbTransmision" value="Transmission:" style="font-weight: bold"/>
+                                    <p:selectOneRadio id="cmbTransmision" value="#{datosRentalNewController.autoActual.transmision}">
+                                        <p:ajax event="change" update=":formulariol:msgs " />
+                                        <f:selectItem itemLabel="Auto" itemValue="0"/>
+                                        <f:selectItem itemLabel="Manual" itemValue="1"/>
+                                    </p:selectOneRadio>
+                                    <p:column/>
+
+                                    <h:outputLabel for="cmbDrivetra" value="Drivetrain:" style="font-weight: bold"/>
+                                    <p:selectOneMenu id="cmbDrivetra" value="#{datosRentalNewController.autoActual.drivetrain.id}"
+                                                     required="true" requiredMessage="Must select one">
+                                        <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                        <p:ajax event="change" update=":formulariol:msgs " />
+                                        <f:selectItems value="#{datosRentalNewController.listaDriveTrain}" var="driveSelecc"
+                                                       itemLabel="#{driveSelecc.nombre}" itemValue="#{driveSelecc.id}"/>
+                                    </p:selectOneMenu>
+                                    <p:column/>   
+
+                                    <h:outputLabel for="cmbAire" value="Air conditioning:" style="font-weight: bold"/>
+                                    <p:selectOneRadio id="cmbAire" value="#{datosRentalNewController.autoActual.aire_acondicionado}">
+                                        <p:ajax event="change" update=":formulariol:msgs " />
+                                        <f:selectItem itemLabel="Yes" itemValue="0"/>
+                                        <f:selectItem itemLabel="No" itemValue="1"/>
+                                    </p:selectOneRadio>
+                                    <p:column/>
+
+                                    <h:outputLabel for="txtGrabado" value="Car emcumbered:" style="font-weight: bold"/>
+                                    <p:inputText id="txtGrabado" value="#{datosRentalNewController.autoActual.grabado}" >
+                                        <p:ajax event="keyup" update=":formulariol:msgs " />
+                                    </p:inputText>
+                                    <p:message for="txtGrabado"/>
+
+
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="cliente" title="#{datosRentalNewController.TAB_CLIENTE}">
+
+                                <p:scrollPanel mode="native" style="height: 80vh">
+                                    <p:panel id="panelPersonal" header="Client Details" >
+
+                                        <p:panelGrid   columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid" >
+
+                                            <p:outputLabel  value="Last  name:" for="txtCliente" style="font-weight: bold "/>
+                                            <p:autoComplete  id="txtCliente"   value="#{datosRentalNewController.clientePrincipal.apellido}" required="true" requiredMessage="You must enter the last name"  completeMethod="#{datosRentalNewController.completeTextCliente}" >
+                                                <p:ajax event="itemSelect" listener="#{datosRentalNewController.onClienteSeleccionado}" update="panelPersonal" />
+                                                <p:ajax event="blur" update="txtEmail"/>
+                                            </p:autoComplete>
+                                            <p:message for="txtCliente"/>
+
+                                            <h:outputLabel value="First name" for="txtNombre" style="font-weight: bold"/>
+                                            <p:inputText id="txtNombre" value="#{datosRentalNewController.clientePrincipal.nombre}" required="true" requiredMessage="You must enter the name" >
+                                                <p:ajax event="blur" listener="#{datosRentalNewController.buscarClienteApellidoNombre}" update="panelPersonal" />
+                                            </p:inputText>
+                                            <p:message for="txtNombre"/>
+
+                                            <h:outputLabel value="Email:" for="txtEmail" style="font-weight: bold"/>
+                                            <p:inputText id="txtEmail" value="#{datosRentalNewController.clientePrincipal.email}" required="true" requiredMessage="You have to enter a email" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs " />
+                                            </p:inputText>
+                                            <p:message for="txtEmail"/>
+
+                                            <h:outputLabel for="fechaNacimiento" value="DOB:" style="font-weight: bold" />
+                                            <p:calendar  mask="true" yearRange="c-100:c" id="fechaNacimiento" navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.clientePrincipal.DOB}" >
+                                                <p:ajax event="dateSelect"  update=":formulariol:msgs " />
+                                                <p:ajax event="keyup" update=":formulariol:msgs " />
+                                            </p:calendar>
+                                            <p:column/>
+
+
+                                            <h:outputLabel value="Phone:" for="txtTelefono" style="font-weight: bold"/>
+                                            <p:inputText id="txtTelefono" value="#{datosRentalNewController.clientePrincipal.telefono}"  >
+                                                <p:ajax event="keyup" update=":formulariol:msgs " />
+                                            </p:inputText>
+                                            <p:message for="txtTelefono" />
+
+                                            <h:outputLabel value="Mobile:"  for="txtMovil" style="font-weight: bold"/>
+                                            <p:inputText id="txtMovil" value="#{datosRentalNewController.clientePrincipal.movil}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs " />
+                                            </p:inputText>
+                                            <p:column/>
+
+                                            <h:outputLabel value="License No:" for="txtNumeroLicencia" style="font-weight: bold"/>
+                                            <p:inputText id="txtNumeroLicencia" value="#{datosRentalNewController.clientePrincipal.licencia_numero}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtNumeroLicencia"/>
+
+                                            <h:outputLabel for="txtOtorgadaEN" value="Granted in" style="font-weight:bold"/>
+                                            <p:inputText id="txtOtorgadaEN" value="#{datosRentalNewController.clientePrincipal.otorgadaEN}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtOtorgadaEN"/>
+
+                                            <h:outputLabel for="fechaVecLicencia"  value="Expiry date:" style="font-weight: bold"/>
+                                            <p:calendar mask="true" id="fechaVecLicencia"  yearRange="c:c+20"  navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.clientePrincipal.fecha_vencimiento_lic}" >
+                                                <p:ajax event="dateSelect"  update=":formulariol:msgs" />
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:calendar>
+                                            <p:column/>
+
+
+                                            <p:selectBooleanCheckbox   value="#{datosRentalNewController.clientePrincipal.lic_infinita}" itemLabel="Life Time:">
+                                                <p:ajax event="change" update=":formulariol:msgs" />
+                                            </p:selectBooleanCheckbox> 
+
+                                            <p:column/>
+                                            <p:column/>
+
+                                            <h:outputLabel for="txtDireccion" value="Address:" style="font-weight: bold"/>
+                                            <p:inputText id="txtDireccion" value="#{datosRentalNewController.clientePrincipal.direccion}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtDireccion"/>
+
+                                            <h:outputLabel for="txtSuburbio" value="Suburb:" style="font-weight: bold"/>
+                                            <p:inputText id="txtSuburbio" value="#{datosRentalNewController.clientePrincipal.suburbio}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtSuburbio"/>
+
+                                            <h:outputLabel for="cmbStateCliente" value="State" style="font-weight:bold"/>
+                                            <p:selectOneMenu id="cmbStateCliente" value="#{datosRentalNewController.clientePrincipal.state.id}" 
+                                                             required="true" requiredMessage="Must select one">
+                                                <p:ajax event="change" update=":formulariol:msgs" />
+                                                <f:selectItems value="#{datosRentalNewController.listaEstadosTerritorio}" var="StateSelecc" 
+                                                               itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                                            </p:selectOneMenu>
+                                            <p:column/>
+
+                                            <h:outputLabel for="txtPostCode" value="Postcode:" style="font-weight: bold"/>
+                                            <p:inputText id="txtPostCode" value="#{datosRentalNewController.clientePrincipal.codigo_postal}"  >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtPostCode"/>
+
+                                            <h:outputLabel value="Country of residence:" for="txtPais" style="font-weight: bold"/>
+                                            <p:inputText id="txtPais" value="#{datosRentalNewController.clientePrincipal.pais}"  >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtPais"/>
+
+                                            <p:commandButton value="Clear Client" rendered="#{datosRentalNewController.isCliente()}" actionListener="#{datosRentalNewController.limpiarCliente}"   update="tabvi" />
+                                            <p:column/>
+                                            <p:column/>
+                                            <p:column/>
+                                            <p:column/>
+
+                                            <p:selectBooleanCheckbox   value="#{datosRentalNewController.clientePrincipal.good_customer}" itemLabel="Good Customer" style="font-weight: bold">
+                                                <p:ajax event="change" update=":formulariol:msgs" />
+                                            </p:selectBooleanCheckbox> 
+
+                                            <p:column/>
+                                            <p:column/>
+                                        </p:panelGrid>
+                                    </p:panel>
+
+
+                                    <p:panel id="driversAdicional" header="Additional Drivers" >
+
+                                        <p:commandButton value="Add new driver" icon="ui-icon-plusthick" style="width: auto" immediate="true" actionListener="#{datosRentalNewController.setMostrarDriverAdicional(true)}" update="driversAdicional panelDriverAdicional"/>
+                                        <p:panelGrid id="panelDriverAdicional" rendered="#{datosRentalNewController.mostrarDriverAdicional}"   columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid" >
+
+                                            <h:outputLabel value="Last name" for="txtClienteAdicional" style="font-weight: bold"/>
+                                            <p:autoComplete id="txtClienteAdicional" value="#{datosRentalNewController.clienteAdicional.apellido}" completeMethod="#{datosRentalNewController.completeTextClienteAdicional}" >
+                                                <p:ajax event="itemSelect" listener="#{datosRentalNewController.onClienteAdiciionalSeleccionado}" update="driversAdicional" />
+                                                <p:ajax event="blur" update=":formulariol:msgs" />
+                                            </p:autoComplete>
+                                            <p:message for="txtClienteAdicional"/>
+
+                                            <h:outputLabel value="First name" for="txtNombreAdicional" style="font-weight: bold"/>
+                                            <p:inputText id="txtNombreAdicional" value="#{datosRentalNewController.clienteAdicional.nombre}" required="true">
+                                                <p:ajax event="blur" listener="#{datosRentalNewController.buscarClienteApellidoNombreAdicional}" update="driversAdicional" />
+                                            </p:inputText>                                    
+                                            <p:message for="txtNombreAdicional"/>
+
+                                            <h:outputLabel value="Email:" for="txtEmailAdicional" style="font-weight: bold"/>
+                                            <p:inputText id="txtEmailAdicional" value="#{datosRentalNewController.clienteAdicional.email}" required="true" requiredMessage="You have to enter an email" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtEmailAdicional"/>
+
+                                            <h:outputLabel for="fechaNacimientoAdicional" value="DOB:" style="font-weight: bold" />
+                                            <p:calendar yearRange="c-100:c" id="fechaNacimientoAdicional" navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.clienteAdicional.DOB}" >
+                                                <p:ajax event="dateSelect"  update=":formulariol:msgs" />
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:calendar>
+                                            <p:column/>
+
+
+                                            <h:outputLabel value="Phone:" for="txtTelefonoAdicional" style="font-weight: bold"/>
+                                            <p:inputText id="txtTelefonoAdicional" value="#{datosRentalNewController.clienteAdicional.telefono}"  >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtTelefonoAdicional" />
+
+                                            <h:outputLabel value="Mobile:"  for="txtMovilAdiciona" style="font-weight: bold"/>
+                                            <p:inputText id="txtMovilAdiciona" value="#{datosRentalNewController.clienteAdicional.movil}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:column/>
+
+                                            <h:outputLabel value="License No:" for="txtNumeroLicenciaAdicional" style="font-weight: bold"/>
+                                            <p:inputText id="txtNumeroLicenciaAdicional" value="#{datosRentalNewController.clienteAdicional.licencia_numero}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtNumeroLicenciaAdicional"/>
+
+                                            <h:outputLabel for="txtOtorgadaENAdicional" value="Granted in" style="font-weight:bold"/>
+                                            <p:inputText id="txtOtorgadaENAdicional" value="#{datosRentalNewController.clienteAdicional.otorgadaEN}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtOtorgadaENAdicional"/>
+
+                                            <h:outputLabel for="fechaVecLicenciaAdicional"  value="Expiry date:" style="font-weight: bold"/>
+                                            <p:calendar id="fechaVecLicenciaAdicional"   mask="true"  yearRange="c:c+20"  navigator="true" pattern="dd-MM-yyyy"  value="#{datosRentalNewController.clienteAdicional.fecha_vencimiento_lic}" >
+                                                <p:ajax event="dateSelect"  update=":formulariol:msgs" />
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:calendar>
+                                            <p:column/>
+
+
+                                            <p:selectBooleanCheckbox   value="#{datosRentalNewController.clienteAdicional.lic_infinita}" itemLabel="Life Time:">
+                                                <p:ajax event="change" update=":formulariol:msgs" />
+                                            </p:selectBooleanCheckbox> 
+
+                                            <p:column/>
+                                            <p:column/>
+
+                                            <h:outputLabel for="txtDireccionAdicional" value="Address:" style="font-weight: bold"/>
+                                            <p:inputText id="txtDireccionAdicional" value="#{datosRentalNewController.clienteAdicional.direccion}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtDireccionAdicional"/>
+
+                                            <h:outputLabel for="txtSuburbioAdicional" value="Suburb:" style="font-weight: bold"/>
+                                            <p:inputText id="txtSuburbioAdicional" value="#{datosRentalNewController.clienteAdicional.suburbio}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtSuburbioAdicional"/>
+
+                                            <h:outputLabel for="cmbStateAdicional" value="State" style="font-weight:bold"/>
+                                            <p:selectOneMenu id="cmbStateAdicional" value="#{datosRentalNewController.clienteAdicional.state.id}" 
+                                                             required="true" requiredMessage="Must select one">
+                                                <p:ajax event="change" update=":formulariol:msgs" />
+                                                <f:selectItems value="#{datosRentalNewController.listaEstadosTerritorio}" var="StateSelecc" 
+                                                               itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                                            </p:selectOneMenu>
+                                            <p:column/>
+
+                                            <h:outputLabel for="txtPostCodeAdicional" value="Postcode:" style="font-weight: bold"/>
+                                            <p:inputText id="txtPostCodeAdicional" value="#{datosRentalNewController.clienteAdicional.codigo_postal}" >
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtPostCodeAdicional"/>
+
+                                            <h:outputLabel value="Country of residence:" for="txtPaisAdicional" style="font-weight: bold"/>
+                                            <p:inputText id="txtPaisAdicional" value="#{datosRentalNewController.clienteAdicional.pais}">
+                                                <p:ajax event="keyup" update=":formulariol:msgs" />
+                                            </p:inputText>
+                                            <p:message for="txtPaisAdicional"/>
+
+                                            <p:commandButton value="Cancel additional customer"  actionListener="#{datosRentalNewController.limpiarClienteAdicional}" update="driversAdicional panelDriverAdicional" />
+
+
+                                        </p:panelGrid>
+                                    </p:panel>
+
+                                </p:scrollPanel>                                
+
+                            </p:tab>
+                            <p:tab id="booking" title="#{datosRentalNewController.TAB_BOOKING_DETAIL}">
+                                <p:panel id="basic"  style="margin-bottom:20px" header="Booking details">
+                                    <p:panelGrid columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                        <p:column/>           
+                                        <p:selectOneRadio id="cmbTiempo" value="#{datosRentalNewController.alquilerActual.diario}">
+                                            <p:ajax event="change" update=":formulariol:msgs " />
+                                            <f:selectItem itemLabel="Daily" itemValue="true"/>
+                                            <f:selectItem itemLabel="Weekly" itemValue="false"/>
+                                        </p:selectOneRadio>
+                                        <p:column/>      
+
+                                        <p:selectBooleanCheckbox value="#{datosRentalNewController.alquilerActual.fortnightly}"  style="font-weight: bold" itemLabel="Payment Fortnightly">
+                                            <p:ajax event="change" update=":formulariol:msgs" />
+                                        </p:selectBooleanCheckbox>
+                                        <p:column/>
+                                        <p:column/>
+
+
+
+                                        <h:outputLabel value="Type:" for="cmbType" style="font-weight:bold"/>
+                                        <p:selectOneMenu id="cmbType" value="#{datosRentalNewController.alquilerActual.estado}" style="width:125px">
+                                            <p:ajax event="change" update=":formulariol:msgs" />
+                                            <f:selectItem itemLabel="Reservation" itemValue="1" />
+                                            <f:selectItem itemLabel="Hired" itemValue="2" />
+                                            <f:selectItem itemLabel="Returned" itemValue="3" />
+                                            <f:selectItem itemLabel="Cancelled" itemValue="4" />
+                                            <f:selectItem itemLabel="Sold" itemValue="6" />
+                                            <f:selectItem itemLabel="Repo" itemValue="7" />
+                                            <f:selectItem itemLabel="Courtesy" itemValue="8" />
+                                        </p:selectOneMenu>
+                                        <p:column/>
+
+                                        <h:outputLabel  for="fechaInicioTerm" value="Pickup Date:" style="font-weight: bold" />
+                                        <p:calendar mask="true" yearRange="c:c+5" id="fechaInicioTerm" navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.alquilerActual.fecha_inicio}"  required="true" requiredMessage="Must select one date">
+                                            <p:ajax event="dateSelect"  update=":formulariol:msgs" listener="#{datosRentalNewController.fechaInicioIngresada()}" />
+                                            <p:ajax event="keyup" update=":formulariol:msgs"  listener="#{datosRentalNewController.fechaInicioIngresada()}"/>
+                                        </p:calendar>
+                                        <p:message for="fechaInicioTerm"/>
+
+
+                                        <h:outputLabel for="horaInicio" value="Pickup time: " style="font-weight: bold"/>
+                                        <p:inputMask id="horaInicio" value="#{datosRentalNewController.alquilerActual.hora_inicio}" mask="99:99" required="true" requiredMessage="You must enter the time">
+                                            <p:ajax event="keyup" update=":formulariol:msgs" />
+                                        </p:inputMask>
+                                        <p:message for="horaInicio"/>
+                                        <h:outputLabel value="Pickup location:" for="cmbSucursalOrigen" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbSucursalOrigen"  value="#{datosRentalNewController.alquilerActual.sucursal_origen.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <p:ajax event="change" update=":formulariol:msgs" />
+                                            <f:selectItems value="#{datosRentalNewController.listaSucursales}" var="sucursalInicioSelecc"
+                                                           itemLabel="#{sucursalInicioSelecc.nombre}" itemValue="#{sucursalInicioSelecc.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cmbSucursalOrigen"/>
+
+                                        <p:column/>
+                                        <p:column/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="fechaFin" value="Dropoff Date:" style="font-weight: bold" />
+                                        <p:calendar  mask="true" yearRange="c:c+5" id="fechaFin" navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.alquilerActual.fecha_fin}"  required="true" requiredMessage="Must select one date">
+                                            <p:ajax event="dateSelect"  update=":formulariol:msgs" />
+                                            <p:ajax event="keyup" update=":formulariol:msgs" />                                        
+                                        </p:calendar>
+                                        <p:message for="fechaFin"/>
+
+                                        <h:outputLabel for="horaFin" value="Dropoff time: " style="font-weight: bold"/>
+                                        <p:inputMask id="horaFin" value="#{datosRentalNewController.alquilerActual.hora_fin}" mask="99:99" required="true" requiredMessage="You must enter the time" >
+                                            <p:ajax event="keyup" update=":formulariol:msgs" />
+                                        </p:inputMask>
+                                        <p:message for="horaFin"/>
+                                        <h:outputLabel value="Dropoff location:" for="cmbSucursalDestino" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbSucursalDestino"  value="#{datosRentalNewController.alquilerActual.sucursal_destino.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <p:ajax event="change" update=":formulariol:msgs" />
+                                            <f:selectItems value="#{datosRentalNewController.listaSucursales}" var="sucursalInicioSelecc"
+                                                           itemLabel="#{sucursalInicioSelecc.nombre}" itemValue="#{sucursalInicioSelecc.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cmbSucursalDestino"/>
+
+                                        <h:outputLabel value="Source:" for="cmbSource" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbSource"  value="#{datosRentalNewController.alquilerActual.source.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <p:ajax event="change" update=":formulariol:msgs" />
+                                            <f:selectItems value="#{datosRentalNewController.listaSource}" var="sourceSelecc"
+                                                           itemLabel="#{sourceSelecc.nombre}" itemValue="#{sourceSelecc.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:column/>
+
+
+                                        <h:outputLabel  for="fechaPrimerPago" value="First payment date:" style="font-weight: bold" />
+                                        <p:calendar mask="true" yearRange="c:c+5" id="fechaPrimerPago" navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.alquilerActual.fecha_primer_pago}">
+                                            <p:ajax event="dateSelect"  update=":formulariol:msgs" />
+                                            <p:ajax event="keyup" update=":formulariol:msgs" />                                        
+                                        </p:calendar>
+                                        <p:message for="fechaPrimerPago"/>
+                                    </p:panelGrid>
+                                </p:panel>
+                                <p:panel id="autoSelecction"  style="margin-bottom:20px" header="Vehicle Selection">
+                                    <p:panelGrid columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                        <h:outputLabel for="vehiculo" value="Vehicle:" style="font-weight: bold"/>
+                                        <p:inputText id="vehiculo"   value="#{datosRentalNewController.descripcionLargaAuto}" readonly="true"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="kmsOut" value="Kms Out:" style="font-weight: bold"/>
+                                        <p:inputText id="kmsOut" value="#{datosRentalNewController.kmsOutStr}" >
+                                            <p:ajax event="keyup" update=":formulariol:msgs" />
+                                        </p:inputText>
+                                        <p:message for="kmsOut"/>
+
+                                        <h:outputLabel for="fuelOut" value="Fuel Out:" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="fuelOut" value="#{datosRentalNewController.alquilerActual.fuel_out}"  required="true" requiredMessage="Must select one">
+                                            <p:ajax event="change" update=":formulariol:msgs" />
+                                            <f:selectItem itemLabel="Select One" itemValue="0" />
+                                            <f:selectItem itemLabel="Full" itemValue="1" />
+                                            <f:selectItem itemLabel="7/8" itemValue="2" />
+                                            <f:selectItem itemLabel="3/4" itemValue="3" />
+                                            <f:selectItem itemLabel="5/8" itemValue="4" />
+                                            <f:selectItem itemLabel="1/2" itemValue="5" />
+                                            <f:selectItem itemLabel="3/8" itemValue="6" />
+                                            <f:selectItem itemLabel="1/4" itemValue="7" />
+                                            <f:selectItem itemLabel="1/8" itemValue="8" />
+                                            <f:selectItem itemLabel="Empty" itemValue="9" />
+                                        </p:selectOneMenu>
+                                        <p:message for="fuelOut"/>
+
+                                        <h:outputLabel for="kmsIn" value="Kms In:" style="font-weight: bold"/>
+                                        <p:inputText id="kmsIn" value="#{datosRentalNewController.kmsInStr}" >
+                                            <p:ajax event="keyup" update=":formulariol:msgs" />
+                                        </p:inputText>
+                                        <p:message for="kmsIn"/>
+
+                                        <h:outputLabel for="fuelIn" value="Fuel In:" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="fuelIn" value="#{datosRentalNewController.alquilerActual.fuel_in}"  >
+                                            <p:ajax event="change" update=":formulariol:msgs" />
+                                            <f:selectItem itemLabel="Select One" itemValue="0" />
+                                            <f:selectItem itemLabel="Full" itemValue="1" />
+                                            <f:selectItem itemLabel="7/8" itemValue="2" />
+                                            <f:selectItem itemLabel="3/4" itemValue="3" />
+                                            <f:selectItem itemLabel="5/8" itemValue="4" />
+                                            <f:selectItem itemLabel="1/2" itemValue="5" />
+                                            <f:selectItem itemLabel="3/8" itemValue="6" />
+                                            <f:selectItem itemLabel="1/4" itemValue="7" />
+                                            <f:selectItem itemLabel="1/8" itemValue="8" />
+                                            <f:selectItem itemLabel="Empty" itemValue="9" />
+                                        </p:selectOneMenu>
+                                        <p:message for="fuelIn"/>
+                                    </p:panelGrid>
+
+                                </p:panel>
+                                <p:panel id="note"  style="margin-bottom:20px" header="Notes" >
+                                    <p:panelGrid columns="1" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                        <h:outputLabel  value="Notes: " style="font-weight: bold"/>
+
+                                        <p:inputTextarea value="#{datosRentalNewController.alquilerActual.notes}" id="notes" rows="5" cols="150"   maxlength="2000"  autoResize="false" >
+                                            <p:ajax event="keyup" update=":formulariol:msgs" />
+                                        </p:inputTextarea>
+                                    </p:panelGrid>
+                                </p:panel>
+                            </p:tab>
+                            <p:tab id="fee" title="#{datosRentalNewController.TAB_FEE}">
+                                <p:panel id="panelTotales" style="background-color: window; border: black solid 1px !important;">
+                                    <p:panelGrid columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                        <h:outputLabel  value="Total: $#{datosRentalNewController.alquilerActual.total}" style="font-weight: bold" />                                
+                                        <p:column/>
+                                        <h:outputLabel  value="Extras: $#{datosRentalNewController.alquilerActual.extra}" style="font-weight: bold" />
+                                        <p:column/>
+                                        <h:outputLabel  value="Grand Total: $#{datosRentalNewController.alquilerActual.gran_total}" style="font-weight: bold" />
+                                        <p:column/>                                
+                                    </p:panelGrid>
+                                </p:panel>
+                                <p:panel id="panelPrincipalFee" style=" border: black solid 1px !important;">
+
+                                    <p:panelGrid columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                        <p:outputLabel style="width: auto" rendered="#{datosRentalNewController.alquilerActual.diario==false}" value="Weeks:" for="txtSemanas"/>
+                                        <p:outputLabel style="width: auto" rendered="#{datosRentalNewController.alquilerActual.diario}" value="Days:" for="txtDias"/>
+                                        <p:inputNumber id="txtSemanas" decimalPlaces="0" rendered="#{datosRentalNewController.alquilerActual.diario==false}" value="#{datosRentalNewController.alquilerActual.semanas}" maxValue="2000000" label="Days">
+                                            <p:ajax event="blur" update="txtTotal panelTotales" listener="#{datosRentalNewController.actualizarTotal()}" />
+                                        </p:inputNumber>
+                                        <p:inputNumber id="txtDias" decimalPlaces="0" rendered="#{datosRentalNewController.alquilerActual.diario}" value="#{datosRentalNewController.alquilerActual.dias}" maxValue="2000000" label="Days">
+                                            <p:ajax event="blur" update="txtTotal panelTotales" listener="#{datosRentalNewController.actualizarTotal()}" />
+                                        </p:inputNumber>
+                                        <p:outputLabel value="Rates:" for="txtRate"/>
+                                        <p:inputNumber id="txtRate"  value="#{datosRentalNewController.alquilerActual.rate_per_day}" maxValue="2000000" label="Daily">
+                                            <p:ajax event="blur" update="txtTotal panelTotales" listener="#{datosRentalNewController.actualizarTotal()}" />
+                                        </p:inputNumber>
+
+                                        <p:outputLabel value="Total:" for="txtTotal"/>
+                                        <p:inputNumber id="txtTotal" decimalPlaces="2" value="#{datosRentalNewController.alquilerActual.total}" maxValue="2000000" label="$">
+                                            <p:ajax event="blur" update="txtRate panelTotales" listener="#{datosRentalNewController.actualizarRate()}" />
+                                        </p:inputNumber>
+
+
+                                    </p:panelGrid>
+                                </p:panel>
+                                <p:panel id="panelFees">
+
+                                    <p:dataTable reflow="true" id="impuestosAlquiler" var="alqImp" value="#{datosRentalNewController.listaAlqImp}" sortBy="#{alqImp.impuesto.tipo_impuesto.id}" rowKey="#{imp.id}" style="margin-bottom:0">
+                                        <p:headerRow>
+                                            <p:column colspan="3">
+                                                <h:outputText value="#{alqImp.impuesto.tipo_impuesto.nombre}" />
+                                            </p:column>
+                                        </p:headerRow>
+                                        <p:column headerText="Select">
+                                            <p:selectBooleanCheckbox value="#{alqImp.seleccionado}">
+                                                <p:ajax update="formulariol:tabvi:panelTotales" listener="#{datosRentalNewController.actualizarMontoExtras()}" />
+                                            </p:selectBooleanCheckbox>
+                                        </p:column>
+                                        <p:column headerText="Name">
+                                            <h:outputText value="#{alqImp.impuesto.nombre}"/>                                  
+                                        </p:column>
+                                        <p:column headerText="Qty">
+                                            <p:inputNumber value="#{alqImp.cantidad}" decimalPlaces="0"> 
+                                                <p:ajax event="keyup" update="formulariol:tabvi:panelTotales" listener="#{datosRentalNewController.actualizarMontoExtras()}" />
+                                            </p:inputNumber>
+                                        </p:column>
+                                        <p:column headerText="Total">
+                                            <p:inputNumber disabled="#{!alqImp.impuesto.editable}" value="#{alqImp.precio}" decimalPlaces="2" maxValue="1000000">
+                                                <p:ajax event="keyup" update="formulariol:tabvi:panelTotales" listener="#{datosRentalNewController.actualizarMontoExtras()}" />
+                                            </p:inputNumber>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panel>
+
+                            </p:tab>
+                            <p:tab id="payments" title="#{datosRentalNewController.TAB_PAYMENTS}">
+
+                                <p:panel>
+                                    <p:panelGrid columns="4" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                        <h:outputLabel value="Renter Name:" style="font-weight: bold"/>
+                                        <h:outputLabel value="#{datosRentalNewController.clientePrincipal.nombre} - #{datosRentalNewController.clientePrincipal.apellido}" style="width: 80%"/>
+                                        <h:outputLabel value="Vehicle:" style="font-weight: bold"/>
+                                        <h:outputLabel value="#{datosRentalNewController.vehiculoStr}"/>
+                                        <h:outputLabel value="Pickup Date:" style="font-weight: bold"/>
+                                        <h:outputLabel value="#{datosRentalNewController.pickupDateStr}"/>
+                                        <h:outputLabel value="Dropoff Date:" style="font-weight: bold"/>
+                                        <h:outputLabel value="#{datosRentalNewController.dropoffDateStr}"/>
+                                    </p:panelGrid>
+                                </p:panel>
+                                <p:panel id="panelImpuestos">
+                                    <p:dataTable  value="#{datosRentalNewController.listaImpuestoSeleccAlq}" var="imp" sortBy="#{imp.alquiler.id}">
+                                        <p:columnGroup type="header">
+                                            <p:row>
+                                                <p:column headerText="Rate and Fees"/>
+                                                <p:column headerText="Weeks" rendered="#{datosRentalNewController.alquilerActual.diario==false}"/>
+                                                <p:column headerText="Days" rendered="#{datosRentalNewController.alquilerActual.diario}"/>
+                                                <p:column headerText="Qty"/>
+                                                <p:column headerText="Rate"/>
+                                                <p:column headerText="Total"/>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column  headerText="Rate" style="background-color: #cccccc;
+                                                           background-image: none !important; text-align: left;
+                                                           color: #000000 !important; border: none"/>
+                                                <p:column headerText="#{datosRentalNewController.alquilerActual.semanas}" rendered="#{datosRentalNewController.alquilerActual.diario==false}" style="background-color: #cccccc;
+                                                          background-image: none !important; text-align: left;
+                                                          color: #000000 !important; border: none"/>
+                                                <p:column headerText="#{datosRentalNewController.alquilerActual.dias}" rendered="#{datosRentalNewController.alquilerActual.diario}" style="background-color: #cccccc;
+                                                          background-image: none !important; text-align: left;
+                                                          color: #000000 !important; border: none"/>                                                
+                                                <p:column headerText="-" style="background-color: #cccccc;
+                                                          background-image: none !important; text-align: left;
+                                                          color: #000000 !important; border: none"/>
+                                                <p:column headerText="$#{datosRentalNewController.alquilerActual.rate_per_day}" style="background-color: #cccccc;
+                                                          background-image: none !important; text-align: left;
+                                                          color: #000000 !important; border: none"/>
+                                                <p:column headerText="$#{datosRentalNewController.alquilerActual.total}" style="background-color: #cccccc;
+                                                          background-image: none !important; text-align: left;
+                                                          color: #000000 !important; border: none"/>
+                                            </p:row>
+                                        </p:columnGroup>
+                                        <p:column>
+                                            <h:outputText value="#{imp.impuesto.nombre}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="-"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{imp.cantidad}"/>
+                                        </p:column>                                
+                                        <p:column>
+                                            <h:outputText value="$#{imp.precio}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="$#{imp.subtotal}"/>
+                                        </p:column>
+                                        <p:summaryRow>
+                                            <p:column colspan="4" style="text-align:right">
+                                                <h:outputText value="Total:" />
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{datosRentalNewController.alquilerActual.gran_total}">
+                                                    <f:convertNumber type="currency" currencySymbol="$" />
+                                                </h:outputText>
+                                            </p:column>
+                                        </p:summaryRow>
+
+                                    </p:dataTable>
+
+
+
+                                </p:panel>
+                                <p:panel id="PanelTablePago">
+                                    <p:dataTable reflow="true" var="pago"   scrollable="true" scrollHeight="300" style="border: 1px solid black" value="#{datosRentalNewController.listaPagoAlquiler}" id="pagosTable" >
+                                        <p:column headerText="Fecha" sortBy="#{pago.fecha_hora}" filterBy="#{pago.fecha_hora}">                                               
+                                            <h:outputText value="#{pago.fecha_hora}">
+                                                <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Type" sortBy="#{pago.tipoPago.nombre}" filterBy="#{pago.tipoPago.nombre}">
+                                            <h:outputText value="#{pago.tipoPago.nombre}" />
+                                        </p:column>
+                                        <p:column headerText="Reference" sortBy="#{pago.nota}" filterBy="#{pago.nota}">
+                                            <h:outputText value="#{pago.nota} By: (#{pago.usuario.nombre} #{pago.usuario.apellido})" />
+                                        </p:column>
+                                        <p:column headerText="Paid Amount" sortBy="#{pago.monto}" filterBy="#{pago.monto}">
+                                            <h:outputText value="$#{pago.monto}" />
+                                        </p:column>
+
+
+
+                                    </p:dataTable>
+                                    <p:separator/>
+                                    <p:panelGrid  columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                        <h:outputLabel style="text-align: left;color: red;" value="Balance due" />
+                                        <h:outputLabel  style="text-align: right; color: red;" value="$#{datosRentalNewController.alquilerActual.deuda}"/>
+                                    </p:panelGrid>
+                                </p:panel>
+                                <p:panel id="panelPago">
+                                    <p:panelGrid columns="3" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                        <p:commandButton style="width: auto"  value="Add new payment"  icon="ui-icon-plusthick"  actionListener="#{datosRentalNewController.setMostrarPago(true)}" update="panelPago" />
+                                        <p:commandButton style="width: auto" value="Show credits cards" rendered="#{datosRentalNewController.ocultarTarjetasCredito}" icon="ui-icon-plusthick"  actionListener="#{datosRentalNewController.setMostrarTarjetasCredito(true)}" update="panelPago"/>
+                                        <p:commandButton style="width: auto" value="Hide  credits cards" rendered="#{datosRentalNewController.mostrarTarjetasCredito}" icon="ui-icon-minus"  actionListener="#{datosRentalNewController.setMostrarTarjetasCredito(false)}" update="panelPago"/>                                            
+                                        <p:commandButton style="width: auto" value="Add new credit card" icon="ui-icon-plusthick"  actionListener="#{datosRentalNewController.setMostrarTarjeta(true)}" update="panelPago"/>                                            
+                                    </p:panelGrid>
+                                    <p:separator/>
+
+
+                                    <p:panelGrid rendered="#{datosRentalNewController.mostrarPago}" id="nuevoPago"  columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                        <h:outputLabel value="Branch:" for="cmbSucursalPago" style="font-weight: bold "/>
+                                        <p:selectOneMenu id="cmbSucursalPago"  value="#{datosRentalNewController.pagoActual.sucursal.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosRentalNewController.listaSucursales}" var="sucursalInicioSelecc"
+                                                           itemLabel="#{sucursalInicioSelecc.nombre}" itemValue="#{sucursalInicioSelecc.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:column/>
+                                        <h:outputLabel value="Type:" for="cmbTypePago" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbTypePago"  value="#{datosRentalNewController.pagoActual.tipoPago.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosRentalNewController.listaTipoPago}" var="tipoPagoSelecc"
+                                                           itemLabel="#{tipoPagoSelecc.nombre}" itemValue="#{tipoPagoSelecc.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:column/>
+
+                                        <h:outputLabel value="Amount:" for="txtMontoPago" style="font-weight: bold"/>
+                                        <p:inputNumber id="txtMontoPago" decimalPlaces="2" value="#{datosRentalNewController.pagoActual.monto}" maxValue="2000000" label="$" />
+                                        <p:message for="txtMontoPago"/>
+
+                                        <h:outputLabel for="fechaPago"  value="Date:"  style="font-weight: bold"/>
+                                        <p:calendar  id="fechaPago" mask="true"  yearRange="c:c+20"  navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.pagoActual.fecha_hora}" />
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtReference" value="Reference:" style="font-weight: bold"/>
+                                        <p:inputText id="txtReference" value="#{datosRentalNewController.pagoActual.nota}"  />
+                                        <p:message for="txtReference"/>
+
+                                        <p:column/>
+                                        <p:column/>
+                                        <p:column/>
+
+                                        <p:column/>
+                                        <p:commandButton value="Save"  actionListener="#{datosRentalNewController.guardarPago}" update="PanelTablePago panelPago panelImpuestos panelFees"  />
+                                        <p:column/>
+                                        <p:commandButton  value="Cancel" immediate="true"  actionListener="#{datosRentalNewController.cancelarPago}" update="panelPago"   />
+                                        <p:column/>
+
+                                    </p:panelGrid>
+
+
+
+
+                                    <p:panelGrid id="nuevaTarjeta"  rendered="#{datosRentalNewController.mostrarTarjeta}" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                        <p:outputLabel value="Card Credit Number:" for="txtNumeroTarjeta" style="font-weight: bold"/>
+                                        <p:inputText id="txtNumeroTarjeta" value="#{datosRentalNewController.tarjetaActual.numero}" required="true" requiredMessage="Must enter the number"/>
+                                        <p:message for="txtNumeroTarjeta"/>
+
+                                        <h:outputLabel value="Type Card:" for="cmbTypeCard" style="font-weight: bold"/>
+                                        <p:selectOneMenu id="cmbTypeCard"  value="#{datosRentalNewController.tarjetaActual.tipoTarjeta.id}"
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosRentalNewController.tiposTarjeta}" var="tipoTarjetaSelecc"
+                                                           itemLabel="#{tipoTarjetaSelecc.nombre}" itemValue="#{tipoTarjetaSelecc.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:column/>
+
+                                        <p:outputLabel for="txtNombreEnTarjeta" value="Name on Card:" style="font-weight: bold"/>
+                                        <p:inputText id="txtNombreEnTarjeta" value="#{datosRentalNewController.tarjetaActual.nombre}" required="true" requiredMessage="Must enter the name"/>
+                                        <p:message for="txtNombreEnTarjeta"/>
+
+                                        <h:outputLabel for="fechaVecTarjeta"  value="Expiry date:" style="font-weight: bold"/>
+                                        <p:calendar id="fechaVecTarjeta"  yearRange="c:c+20"  navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.tarjetaActual.fechaVenc}" />
+                                        <p:column/>
+
+                                        <p:column/>
+
+                                        <p:commandButton value="Save"  actionListener="#{datosRentalNewController.guardarTarjeta}" update="panelPago"   />
+                                        <p:column/>
+                                        <p:commandButton  value="Cancel"  actionListener="#{datosRentalNewController.cancelarTarjeta}" immediate="true"  update="panelPago"   />
+                                        <p:column/>
+
+                                    </p:panelGrid>
+
+
+                                    <p:dataTable id="grillaTarjetas" rendered="#{datosRentalNewController.mostrarTarjetasCredito}" reflow="true" var="tarjeta"    style="border: 1px solid black" value="#{datosRentalNewController.tarjetasAlquiler}" 
+                                                 selectionMode="single" selection="#{datosRentalNewController.tarjetasSeleccionada}" rowKey="#{tarjeta.id}">
+                                        <p:ajax event="contextMenu" update="formulariol:grillaTarjetas"/>
+                                        <p:ajax 
+                                            event="rowDblselect" 
+                                            listener="#{datosRentalNewController.onRowDoubleClick}" 
+                                            update="panelPago" />
+
+                                        <p:column headerText="Type" sortBy="#{tarjeta.tarjeta.tipoTarjeta.nombre}" filterBy="#{tarjeta.tarjeta.tipoTarjeta.nombre}" >
+                                            <h:outputText value="#{tarjeta.tarjeta.tipoTarjeta.nombre}" />
+                                        </p:column>
+                                        <p:column headerText="Number" sortBy="#{tarjeta.tarjeta.numero}" filterBy="#{tarjeta.tarjeta.numero}">
+                                            <h:outputText value="#{tarjeta.tarjeta.numero}"/>                                               
+                                        </p:column>
+                                        <p:column headerText="Name" sortBy="#{tarjeta.tarjeta.nombre}" filterBy="#{tarjeta.tarjeta.nombre}">
+                                            <h:outputText value="#{tarjeta.tarjeta.nombre}" />
+                                        </p:column>
+                                        <p:column headerText="Expiry date" sortBy="#{tarjeta.tarjeta.fechaVenc}" filterBy="#{tarjeta.tarjeta.fechaVenc}">
+                                            <h:outputText value="#{tarjeta.tarjeta.fechaVenc}">
+                                                <f:convertDateTime locale="us" timeStyle="short" type="both" dateStyle="full"/>
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:dataTable>
+                                    <p:contextMenu id="menuContext" for="grillaTarjetas">
+                                        <p:menuitem value="Delete" update="panelPago" immediate="true"  icon="pi pi-times" action="#{datosRentalNewController.eliminarTarjeta}"/>
+                                    </p:contextMenu>
+                                </p:panel>                                
+
+
+                            </p:tab>
+                            <p:tab id="documents" title="#{datosRentalNewController.TAB_DOCUMENTS}">
+                                <p:commandButton value="Agreement" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{datosRentalNewController.generateReportConr()}" style="width: auto"  />
+                                <p:commandButton  styleClass="rounded-button ui-button-help"  value="Summary" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{datosRentalNewController.generateReportSumary()}" style="width: auto"  />                               
+                            </p:tab>
+
+
+                            <p:tab title="#{datosRentalNewController.TAB_CLIENT_HISTORY}" id="historial" rendered="#{datosRentalNewController.mostrarClientHistory()}">
+                                <h3>Client Expenses</h3>
+                                <p:commandButton  style="width: auto" value="Add new client expense" icon="ui-icon-plusthick" action="#{datosRentalNewController.nuevoExpense()}" update="historial"/>
+                                <p:panel id="panelExpenses" rendered="#{datosRentalNewController.mostrarExpensesDatos}">
+                                    <p:panelGrid id="gridExpenses" columns="3" layout="grid" style="width: 900px">
+
+                                        <h:outputLabel for="txtNombreProveedor" value="Supplier name:" style="font-weight: bold"/>
+                                        <p:autoComplete id="txtNombreProveedor" value="#{datosRentalNewController.proveedorActualExpenses.apellido}"  completeMethod="#{datosRentalNewController.completeTextNombreProveedorExpenses}">
+                                            <p:ajax event="itemSelect" listener="#{datosRentalNewController.onProveedorExpensesSelectNombre}" update="historial" />                                 
+                                        </p:autoComplete>
+                                        <p:column/>
+
+                                        <h:outputLabel for="fechaOrden" value="Order Date:" style="font-weight: bold"/>
+                                        <p:calendar mask="true" id="fechaOrden" navigator="true" pattern="dd-MM-yyyy" value="#{datosRentalNewController.invoiceMecanicoActual.fecha}"/>
+                                        <p:column/>
+
+                                        <p:commandButton value="New supplier" style="width: auto" action="#{datosRentalNewController.nuevoProveedor()}" />
+                                        <p:column/>
+                                        <p:column/>
+                                        <h:outputLabel for="montoExpenses" value="Amount" style="font-weight: bold"/>                                    
+                                        <p:inputNumber id="montoExpenses" value="#{datosRentalNewController.invoiceMecanicoDetalleActual.subtotal_sin_gst}" symbol="$" 
+                                                       symbolPosition="p" required="true" emptyValue="empty">
+                                            <p:ajax update=":formulariol:msgs"/>
+                                        </p:inputNumber>
+                                        <p:column/>
+                                        <h:outputLabel for="checkGST" value="Inc GST:" style="font-weight: bold" />
+                                        <p:selectBooleanCheckbox value="#{datosRentalNewController.invoiceMecanicoDetalleActual.inc_gst}" >
+                                            <p:ajax listener="#{datosRentalNewController.seleccionoIncGST()}" update="txtGST txtSubtotal montoExpenses"/>
+                                        </p:selectBooleanCheckbox>
+                                        <p:column/>
+                                        <h:outputLabel for="txtGST" value="Gst:" style="font-weight: bold" />
+                                        <p:inputNumber id="txtGST" value="#{datosRentalNewController.invoiceMecanicoDetalleActual.gst}" symbol="$" 
+                                                       symbolPosition="p" required="true" emptyValue="empty"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtSubtotal" value="Total:" style="font-weight: bold" />
+                                        <p:inputNumber id="txtSubtotal" value="#{datosRentalNewController.invoiceMecanicoDetalleActual.subtotal}" symbol="$" 
+                                                       symbolPosition="p" required="true" emptyValue="empty">
+                                            <p:ajax update=":formulariol:msgs"/>
+                                        </p:inputNumber>
+                                        <p:column/>
+                                        <h:outputLabel for="txtDescription" value="Description:" style="font-weight: bold" />
+                                        <p:inputText id="txtDescription" value="#{datosRentalNewController.invoiceMecanicoDetalleActual.descripcion}" />
+                                        <p:column/>
+                                        <h:outputLabel for="txtInvoiceNumber" value="Invoice Number:" style="font-weight: bold" />
+                                        <p:inputText id="txtInvoiceNumber" value="#{datosRentalNewController.invoiceMecanicoActual.invoice_number}" />
+                                        <p:column/>
+
+                                        <p:commandButton value="Submit" style="width: auto" actionListener="#{datosRentalNewController.confirmAndCloseDialog()}"  update="tabvi" />
+                                        <p:commandButton value="Cancel" style="width: auto" actionListener="#{datosRentalNewController.closeDialogExpenses()}"  update="tabvi" />
+                                        <p:commandButton value="Delete" style="width: auto" actionListener="#{datosRentalNewController.deleteExpense()}"  update="tabvi" >
+                                            <p:confirm header="Confirmation"  message="Are you sure?" icon="pi pi-exclamation-triangle" /> 
+                                        </p:commandButton>
+                                    </p:panelGrid>
+                                </p:panel>                                
+                                <p:dataTable   var="detalleInvoice"  value="#{datosRentalNewController.listaInvoiceDetalleCliente}"    id="Tablegastos" sortBy="#{detalleInvoice.nuestro}" >
+
+                                    <p:column headerText="Reference" sortBy="#{detalleInvoice.invoiceMecanico.invoice_number}" filterBy="#{detalleInvoice.invoiceMecanico.invoice_number}" >
+                                        <p:commandLink  actionListener="#{datosRentalNewController.editarExpenses(detalleInvoice)}" value="#{detalleInvoice.invoiceMecanico.invoice_number}" update="formulariol:tabvi"/>
+                                    </p:column>
+                                    <p:column headerText="Date" >
+                                        <h:outputText value="#{detalleInvoice.invoiceMecanico.fecha}">
+                                            <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Detail">
+                                        <h:outputText value="#{datosRentalNewController.getAutoInvoiceDetalle(detalleInvoice)}" />
+                                    </p:column>
+                                    <p:column headerText="Detail">
+                                        <h:outputText value="#{detalleInvoice.descripcion}" />
+                                    </p:column>
+                                    <p:column headerText="Spent money">
+                                        <h:outputText value="#{detalleInvoice.subtotal}" >
+                                            <f:convertNumber type="currency" currencySymbol="$" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:summaryRow>
+                                        <p:column colspan="4" style="text-align:right">
+                                            <h:outputText value="Total:" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{datosRentalNewController.getGastosTotal()}">
+                                                <f:convertNumber type="currency" currencySymbol="$" />
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:summaryRow>
+                                </p:dataTable> 
+
+
+                                <h3>Agreements</h3>
+                                <p:dataTable   var="agreementCliente"  value="#{datosRentalNewController.listaAlquilerCliente}"    id="listaAlqCliente" >
+                                    <p:column headerText="Reference"  >
+                                        <h:commandLink target="_blank"  actionListener="#{datosRentalNewController.verDetalleAlquiler(agreementCliente.id)}" value="#{agreementCliente.id}"/>
+                                    </p:column>
+                                    <p:column style="#{grillaAlquileresController.esReservado(agreementCliente.estado)? 'background-color: #ff6600;':''} ;#{grillaAlquileresController.esAlquilado(agreementCliente.estado)? 'background-color: #6600ff;':''};#{grillaAlquileresController.esCancelado(agreementCliente.estado)? 'background-color: #F21414;':''}; width: 200px" headerText="Status" >
+                                        <h:outputText value="#{grillaAlquileresController.getEstadoStr(agreementCliente)}" />
+                                    </p:column>
+                                    <p:column headerText="Date Pickup" >
+                                        <h:outputText value="#{agreementCliente.fecha_inicio}">
+                                            <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Date Dropoff" >
+                                        <h:outputText value="#{agreementCliente.fecha_fin}">
+                                            <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Car"  >
+                                        <h:outputText value="#{datosRentalNewController.getAutoAlquiler(agreementCliente)}" />
+                                    </p:column>     
+                                    <p:column headerText="Car Cost">
+                                        <h:outputText value="#{datosRentalNewController.getCarCost(agreementCliente)}">
+                                            <f:convertNumber type="currency" currencySymbol="$" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Total">
+                                        <h:outputText value="#{datosRentalNewController.getCurrencyFormat(agreementCliente.gran_total)}" />
+                                    </p:column>
+
+                                    <p:column headerText="Paid">
+                                        <h:outputText value="#{datosRentalNewController.getMontoPagadoAlquiler(agreementCliente.id)}" />
+                                    </p:column>
+
+
+
+                                    <p:column headerText="Owing">
+                                        <h:outputText value="#{datosRentalNewController.getCurrencyFormat(agreementCliente.deuda)}" />
+                                    </p:column>
+                                </p:dataTable>  
+                            </p:tab>                            
+
+                        </p:tabView>
+                        <!--        </p:wizard>-->
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+                        </p:confirmDialog> 
+
+
+                    </h:form>
+
+                    <h:form>
+
+                    </h:form>
+
+                </div>  
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="registrationTransferDetalle" pageWidth="790" pageHeight="595" orientation="Landscape" columnWidth="790" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5549b2e8-e37f-4423-b8ee-1cde9edb9f92">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="rego" class="java.lang.String"/>
+	<field name="fechaCompra" class="java.lang.String"/>
+	<field name="VIN" class="java.lang.String"/>
+	<field name="make" class="java.lang.String"/>
+	<field name="odometer" class="java.lang.String"/>
+	<field name="vendedorInfo" class="java.lang.String"/>
+	<field name="vendedorLicencia" class="java.lang.String"/>
+	<field name="marketValue" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="70" height="17" uuid="54919e5c-b0ab-478a-b632-9f5e1e49255c">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="0" width="65" height="17" uuid="da977b66-7c05-4dfd-b69d-c4cd9a944dc4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="135" y="0" width="99" height="17" uuid="efecc4b5-928e-49e6-bde8-5c2dee3e7f06">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="234" y="0" width="85" height="17" uuid="db9a9b75-9ed4-460e-a90f-f7f2feec538e">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="0" width="65" height="17" uuid="9f739d04-e7f5-47e8-abc4-4e09f4f35e68">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="384" y="0" width="194" height="17" uuid="ce8313de-dbe1-4207-b0ea-da670e887267">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="578" y="0" width="70" height="17" uuid="63cfbce8-b72a-40fc-9e82-c4d56cac7140">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="648" y="0" width="56" height="17" uuid="c04d8bf5-1efa-48d4-9b31-e085f733f9b7">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="704" y="0" width="42" height="17" uuid="ab3cb168-ee89-4c5d-b3b1-a90313c9fae6">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="746" y="0" width="42" height="17" uuid="61a4a289-0b8c-4468-a489-c0b55e9e38fc">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="1" y="0" width="69" height="17" uuid="676c0aa6-b188-4b08-a7e2-2f05f99eefae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rego}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="1" width="64" height="16" uuid="b67113b2-3f7f-4595-a907-66cce0238fe9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="1" width="95" height="16" uuid="009424b5-0f1c-47f7-a6e5-ee7435cc19ea"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="1" width="82" height="16" uuid="a452402d-fa40-4bf5-b6e0-9be34243904d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{make}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="0" width="62" height="17" uuid="9f04a09d-3edd-4050-b27c-b98b70cf9243"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{odometer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="1" width="192" height="16" uuid="5d6d3559-fcf8-44fc-9310-5d596fd0b968"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendedorInfo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="580" y="0" width="68" height="17" uuid="19262708-4016-4609-9b4b-e19ca885ee95"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendedorLicencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="1" width="54" height="16" uuid="89de5c51-565f-4533-a78e-c845e6d7d67a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marketValue}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="725" y="0" width="1" height="17" uuid="bd1948d3-2b8f-4c4f-a8bb-a3651b7544bf"/>
+			</line>
+			<rectangle>
+				<reportElement x="710" y="3" width="10" height="10" uuid="9ae32552-16a8-4779-9680-a2b17fb0fddd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="731" y="3" width="10" height="10" uuid="2ee5d2a5-91a5-4a6d-a486-95fe86663d14">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="752" y="3" width="10" height="10" uuid="fcd6ded0-1886-4433-87a7-4c01edbc3691">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="773" y="3" width="10" height="10" uuid="277e6f4f-3c68-4413-8899-953dad4f90b9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<line>
+				<reportElement x="767" y="0" width="1" height="17" uuid="3f758d55-9872-4527-84f0-0b631cf40bb4"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

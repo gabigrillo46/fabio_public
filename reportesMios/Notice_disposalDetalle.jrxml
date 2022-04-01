@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Notice_disposalDetalle" pageWidth="808" pageHeight="595" orientation="Landscape" columnWidth="808" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7d1251c0-0802-4e5c-86db-265bfd7e887c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="rego" class="java.lang.String"/>
+	<field name="fechaVenta" class="java.lang.String"/>
+	<field name="precioVenta" class="java.lang.String"/>
+	<field name="vin" class="java.lang.String"/>
+	<field name="odometer" class="java.lang.String"/>
+	<field name="compradorFullName" class="java.lang.String"/>
+	<field name="compradorDireccion" class="java.lang.String"/>
+	<field name="licencia" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="1" y="0" width="70" height="19" uuid="577f7d1a-d69a-4b6a-9843-925859ddfc67">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="71" y="0" width="59" height="19" uuid="37d55af5-9f45-40cf-9515-f2fcf1f9b951"/>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="130" y="0" width="70" height="19" uuid="ab08951a-c961-40ed-ba49-c52257e28a52"/>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="200" y="0" width="150" height="19" uuid="3909e92e-6fec-4f3a-ab5b-e19ca0b4ffaa"/>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="350" y="0" width="59" height="19" uuid="e59e1855-6464-4860-b214-c27175c0c3f7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="409" y="0" width="127" height="19" uuid="40caf2f2-d14a-4186-886c-3c7bfa9d4a74"/>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="536" y="0" width="144" height="19" uuid="e47894d0-b422-4a8f-9742-e903b0791e80"/>
+			</rectangle>
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="680" y="0" width="127" height="19" uuid="ed398d52-ed14-4896-a21f-6cf754382e47">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="2" y="1" width="69" height="18" uuid="9ec6c415-ab1a-482f-a885-6773e7fd84f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rego}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="1" width="58" height="18" uuid="c14048a4-b3f9-4423-b05c-af51177bf4f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaVenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="1" width="69" height="18" uuid="1eb479b4-38e2-408d-bf8f-fac9df5dc384"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precioVenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="1" width="149" height="18" uuid="e1a771e1-35b1-4c13-b5a2-220519b96296"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="1" width="58" height="18" uuid="6b79fec0-c05c-4db4-be8f-b99221844816"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{odometer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="1" width="126" height="18" uuid="5802d33f-d8cf-49c4-9285-741ea8195f05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compradorFullName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement x="537" y="1" width="143" height="18" uuid="2302253d-9609-49ff-8c81-ec91752fbcd7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compradorDireccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="681" y="1" width="126" height="18" uuid="75ef8483-821f-4b3f-8b1d-a8d58dd202f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{licencia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Supplier data</h1>
+                        </dir>
+                        <p:panel>
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                <h:outputLabel for="txtNombre" value="Name:" style="font-weight:bold"/>
+                                <p:inputText  id="txtNombre" value="#{datosProveedorController.proveedorActual.apellido}"/>                               
+                                <p:column/>
+
+                                <h:outputLabel for="txtTelefono" value="Phone number:" style="font-weight:bold"/>
+                                <p:inputText  id="txtTelefono" value="#{datosProveedorController.proveedorActual.telefono}"/>                               
+                                <p:column/>
+
+                                <h:outputLabel for="txtMovil" value="Mobile:" style="font-weight:bold"/>
+                                <p:inputText  id="txtMovil" value="#{datosProveedorController.proveedorActual.movil}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtEmail" value="Email:" style="font-weight:bold"/>
+                                <p:inputText  id="txtEmail" value="#{datosProveedorController.proveedorActual.email}"/>                               
+                                <p:column/>
+
+                                <h:outputLabel for="txtLicenciaNumero" value="Dealer Licence:" style="font-weight:bold"/>
+                                <p:inputText  id="txtLicenciaNumero" value="#{datosProveedorController.proveedorActual.licencia_numero}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtDireccion" value="Address:" style="font-weight:bold"/>
+                                <p:inputText  id="txtDireccion" value="#{datosProveedorController.proveedorActual.direccion}"/>                               
+                                <p:column/>
+
+                                <h:outputLabel for="txtSuburbio" value="Suburb:" style="font-weight:bold"/>
+                                <p:inputText  id="txtSuburbio" value="#{datosProveedorController.proveedorActual.suburbio}"/>                               
+                                <p:column/>
+
+                                <h:outputLabel for="txtStateDireccion" value="State:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbStateCliente" value="#{datosProveedorController.proveedorActual.state.id}" 
+                                                 required="true" requiredMessage="Must select one">
+                                    <f:selectItems value="#{datosProveedorController.listaEstadosTerritorio}" var="StateSelecc" 
+                                                   itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <h:outputLabel for="txtCodigoPostal" value="Postcode:" style="font-weight:bold"/>
+                                <p:inputText  id="txtCodigoPostal" value="#{datosProveedorController.proveedorActual.codigo_postal}"/>                               
+                                <p:column/>
+
+                                <h:outputLabel for="txtPaisResidencia" value="Country:" style="font-weight:bold"/>
+                                <p:inputText  id="txtPaisResidencia" value="#{datosProveedorController.proveedorActual.pais}"/>                               
+                                <p:column/>
+                                
+                                <h:outputLabel for="txtABN" value="ABN:" style="font-weight:bold"/>
+                                <p:inputText  id="txtABN" value="#{datosProveedorController.proveedorActual.abn}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtACN" value="ACN:" style="font-weight:bold"/>
+                                <p:inputText  id="txtACN" value="#{datosProveedorController.proveedorActual.acn}"/>                               
+                                <p:column/>
+                                
+
+                            </p:panelGrid>
+
+                        </p:panel>
+
+                        <p:panel style="text-align: center">
+                            <p:panelGrid columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton value="Submit" style="width: auto" update="grid"  rendered="#{datosProveedorController.accion=='R'}" actionListener="#{datosProveedorController.registrarProveedor()}"/>
+                                <p:commandButton value="Submit" style="width: auto" update="grid" actionListener="#{datosProveedorController.editarProveedor()}" rendered="#{datosProveedorController.accion=='M'}"/>
+                                <p:commandButton value="Cancel" action="GrillaProveedores" immediate="true" style="width: auto"/>
+                            </p:panelGrid>
+                        </p:panel>
+
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

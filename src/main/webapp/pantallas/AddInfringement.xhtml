@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="addMulta">
+                        <p:messages id="messages" showDetail="true" closable="true">
+                            <p:autoUpdate/>
+                        </p:messages>                     
+                    <p:panel id="filtros">
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <h:outputLabel for="txtApellido" value="Last name:" style="font-weight:bold"/>
+                            <p:inputText id="txtApellido" value="#{addInfringementController.apellido}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtReferencia" value="Reference number:" style="font-weight:bold"/>
+                            <p:inputText id="txtReferencia" value="#{addInfringementController.referencia}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtRego" value="Rego:" style="font-weight:bold"/>
+                            <p:inputText id="txtRego" value="#{addInfringementController.rego}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtTelefono" value="Phone number:" style="font-weight:bold"/>
+                            <p:inputText id="txtTelefono" value="#{addInfringementController.telefono}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="fechaInicio" value="From (Date pickup)" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaInicio" navigator="true" pattern="dd-MM-yyyy" value="#{addInfringementController.fechaDesde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="To (Date pickup)" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaFin" navigator="true" pattern="dd-MM-yyyy" value="#{addInfringementController.fechaHasta}" />
+                            <p:column/>
+
+                            <h:outputLabel value="Branch:" for="cmbSucursal" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbSucursal"  value="#{addInfringementController.idSucursal}"
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItem itemLabel="All" itemValue="-1"/>
+                                <f:selectItems value="#{addInfringementController.listaSucursales}" var="sucursalInicioSelecc"
+                                               itemLabel="#{sucursalInicioSelecc.nombre}" itemValue="#{sucursalInicioSelecc.id}"/>
+                            </p:selectOneMenu>
+                            <p:column/>
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{addInfringementController.buscarAlquilerPorFiltro}"  update="alquilerTable"/>
+
+
+                        </p:panelGrid>
+                            <p:commandButton style="width: auto" value="Add infringement in blank" icon="ui-icon-plusthick" action="DatosMultaBlanco"/>
+                    </p:panel>
+
+                    <p:panel id="panelTable">
+                        <p:dataTable    value="#{addInfringementController.listaAlquileresResultado}" var="alquilerFiltrado" id="alquilerTable" 
+                                        selectionMode="single" selection="#{addInfringementController.alquilerSeleccionado}" rowKey="#{alquilerFiltrado.id}">
+                            <p:column headerText="Reference" sortBy="#{alquilerFiltrado.id}" filterBy="#{alquilerFiltrado.id}">
+                                <h:outputText value="#{alquilerFiltrado.id}" />
+                            </p:column>
+                            <p:column headerText="Rego" sortBy="#{alquilerFiltrado.rego}" filterBy="#{alquilerFiltrado.rego}">
+                                <h:outputText value="#{alquilerFiltrado.rego}" />
+                            </p:column>
+                            <p:column headerText="Last name" sortBy="#{alquilerFiltrado.apellido}" filterBy="#{alquilerFiltrado.apellido}">
+                                <h:outputText value="#{alquilerFiltrado.apellido}" />
+                            </p:column>
+                            <p:column style="#{addInfringementController.esReservado(alquilerFiltrado.estado)? 'background-color: #ff6600;':''} ;#{addInfringementController.esAlquilado(alquilerFiltrado.estado)? 'background-color: #6600ff;':''};#{addInfringementController.esCancelado(alquilerFiltrado.estado)? 'background-color: #F21414;':''}" headerText="Status" sortBy="#{addInfringementController.getEstadoStr(alquiler.estado)}" filterBy="#{addInfringementController.getEstadoStr(alquiler.estado)}">
+                                <h:outputText value="#{addInfringementController.getEstadoStr(alquilerFiltrado.estado)}" />
+                            </p:column>
+                            <p:column headerText="Pick up date" sortBy="#{alquilerFiltrado.fecha_inicio}" filterBy="#{alquilerFiltrado.fecha_inicio}">
+                                <h:outputText value="#{alquilerFiltrado.fecha_inicio}">
+                                    <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Dropoff Location" sortBy="#{alquilerFiltrado.sucursal_destino.nombre}" filterBy="#{alquilerFiltrado.sucursal_destino.nombre}">
+                                <h:outputText value="#{alquilerFiltrado.sucursal_destino.nombre}" />
+                            </p:column>
+                            <p:column headerText="Dropoff Date" sortBy="#{alquilerFiltrado.fecha_fin}" filterBy="#{alquilerFiltrado.fecha_fin}">
+                                <h:outputText value="#{alquilerFiltrado.fecha_fin}">
+                                    <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column >
+                                <p:commandButton action="DatosMulta" value="Select" label="Select" icon="pi pi-check"  >
+                                    <f:param name="AlquilerSelect" value="#{alquilerFiltrado.id}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

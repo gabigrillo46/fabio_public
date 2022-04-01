@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+
+                <h:form id="formulario" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Client data</h1>
+                        </dir>
+                        <p:tabView id="tabvi">
+                            <p:tab title="Client detail" id="clienteDetail">
+                                <p:panel>
+                                    <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                        <h:outputLabel for="txtNombre" value="Name:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtNombre" value="#{datosClienteController.clientePrincipal.nombre}"/>                               
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtApellido" value="Last Name:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtApellido" value="#{datosClienteController.clientePrincipal.apellido}"/>                               
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtTelefono" value="Phone number:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtTelefono" value="#{datosClienteController.clientePrincipal.telefono}"/>                               
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtMovil" value="Mobile:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtMovil" value="#{datosClienteController.clientePrincipal.movil}"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtEmail" value="Email:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtEmail" value="#{datosClienteController.clientePrincipal.email}"/>                               
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtDOB" value="DOB:" style="font-weight:bold"/>
+                                        <p:calendar  mask="true" yearRange="c-100:c" id="txtDOB" navigator="true" pattern="dd-MM-yyyy" value="#{datosClienteController.clientePrincipal.DOB}"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtLicenciaNumero" value="License number:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtLicenciaNumero" value="#{datosClienteController.clientePrincipal.licencia_numero}"/>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtPaisLicencia" value="Granted in:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtPaisLicencia" value="#{datosClienteController.clientePrincipal.otorgadaEN}"/>                               
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtVencLicencia" value="Expiry date:" style="font-weight:bold"/>
+                                        <p:calendar mask="true" id="txtVencLicencia"  yearRange="c:c+20"  navigator="true" pattern="dd-MM-yyyy" value="#{datosClienteController.clientePrincipal.fecha_vencimiento_lic}" />
+                                        <p:column/>
+
+                                        <p:column/>
+                                        <p:selectBooleanCheckbox  value="#{datosClienteController.clientePrincipal.lic_infinita}" itemLabel="Life Time:"/> 
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtDireccion" value="Address:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtDireccion" value="#{datosClienteController.clientePrincipal.direccion}"/>                               
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtSuburbio" value="Suburb:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtSuburbio" value="#{datosClienteController.clientePrincipal.suburbio}"/>                               
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtStateDireccion" value="State:" style="font-weight:bold"/>
+                                        <p:selectOneMenu id="cmbStateCliente" value="#{datosClienteController.clientePrincipal.state.id}" 
+                                                         required="true" requiredMessage="Must select one">
+                                            <f:selectItems value="#{datosClienteController.listaEstadosTerritorio}" var="StateSelecc" 
+                                                           itemLabel="#{StateSelecc.nombre}" itemValue="#{StateSelecc.id}" />
+                                        </p:selectOneMenu>
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtCodigoPostal" value="Postcode:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtCodigoPostal" value="#{datosClienteController.clientePrincipal.codigo_postal}"/>                               
+                                        <p:column/>
+
+                                        <h:outputLabel for="txtPaisResidencia" value="Country of residence:" style="font-weight:bold"/>
+                                        <p:inputText  id="txtPaisResidencia" value="#{datosClienteController.clientePrincipal.pais}"/>                               
+                                        <p:column/>
+
+                                    </p:panelGrid>
+
+                                </p:panel>
+                            </p:tab>
+                            <p:tab title="History" id="historial">
+                                <h3>Expenses</h3>
+                                <p:dataTable   var="invoiceDetalle"  value="#{datosClienteController.listaInvoiceDetalleCliente}" id="listaExpensesCliente" sortBy="#{invoiceDetalle.nuestro}">
+                                    <p:column headerText="Date" >
+                                        <h:outputText value="#{invoiceDetalle.invoiceMecanico.fecha}">
+                                            <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Car"  >
+                                        <h:outputText value="#{datosClienteController.getAutoInvoiceDetalle(invoiceDetalle)}" />
+                                    </p:column>  
+                                    <p:column headerText="Detail">
+                                        <h:outputText value="#{invoiceDetalle.descripcion}" />
+                                    </p:column>  
+                                    <p:column headerText="Amount"  >
+                                        <h:outputText value="#{datosClienteController.getCurrencyFormat(invoiceDetalle.subtotal)}" />
+                                    </p:column>  
+                                    <p:summaryRow>
+                                        <p:column colspan="3" style="text-align:right">
+                                            <h:outputText value="Total:" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{datosClienteController.getGastosTotal()}">
+                                                <f:convertNumber type="currency" currencySymbol="$" />
+                                            </h:outputText>
+                                        </p:column>
+                                    </p:summaryRow>                                    
+                                </p:dataTable>
+
+
+                                <h3>Agreements</h3>
+                                <p:dataTable   var="agreementCliente"  value="#{datosClienteController.listaAlquilerCliente}"    id="listaAlqCliente" >
+                                    <p:column headerText="Reference"  >
+                                        <h:commandLink target="_blank"  actionListener="#{datosClienteController.verDetalleAlquiler(agreementCliente.id)}" value="#{agreementCliente.id}"/>
+                                    </p:column>
+                                    <p:column style="#{grillaAlquileresController.esReservado(agreementCliente.estado)? 'background-color: #ff6600;':''} ;#{grillaAlquileresController.esAlquilado(agreementCliente.estado)? 'background-color: #6600ff;':''};#{grillaAlquileresController.esCancelado(agreementCliente.estado)? 'background-color: #F21414;':''}; width: 200px" headerText="Status" >
+                                        <h:outputText value="#{grillaAlquileresController.getEstadoStr(agreementCliente)}" />
+                                    </p:column>
+                                    <p:column headerText="Date Pickup" >
+                                        <h:outputText value="#{agreementCliente.fecha_inicio}">
+                                            <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Date Dropoff" >
+                                        <h:outputText value="#{agreementCliente.fecha_fin}">
+                                            <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Car"  >
+                                        <h:outputText value="#{datosClienteController.getAutoAlquiler(agreementCliente)}" />
+                                    </p:column>                                    
+                                    <p:column headerText="Total">
+                                        <h:outputText value="#{datosClienteController.getCurrencyFormat(agreementCliente.gran_total)}" />
+                                    </p:column>
+                                    <p:column headerText="Owing">
+                                        <h:outputText value="#{datosClienteController.getCurrencyFormat(agreementCliente.deuda)}" />
+                                    </p:column>
+                                </p:dataTable>  
+
+
+                            </p:tab>
+                        </p:tabView>
+
+                        <p:panel style="text-align: center">
+                            <p:panelGrid columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton value="Submit" style="width: auto" actionListener="#{datosClienteController.registrarCliente()}"/>
+                                <p:commandButton value="Cancel" action="GrillaClientes" immediate="true" style="width: auto"/>
+                            </p:panelGrid>
+                        </p:panel>
+
+                    </div>
+                </h:form>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

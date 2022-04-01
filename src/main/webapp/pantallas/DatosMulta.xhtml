@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form>
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Infringement data</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <p:outputLabel value="Offence driver:" for="cmbDrivers" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbDrivers" value="#{datosMultasController.multaActual.clienteInfraccion.id}" 
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosMultasController.listaAlquilerCliente}" var="clientesAlquiler" 
+                                               itemLabel="#{clientesAlquiler.cliente.nombre} #{clientesAlquiler.cliente.apellido}" itemValue="#{clientesAlquiler.cliente.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:outputLabel value="Address:" for="txtDireccion" style="font-weight: bold"/>
+                            <p:outputLabel value="#{datosMultasController.clientePrincipal.direccion} #{datosMultasController.clientePrincipal.suburbio}" id="txtDireccion"/>
+                            <p:column/>
+
+                            <p:outputLabel value="Date of birth:" for="txtDOB" style="font-weight: bold"/>
+                            <p:outputLabel value="#{datosMultasController.fechaNacimientoClientePrincipal}" id="txtDOB"/>
+                            <p:column/>
+
+                            <p:outputLabel value="Licence:" for="txtLicense" style="font-weight: bold"/>
+                            <p:outputLabel value="#{datosMultasController.clientePrincipal.licencia_numero}" id="txtLicense"/>
+                            <p:column/>
+
+                            <p:outputLabel value="Issued:" for="txtOtorgadoEN" style="font-weight: bold"/>
+                            <p:outputLabel value="#{datosMultasController.clientePrincipal.pais}" id="txtOtorgadoEN"/>
+                            <p:column/>
+
+                            <p:outputLabel value="Licence expire date:" for="txtFechaLicencia" style="font-weight: bold"/>
+                            <p:outputLabel value="#{datosMultasController.fechaVencimientoLicencia}" id="txtFechaLicencia"/>
+                            <p:column/>
+
+                            <p:outputLabel value="Reservation#:" for="txtNumeroReserva" style="font-weight: bold"/>
+                            <p:outputLabel value="#{datosMultasController.alquilerSeleccionado.id}" id="txtNumeroReserva"/>
+                            <p:column/>
+
+                            <p:outputLabel value="Rego:" for="txtRego" style="font-weight: bold"/>
+                            <p:outputLabel value="#{datosMultasController.alquilerSeleccionado.rego}" id="txtRego"/>
+                            <p:column/>
+
+                            <p:outputLabel value="Infringement Authority:" for="cmbAutoridades" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbAutoridades" value="#{datosMultasController.multaActual.autoridad.id}" 
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosMultasController.listaAutoridades}" var="AutoridadSelec" 
+                                               itemLabel="#{AutoridadSelec.nombre}" itemValue="#{AutoridadSelec.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:outputLabel for="fechaMulta" value="Date of offence:" style="font-weight: bold" />
+                            <p:inputMask id="fechaMulta" value="#{datosMultasController.multaActual.fechaMulta}" mask="99/99/9999 99:99"/>                              
+                            <p:column/>
+
+                            <p:outputLabel for="txtNumeroMulta" value="Infringement#:" style="font-weight: bold"/>
+                            <p:inputText id="txtNumeroMulta" value="#{datosMultasController.multaActual.numero}" required="true" requiredMessage="Must enter the number of the infringement">
+                                <p:ajax event="blur" listener="#{datosMultasController.ingresoNumeroMulta()}" update="txtNumeroMulta" />
+                            </p:inputText>
+                            <p:message for="txtNumeroMulta"/>
+
+                            <h:outputLabel for="cmbTipoMulta" value="Type:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbTipoMulta" value="#{datosMultasController.multaActual.tipo.id}" 
+                                             required="true" requiredMessage="Must select one" >
+                                <f:selectItems value="#{datosMultasController.listaTipoMulta}" var="modeloSelecc" 
+                                               itemLabel="#{modeloSelecc.nombre}" itemValue="#{modeloSelecc.id}" />
+                            </p:selectOneMenu>
+                            <p:message for="cmbTipoMulta"/>
+
+                            <p:outputLabel for="cmbTrabajadoresMulta" value="Declared by:" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbTrabajadoresMulta" value="#{datosMultasController.multaActual.usuario.id}" 
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosMultasController.listaUsuarios}" var="trabajadorSelec" 
+                                               itemLabel="#{trabajadorSelec.nombre} #{trabajadorSelec.apellido}" itemValue="#{trabajadorSelec.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:outputLabel for="fechaCargada" value="Declaration date:" style="font-weight: bold" />
+                            <p:calendar yearRange="c-100:c" id="fechaCargada" navigator="true" pattern="dd-MM-yyyy" value="#{datosMultasController.multaActual.fechaCargada}" />
+                            <p:column/>
+
+                            <p:outputLabel for="cmbWitness" value="Witness:" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbWitness" value="#{datosMultasController.multaActual.witness.id}" 
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{datosMultasController.listaWitness}" var="witnessSelec" 
+                                               itemLabel="#{witnessSelec.nombre}" itemValue="#{witnessSelec.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:outputLabel for="letterNotes" value="Customer Letter Notes:" style="font-weight: bold"/>
+                            <p:inputTextarea cols="50" rows="3" maxlength="100" id="letterNotes" value="#{datosMultasController.multaActual.letra_cliente}"/>
+                            <p:column/>
+
+                            <p:outputLabel for="internalNotes" value="Internal notes:" style="font-weight: bold"/>
+                            <p:inputTextarea cols="50" rows="3" maxlength="100" id="internalNotes" value="#{datosMultasController.multaActual.internal_notes}"/>
+                            <p:column/>
+
+                        </p:panelGrid>                            
+
+                        <p:panel style="text-align: center">
+                            <p:panelGrid   columns="3" layout="grid" >
+                                <p:commandButton value="Return" action="GrillaMultas" rendered="#{datosMultasController.accion=='M'}" immediate="true" style="width: auto"/>
+                                <p:commandButton value="Return" action="AddInfringement" rendered="#{datosMultasController.accion=='R'}" immediate="true" style="width: auto"/>
+                                <p:commandButton value="Print" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{datosMultasController.imprimir}" style="width: auto"  />
+                                <p:commandButton value="Submit" update="grid"  rendered="#{datosMultasController.accion=='R'}"  actionListener="#{datosMultasController.registrarMulta}" style="width: auto"/>
+                                <p:commandButton value="Submit" update="grid"  actionListener="#{datosMultasController.editarMulta()}" rendered="#{datosMultasController.accion=='M'}" style="width: auto"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

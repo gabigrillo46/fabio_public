@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>User data</h1>
+                        </dir>
+                        <p:panel id="panelCampos" rendered="#{datosUsuarioController.cambiandoContrasena==false}">
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                <h:outputLabel for="txtNombreUsuario" value="Username" style="font-weight:bold"/>
+                                <p:inputText id="txtNombreUsuario" value="#{datosUsuarioController.usuarioActual.nombre_usuario}" required="true" requiredMessage="You must enter a username">
+                                </p:inputText>
+                                <p:message for="txtNombreUsuario"/>
+
+                                <h:outputLabel for="txtPassword" value="Password" style="font-weight: bold"/>                                
+                                <p:password rendered="#{datosUsuarioController.accion=='R'}" id="txtPassword"  value="#{datosUsuarioController.usuarioActual.contraseña}"/>
+                                <p:inputText value="*****" disabled="true" rendered="#{datosUsuarioController.accion=='M'}"/>
+                                <p:message for="txtPassword"/>
+
+                                <h:outputLabel for="txtNombre" value="Name" style="font-weight:bold"/>
+                                <p:inputText id="txtNombre" value="#{datosUsuarioController.usuarioActual.nombre}">
+                                </p:inputText>
+                                <p:column/>
+
+                                <h:outputLabel for="txtApellido" value="Last name" style="font-weight:bold"/>
+                                <p:inputText id="txtApellido" value="#{datosUsuarioController.usuarioActual.apellido}">
+                                </p:inputText>
+                                <p:column/>
+
+                                <h:outputLabel for="txtPregunta" value="Question to recover password" style="font-weight:bold"/>
+                                <p:inputText id="txtPregunta" value="#{datosUsuarioController.usuarioActual.pregunta}">
+                                </p:inputText>
+                                <p:column/>
+
+                                <h:outputLabel for="txtRespuesta" value="Answer" style="font-weight:bold"/>
+                                <p:inputText id="txtRespuesta" value="#{datosUsuarioController.usuarioActual.respuesta}">
+                                </p:inputText>
+                                <p:column/>
+
+                                <h:outputLabel for="txtMobile" value="Mobile" style="font-weight:bold"/>
+                                <p:inputText id="txtMobile" value="#{datosUsuarioController.usuarioActual.mobile}">
+                                </p:inputText>
+                                <p:column/>
+
+                                <h:outputText id="display" />
+                            </p:panelGrid>
+
+                        </p:panel>
+                        <p:panel id="panelCambioContra" rendered="#{datosUsuarioController.cambiandoContrasena}">
+                            <h:panelGrid id="grid2" columns="3" >
+                                <h:outputLabel for="txtContraActual" value="Current password" style="font-weight:bold"/>
+                                <p:inputText id="txtContraActual" value="#{datosUsuarioController.passwordActual}">
+                                </p:inputText>
+                                <p:column/>
+
+                                <h:outputLabel for="txtNuevaContra" value="New Password" style="font-weight:bold"/>
+                                <p:inputText id="txtNuevaContra" value="#{datosUsuarioController.newPass}">
+                                </p:inputText>
+                                <p:column/>
+
+                                <h:outputLabel for="txtNuevaContra2" value="New Password Again" style="font-weight:bold"/>
+                                <p:inputText id="txtNuevaContra2" value="#{datosUsuarioController.newPass2}">
+                                </p:inputText>
+                                <p:column/>
+                            </h:panelGrid>
+
+
+                            <p:commandButton value="Summit" style="width: auto"   actionListener="#{datosUsuarioController.aceptoCambioContrasena()}" update="formulario"/>
+                            <p:commandButton value="Cancel" style="width: auto" actionListener="#{datosUsuarioController.cancelarCambioContrasena()}" update="formulario"/>
+                        </p:panel>
+                        <p:panel id="panelBotones" style="text-align: center" rendered="#{datosUsuarioController.cambiandoContrasena==false}">
+                            <p:panelGrid columns="3" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton value="Cancel" action="GrillaUsuarios" immediate="true" style="width: auto"/>
+                                <p:commandButton value="Submit" style="width: auto" update="grid"  rendered="#{datosUsuarioController.accion=='R' }" actionListener="#{datosUsuarioController.registrar()}"/>
+                                <p:commandButton value="Submit" style="width: auto" update="grid" actionListener="#{datosUsuarioController.editar()}" rendered="#{datosUsuarioController.accion=='M' }"/>
+                                <p:commandButton value="Change Password" style="width: auto" immediate="true"   actionListener="#{datosUsuarioController.cambiarContra()}" update="formulario" />
+                            </p:panelGrid>
+                        </p:panel>
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

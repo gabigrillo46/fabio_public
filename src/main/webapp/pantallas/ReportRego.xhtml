@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="reportStatus">
+                    <p:growl id="messages" showDetail="true" />
+                    <p:panel id="filtros">
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel for="fechaInicio" value="From" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaInicio" navigator="true" pattern="dd-MM-yyyy" value="#{reportRegoController.fechaDesde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="To" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaFin" navigator="true" pattern="dd-MM-yyyy" value="#{reportRegoController.fechaHasta}" />
+                            <p:column/>
+
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{reportRegoController.buscarPorFiltro2}"  update="reportStatus:alquilerTable reportStatus:cantidad"/>
+                        </p:panelGrid>
+                    </p:panel>
+                    <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2" ajax="false">
+                        <p:dataExporter type="pdf" target="alquilerTable" fileName="Rego"/>
+                    </p:commandButton>
+                    <h:outputLabel id="cantidad" value="Quantity: #{reportRegoController.cantidadResultado}" style="font-weight:bold"/>
+                    <br/>
+                    <p:dataTable  emptyMessage=""   value="#{reportRegoController.listaAlquileres}" var="alquiler" id="alquilerTable" sortBy="#{autoResultado.fecha_vencimiento_rego}" >
+                        <p:column headerText="Reference" style="#{reportRegoController.isRegoFinalizaConAgreement(alquiler)? 'background-color: #fcba03;':''}">
+                            <h:commandLink value="#{alquiler.id}" actionListener="#{reportRegoController.verDetalleContrato(alquiler.id)}" action="DatosRentalNew" />
+                        </p:column>
+                        <p:column headerText="Rego" style="#{reportRegoController.isRegoFinalizaConAgreement(alquiler)? 'background-color: #fcba03;':''}">
+                            <h:outputText value="#{alquiler.auto.rego}"/>
+                        </p:column>
+                        <p:column headerText="Expiration date"  style="#{reportRegoController.isRegoFinalizaConAgreement(alquiler)? 'background-color: #fcba03;':''}">
+                            <h:outputText value="#{reportRegoController.getFechaFormat(alquiler.auto.fecha_vencimiento_rego)}" />
+                        </p:column>
+                        <p:column headerText="Pickup Date" style="#{reportRegoController.isRegoFinalizaConAgreement(alquiler)? 'background-color: #fcba03;':''}">
+                            <h:outputText value="#{reportRegoController.getFechaFormat(alquiler.fecha_inicio)}" />
+                        </p:column>
+                        <p:column headerText="Dropoff Date" style="#{reportRegoController.isRegoFinalizaConAgreement(alquiler)? 'background-color: #fcba03;':''}">
+                            <h:outputText value="#{reportRegoController.getFechaFormat(alquiler.fecha_fin)}" />
+                        </p:column>                                                
+                        <p:column headerText="Brand" style="#{reportRegoController.isRegoFinalizaConAgreement(alquiler)? 'background-color: #fcba03;':''}">
+                            <h:outputText value="#{alquiler.auto.marca.nombre}" />
+                        </p:column>
+                        <p:column headerText="Model" style="#{reportRegoController.isRegoFinalizaConAgreement(alquiler)? 'background-color: #fcba03;':''}">
+                            <h:outputText value="#{alquiler.auto.modelo.nombre}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

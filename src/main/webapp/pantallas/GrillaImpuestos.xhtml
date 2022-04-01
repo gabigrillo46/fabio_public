@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                    
+                    <dir style="text-align: center">
+                        <h1>Fee list</h1>
+                    </dir>
+                    <p:panel>
+                        <p:commandButton value="Add new fee" icon="ui-icon-plusthick" action="DatosImpuestos"/>
+                    </p:panel>
+                    <p:panel>
+                        <p:dataTable var="imp" value="#{grillaImpuestoController.listaImpuestos}"    id="carTable" >
+                            <p:column headerText="Number" sortBy="#{imp.id}" filterBy="#{imp.id}">
+                                <h:commandLink  action="DatosImpuestos" actionListener="#{grillaImpuestoController.setImpuestoSeleccionado(imp)}">
+                                    <h:outputText value="#{imp.id}" />
+                                </h:commandLink>
+                            </p:column>
+                            <p:column headerText="Name" sortBy="#{imp.nombre}" filterBy="#{imp.nombre}" style="width: 400px">
+                                <h:outputText value="#{imp.nombre}" />
+                            </p:column>
+                            <p:column headerText="Type" sortBy="#{imp.tipo_impuesto.nombre}" filterBy="#{imp.tipo_impuesto.nombre}">
+                                <h:outputText value="#{imp.tipo_impuesto.nombre}" />
+                            </p:column>
+                            <p:column headerText="Rate" sortBy="#{imp.price}" filterBy="#{imp.price}">
+                                <h:outputText value="#{imp.price}" />
+                            </p:column>
+                            <p:column headerText="Branch" sortBy="#{imp.sucursal.nombre}" filterBy="#{imp.sucursal.nombre}">
+                                <h:outputText value="#{imp.sucursal.nombre}" />
+                            </p:column>                            
+                            <p:column headerText="Mandatory" sortBy="#{grillaImpuestoController.getSiono(imp.obligatorio)}" filterBy="#{grillaImpuestoController.getSiono(imp.obligatorio)}">
+                                <h:outputText value="#{grillaImpuestoController.getSiono(imp.obligatorio)}" />
+                            </p:column>
+                            <p:column headerText="Editable" sortBy="#{grillaImpuestoController.getSiono(imp.editable)}" filterBy="#{grillaImpuestoController.getSiono(imp.editable)}">
+                                <h:outputText value="#{grillaImpuestoController.getSiono(imp.editable)}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

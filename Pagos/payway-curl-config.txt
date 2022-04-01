@@ -1,0 +1,5 @@
+basic
+user=Q42023:
+silent
+show-error
+fail

@@ -1,0 +1,3454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="transferRegistration" pageWidth="570" pageHeight="842" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e423b147-1513-402b-acb7-2322bcdc8bcb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\Gabriel\\Proyectos\\Fabio\\reportesMios\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="carRego" class="java.lang.String"/>
+	<field name="cliente_tipo" class="java.lang.Integer"/>
+	<field name="clienteLicence" class="java.lang.String"/>
+	<field name="cliente_apellido" class="java.lang.String"/>
+	<field name="clienteNombre" class="java.lang.String"/>
+	<field name="clienteDireccion" class="java.lang.String"/>
+	<field name="cliente_state" class="java.lang.String"/>
+	<field name="cliente_codigo_postal" class="java.lang.String"/>
+	<field name="cliente_dob_dia" class="java.lang.String"/>
+	<field name="cliente_dob_mes" class="java.lang.String"/>
+	<field name="cliente_dob_year" class="java.lang.String"/>
+	<field name="cliente_dealer_licence" class="java.lang.String"/>
+	<field name="cliente_abn" class="java.lang.String"/>
+	<field name="cliente_acn" class="java.lang.String"/>
+	<field name="venta_dia" class="java.lang.String"/>
+	<field name="venta_mes" class="java.lang.String"/>
+	<field name="venta_year" class="java.lang.String"/>
+	<field name="car_year" class="java.lang.Integer"/>
+	<field name="carModel" class="java.lang.String"/>
+	<field name="carMarca" class="java.lang.String"/>
+	<field name="carOdometer" class="java.lang.String"/>
+	<field name="carVIN" class="java.lang.String"/>
+	<field name="carNumeroMotor" class="java.lang.String"/>
+	<field name="sucursalNombre" class="java.lang.String"/>
+	<field name="sucursalDireccion" class="java.lang.String"/>
+	<field name="sucursal_state" class="java.lang.String"/>
+	<field name="sucursal_codigo_postal" class="java.lang.String"/>
+	<field name="carMontoConGST" class="java.lang.String"/>
+	<field name="clienteMobile" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="820" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="435" y="144" width="133" height="636" backcolor="rgba(229, 234, 242, 0.5803922)" uuid="8d979fd8-13e7-4cd5-9738-a4bdd3048240"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="322" y="432" width="245" height="20" uuid="39a5931f-b328-4ce6-8114-06ec1f2e8b79">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="597" width="252" height="20" uuid="2970ec88-b323-4b69-b4a8-a7fc98abf1bc">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="10" y="15" width="35" height="42" uuid="f0438591-63eb-4b37-a879-9449102d8e7e">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"LogoNSW.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="11" width="570" height="1" uuid="1fe129fe-f8f6-442c-99a3-1d8cd8130c91"/>
+			</line>
+			<line>
+				<reportElement x="50" y="15" width="1" height="35" uuid="a16751aa-eabf-4e42-99a0-6e1ca3fe933c"/>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="54" width="479" height="90" uuid="90da7266-0d11-4498-83b8-e335c60934c6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="57" y="15" width="60" height="35" uuid="bb479cd2-f010-4048-83d1-fc797b11057e"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Transport for NSW]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="11" width="320" height="42" uuid="608aa69e-74cb-4884-9f35-62f43e84446a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Application for Transfer of Registration]]></text>
+			</staticText>
+			<image>
+				<reportElement x="516" y="19" width="40" height="31" uuid="b5c60354-e875-4b03-9c14-c17a3156b0bd"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"B.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="479" y="54" width="89" height="90" uuid="5382c6a3-fdab-4912-b74e-522e3e707e6c">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="489" y="60" width="70" height="30" uuid="a2321e92-36cd-47ef-88f5-a33a5670d9f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Office Use Only]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="91" width="88" height="30" uuid="d50ba0fd-3db1-45e9-985e-f1588564a5e9"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Attachments]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="53" width="454" height="23" uuid="87e8f700-8f09-4a25-92ed-850f4ebb5d31"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					<paragraph lineSpacing="AtLeast" lineSpacingSize="0.0"/>
+				</textElement>
+				<text><![CDATA[An application can be completed online at service.nsw.gov.au or in person (not mail) at a service centre within 14 days of purchasing/acquiring a vehicle or a late application fee of at least $121 will be charged.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="74" width="450" height="12" uuid="e7669258-54e9-4e9f-a3c7-10a5f7fad307"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Costs shown are correct at the time of printing, but can be subject to change without notice.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="90" width="450" height="12" uuid="9a1ed7c8-b027-4252-97ad-349331ab9575">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Check the last page of this form for a guide to applying to transfer registration.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="101" width="30" height="13" uuid="2ee00576-75ae-4d46-a0db-18c2edabbd76"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Note:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="100" width="433" height="23" uuid="2579c9f0-4e4b-4201-b711-223170cf1442">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[To register a vehicle in your name you must be at least 16 years of age for a light vehicle (up to 4.5 tonnes GVM) and at least 18 years of age for a heavy vehicle (over 4.5 tonnes GVM).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="121" width="466" height="23" uuid="b71f6290-27da-47db-b680-171d1fb5209c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[To complete an application online you must have an online services account and the notice of disposal must be lodged by the seller and recorded by Service NSW.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="30" y="160" width="116" height="18" uuid="4059ec5f-2fac-4596-9af8-7ac00d5c0b00">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<line>
+				<reportElement x="290" y="144" width="1" height="637" uuid="6e48df2e-8ebb-44fb-9abb-cfd15d0d5fc2"/>
+			</line>
+			<staticText>
+				<reportElement x="10" y="147" width="200" height="12" uuid="31f4be49-9d54-478b-8e84-73c2b093b60f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[1       Registration plate number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="180" width="270" height="12" uuid="9df5e2fe-084a-4e07-a8f8-4568e47eb380"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[2       Is the vehicle to be registered in the name of:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="146" y="197" width="14" height="14" uuid="ddd8ca45-d8a6-4f39-958a-5153bc37fc58"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="146" y="214" width="14" height="14" uuid="9b9ec3ec-44dd-452e-84f6-8a80f50e5c07"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="146" y="231" width="14" height="14" uuid="26d18996-5a96-4b76-a5ae-e43dcb30441d"/>
+			</rectangle>
+			<image>
+				<reportElement x="161" y="197" width="15" height="47" uuid="c89530db-87be-4320-8f00-29ffa21fc083"/>
+				<imageExpression><![CDATA["Flechas.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="30" y="198" width="100" height="12" uuid="386b38a5-bc4d-4ede-b4c4-f7fceb8a56af">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[a person]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="215" width="110" height="12" uuid="2558bb65-a349-466b-b35e-eaac4e65e0d9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[a licensed motor dealer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="232" width="110" height="12" uuid="78c4607b-e506-4922-9e23-0e66d69d6e25">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[a corporation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="247" width="250" height="27" uuid="9d44f0e9-8467-4043-b255-b995874ee7aa"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Have   you   previously conducted  business  with  Transport for NSW in another name?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="269" width="130" height="12" uuid="e38b4a20-a626-4c26-8ec2-3ae97c3bc9bc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[If 'Yes" please specify]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="30" y="283" width="250" height="20" uuid="55ad103e-bf3c-4db6-b74f-fd4c47b0492f">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="305" width="270" height="12" uuid="4f6e639b-a4bd-421b-a9c4-af9ff916b768"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[3       Customer details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="314" width="250" height="52" uuid="5dd2c790-1503-4128-bc74-fb5df3a909ba">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[If you are sending someone else to transfer the registration into your name you must also complete the Representative Authority on page 3 of this form. However, if you are not already recorded on the Transport for NSW computer system, you must attend a service centre in person and provide Proof of Identity.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="365" width="194" height="13" uuid="fba6e828-489a-4dba-8f35-cff8f478127a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[NSW Driver licence/Customer number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="28" y="379" width="162" height="20" uuid="d1792262-1e89-4489-b70c-6821e9e5082a">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="28" y="398" width="194" height="13" uuid="820a89b7-47cc-46cb-a020-2e3f1ad5e61b"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Surname]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="28" y="410" width="252" height="20" uuid="da9258af-276b-4f40-98ba-8661bf893b20">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="28" y="429" width="194" height="13" uuid="d5395df8-e81f-4906-ac86-014ad3f9ab2c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Given names]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="28" y="440" width="252" height="20" uuid="20c57707-c93d-44c8-bd55-c510362dfed5">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="28" y="459" width="252" height="25" uuid="91f61f34-3f72-46cd-a999-48e7327d6068"/>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[You must notify Service NSW of your new residential and mailing address within 14 days of moving.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="482" width="194" height="13" uuid="18abf4bb-cfa3-4895-a874-024c9e997f7c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Residential address]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="27" y="493" width="252" height="20" uuid="664c42da-439a-4434-8a62-926a2088cf36">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="513" width="252" height="20" uuid="e9318a47-1171-41a4-83ce-4e5648827f17">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="533" width="252" height="20" uuid="988916c6-ea57-4973-8609-f725e28643b1">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="123" y="537" width="24" height="13" uuid="30386213-1c2a-42de-b10a-9a1b378c3e83"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[State]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="537" width="40" height="13" uuid="fc0b7e02-d3d9-4a01-896f-b281cbc26885"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="553" width="73" height="13" uuid="9d47b007-9a06-4c93-a5d2-f97b2f40541c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Mailing address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="553" width="160" height="25" uuid="91785d89-f365-48e9-9b43-4b04082f266f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(If different from residential address.    All mail will be posted to this address)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="601" width="40" height="13" uuid="0c06c0f9-274f-4961-b789-c3b6b3b7df74"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="123" y="601" width="24" height="13" uuid="e658a824-6565-47ad-aa8a-51fbbbf6f6f9"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[State]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="27" y="577" width="252" height="20" uuid="edfe13bc-3199-4a85-b86f-06c6c38909a1">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="27" y="620" width="73" height="13" uuid="df8bf66b-045a-4f06-8aab-d2a026297678"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Date of birth]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="27" y="634" width="113" height="20" uuid="f0d61816-51e7-4755-9a56-2e79e8d82cc9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<line direction="BottomUp">
+				<reportElement x="61" y="637" width="7" height="13" uuid="e922666b-383a-478a-9cab-fca63107774e"/>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="100" y="637" width="7" height="13" uuid="d0d62cdc-3e7a-4f88-bb05-170034826639"/>
+			</line>
+			<staticText>
+				<reportElement x="38" y="647" width="11" height="10" uuid="28b16efd-407b-427f-aeec-193a45120096"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="647" width="17" height="10" uuid="987d985c-1fd3-4c12-ad09-39d887400444">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="647" width="17" height="10" uuid="cb925c8a-c474-446d-8d61-c012339956d5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="620" width="99" height="13" uuid="20c230bb-b36d-42f1-99f8-31291ae5ca3a"/>
+				<textElement>
+					<font size="9" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ABN (if applicable)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="161" y="634" width="117" height="20" uuid="7f4b3806-037e-4ada-9ad9-723edf74a5ed">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="657" width="36" height="12" uuid="e9fd1762-a341-462c-a838-c16890540c1a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Gender]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="657" width="24" height="12" uuid="d10d4085-ad20-4e82-89e1-9cc890b6f9f0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[male]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="117" y="658" width="11" height="11" uuid="3a3aa729-3bc9-499f-8cff-a060508feb5a">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="146" y="657" width="34" height="12" uuid="4e53354f-7955-4374-bc98-f5c637c68847">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[female]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="184" y="658" width="11" height="11" uuid="1d0542b5-7e6d-4987-a3fc-950d22b30d8c">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="29" y="672" width="248" height="21" uuid="8fde5dee-dae5-4e27-ba60-e0501ce7cbbe">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Please provide your email address if you would like to register for an online services account, go to]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="681" width="142" height="12" uuid="d86e8e54-0bfa-46aa-870c-043e54566ed5"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[service.nsw.gov.au/online-services]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="690" width="100" height="15" uuid="127d01f8-8f5e-4bce-9125-ce4805d17ade">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[for more information]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="27" y="700" width="252" height="20" uuid="fcb5db9e-aed0-415f-a51e-6545b2d7b072">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="700" width="45" height="10" uuid="28b4903a-9b89-4bf8-85e9-307c4f2486fe"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Email address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="719" width="248" height="21" uuid="bc402200-49d0-4b9c-8141-80d58cb4793d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Please provide a mobile number if you would like to receive communications from Service NSW this way]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="28" y="740" width="252" height="20" uuid="319d0870-30d2-439e-a301-cc3170122444">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="740" width="45" height="10" uuid="3708bdb3-2897-4c42-a446-d9215f084540"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Mobile number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="760" width="248" height="21" uuid="431e795f-5925-4138-ab40-a2289a79e05b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[To record a courtesy name go to 6, if the vehicle is to be leased or managed go to 7, if not go to 8]]></text>
+			</staticText>
+			<image>
+				<reportElement x="19" y="788" width="350" height="29" uuid="016d4fb4-0af8-42af-8bcc-6c697ea92e27"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"PiePagina.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="179" y="198" width="100" height="12" uuid="c1e60a65-35b0-43b1-a987-d887117f9c68">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[now go to 3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="215" width="100" height="12" uuid="2874f9f6-668e-48ef-81f5-af9b55ed9dfd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[now go to 4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="232" width="100" height="12" uuid="1a17999e-e78a-4fe7-adc7-9322bc013fa5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[now go to 5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="147" width="200" height="12" uuid="ba356427-c7f2-4e86-aa7c-22768583d833"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[4       Dealer's details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="158" width="194" height="13" uuid="e73d8ced-55e3-46a7-83d2-2bceeb48cb02"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Name of dealership]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="169" width="245" height="20" uuid="e2bef657-df4b-4d24-a343-cacb82090638">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="322" y="191" width="108" height="13" uuid="75daa349-8e3b-4b6c-8750-d7a055386cdc"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Dealer's licence number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="203" width="113" height="20" uuid="4624fb29-8785-489f-9771-d70284c8fd9d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="452" y="191" width="80" height="13" uuid="3757604f-7c49-4999-9b07-a0f156df3132"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[State or Territory]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="452" y="203" width="115" height="20" uuid="29fcda6b-a9d0-445f-8a2d-6d4164404585">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="322" y="224" width="148" height="13" uuid="3622f9f3-1536-424b-8b11-ba1faf90d086"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Date vehicle purchased/acquired]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="236" width="113" height="20" uuid="f2d1ebbb-9c28-47ce-ac90-6dc42393a32f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="413" y="249" width="17" height="10" uuid="73ac7280-a30f-4d91-9f10-56e1840ecb2c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[year]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="395" y="239" width="7" height="13" uuid="4814b593-65ea-49bd-90bd-134ba880c461"/>
+			</line>
+			<staticText>
+				<reportElement x="370" y="249" width="17" height="10" uuid="f9244fbd-4f45-4694-bb11-1d39b8cf3d31">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[month]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="356" y="239" width="7" height="13" uuid="c7a4b9ff-b7a8-4f54-b580-f9263ea16eff"/>
+			</line>
+			<staticText>
+				<reportElement x="333" y="249" width="11" height="10" uuid="09eb0281-0ff3-4c48-a118-48c96762f0c6"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="255" width="100" height="12" uuid="59f2de22-a6da-4262-8219-3b6979a636d4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Dealers now go to 8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="279" width="200" height="12" uuid="036cb9bc-1f31-4ce9-9aa1-7c73896537fc"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[5       Corporation's details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="290" width="134" height="13" uuid="7c73109c-0af4-4077-8908-37c4d87fde45"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Customer number (if issued)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="323" y="302" width="194" height="20" uuid="eb1c8dd4-913b-4b82-834e-2b0ee01bd010">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="322" y="323" width="134" height="13" uuid="dd9ccd0e-161e-4999-b9f1-07e4bbfb2c20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="354" width="245" height="20" uuid="aaabb281-1fd7-4bb9-a8c2-586cf32682f1">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="322" y="334" width="245" height="20" uuid="bc4ffa1d-e29e-4e3b-bb75-8b35857b9507">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="322" y="373" width="245" height="25" uuid="fe10096a-8f36-4756-a57b-55dc81a84959"/>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[You must notify Service NSW of your new residential and mailing address within 14 days of moving.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="400" width="134" height="13" uuid="1955ed74-7218-4758-b63c-a249c9af288e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Business address]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="412" width="245" height="20" uuid="a2ec6bd2-9d6c-4c0e-b6e2-af8fe096c314">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="486" y="436" width="40" height="13" uuid="80824b8e-a8b6-4242-bdc7-6e92399a09a1"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="436" width="24" height="13" uuid="5d7e1d41-56a2-43fd-911a-fde11048e165"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[State]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="498" width="246" height="20" uuid="eb42294b-bf6b-449d-89da-1d071578cc06">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="324" y="454" width="73" height="13" uuid="4e050ab9-1d53-439d-a270-7d6748e6147b"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Mailing address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="454" width="158" height="25" uuid="2395937c-dc42-4209-9e12-9ec14e4f0acd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(If different from Business address.    All mail will be posted to this address)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="502" width="40" height="13" uuid="9f8befd1-a166-4885-ae1b-6cec573ab5d6"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="502" width="24" height="13" uuid="0b13db1d-232b-4409-adb8-32d3b53640ba"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[State]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="478" width="246" height="20" uuid="9148f710-8b6c-45f8-aa18-fa8ee6e7ed69">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="322" y="519" width="99" height="13" uuid="21502279-9059-4df4-a7da-42792b00b606"/>
+				<textElement>
+					<font size="9" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ABN (if applicable)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="533" width="113" height="20" uuid="da0cc941-f925-4b8c-a0c7-d26106a7c4c5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="448" y="533" width="119" height="20" uuid="a743b2e5-d2a7-4412-9fb3-28cb33b3d7b1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="448" y="519" width="99" height="13" uuid="14113390-a809-4ef5-b67a-bf0e447c8f5e"/>
+				<textElement>
+					<font size="9" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ACN, ARBN or other]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="553" width="119" height="18" uuid="59d2ad50-2df8-4780-9101-1d73b4cc5297"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(evidence of incorporation required - see page 4)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="570" width="200" height="12" uuid="9dab5ef6-a377-4094-a565-6b6250968da8"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[6       Courtesy name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="581" width="238" height="13" uuid="feec87ad-adba-4cba-a723-73b1624e0945"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(only an organisation name can be recorded, if required)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="594" width="245" height="20" uuid="cead760b-beaa-4bb5-9f0f-333a9bf6280f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="617" width="259" height="12" uuid="2dcf1a65-4575-4b91-91cd-0c00f7cadf14"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[7       Fleet manager or leasing company (if applicable)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="628" width="65" height="11" uuid="a812f107-8701-4a43-8fca-33ed166ddcc6"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[To be completed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="628" width="19" height="11" uuid="746297ec-8c57-437a-9614-3e48bebb1589">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[only]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="628" width="155" height="11" uuid="2df61b1c-8f9e-41bd-8906-13f94d7a3edc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[if the registration renewal or legal notices]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="637" width="155" height="11" uuid="7d6226ae-10af-4083-97d4-ca08352709c5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[are to be mailed to the fleet manager.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="657" width="235" height="13" uuid="0cc7a3ed-4793-4780-b89c-2fc85eba9c86"/>
+				<textElement>
+					<font size="9" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Name and postal address of manager]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="668" width="209" height="10" uuid="79ba115c-29db-4891-a3a8-6fa95312113f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(for registration renewals or legal notices)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="321" y="720" width="246" height="20" uuid="4bb42803-a707-45cd-a40f-221d17fbf996">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="483" y="724" width="40" height="13" uuid="8603c581-a57b-439d-a248-c9131adfda62"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="724" width="24" height="13" uuid="785ca73d-4a4c-4771-b392-9541dd895688"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[State]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="321" y="700" width="246" height="20" uuid="92755fd7-2740-4b6f-81a8-56002de85bde">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="321" y="680" width="246" height="20" uuid="14460531-975c-449f-8421-2274c57c6e4c">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="322" y="745" width="235" height="13" uuid="6e93b46d-a5a4-4b9e-b80f-f951ed244463"/>
+				<textElement>
+					<font size="9" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Customer number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="322" y="760" width="178" height="20" uuid="d66271bd-4ebf-4d28-b6fb-687d00febe81">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<break>
+				<reportElement x="0" y="817" width="98" height="1" uuid="946d6552-3353-494e-8e99-3fd7bd9c7c1d"/>
+			</break>
+			<staticText>
+				<reportElement x="512" y="783" width="56" height="12" uuid="3d971345-c6ff-465e-a8f8-936c4efad454"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Page 1 of 4]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="32" y="160" width="111" height="18" uuid="a77c3f89-9cc2-4f89-a4a2-49ecbd496be0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{carRego}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="146" y="197" width="13" height="13" uuid="c4b2080c-9b0f-4392-9bdd-86fde9532399">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="215" width="13" height="13" uuid="e06055cf-3714-4cb6-be56-fcec99536530">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="232" width="13" height="13" uuid="06481141-e5ca-479c-9915-d56796ac676f">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="29" y="378" width="161" height="21" uuid="63f69671-8fa3-4d5b-98e1-893d3799d8c6">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{clienteLicence}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="411" width="247" height="18" uuid="e80d795d-4b55-43c5-b500-5d1d3d0b933b">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="440" width="247" height="19" uuid="0363b866-ccae-4d0b-b6b7-c549702fa47f">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{clienteNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="496" width="246" height="39" uuid="0f47ceb3-4909-46f2-932d-da351884d5f1">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clienteDireccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="533" width="46" height="17" uuid="abc26d90-94ca-4b04-b42d-ca21fb6f7cee">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_state}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="533" width="42" height="17" uuid="b6a2b452-1f74-426d-8e5d-34208d12d6b6">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_codigo_postal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="28" y="634" width="31" height="13" uuid="4f9d8a7d-fca9-45c4-ac35-d916d621bde5">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_dob_dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="634" width="25" height="13" uuid="18cf12d6-8858-46bb-bfc7-4a0fa0110fd7">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_dob_mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="634" width="31" height="13" uuid="790fda2a-1788-4a4d-9cee-de2930729e60">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_dob_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="634" width="112" height="20" uuid="9a84d1b5-d24c-44d7-9439-ad20930d8def">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_abn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="169" width="241" height="20" uuid="d83e5a52-21bc-440a-be28-d7b1e4e93323">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="203" width="111" height="20" uuid="5d40b45a-8a15-49a3-86ff-cee1e7585707">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente_dealer_licence}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="203" width="111" height="20" uuid="78d7f327-0e7a-4fc8-86b3-b11c2cb4200e">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente_state}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="323" y="237" width="33" height="12" uuid="ff937bb6-7db4-4398-89b5-3f55163e0f1b">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venta_dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="236" width="31" height="13" uuid="45c1c72d-f4a2-49a2-abbd-da6f0e5d0d93">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venta_mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="236" width="33" height="13" uuid="e39c724a-00f2-43c0-88f8-b7079fff5f6b">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venta_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="323" y="336" width="242" height="37" uuid="09d94e59-18d9-4607-b869-5410823f6094">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="413" width="241" height="19" uuid="2e0f2692-52a1-438a-8795-dd9b771e1593">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clienteDireccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="433" width="45" height="16" uuid="34b5fdcc-acc3-4f52-b005-2128cd012f79">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_state}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="526" y="434" width="41" height="15" uuid="c8d6e08b-5cb7-4ebe-b01e-30f35b320037">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_codigo_postal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="533" width="108" height="20" uuid="7ace7132-329e-4b8f-bdec-86e7acf4306f">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_abn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="533" width="115" height="20" uuid="6fddeac5-1cc5-439d-86df-18d0a375dad6">
+					<printWhenExpression><![CDATA[$F{cliente_tipo}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_acn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="740" width="198" height="20" uuid="8a93a322-9c62-4cc6-b3ff-cafdfed318fa"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{clienteMobile}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="820">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="10" y="2" width="250" height="12" uuid="2f205617-28b7-41ae-8c7f-1357c4c6ecef">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[8      Purchase/Acquisition details]]></text>
+			</staticText>
+			<line>
+				<reportElement x="291" y="3" width="1" height="777" uuid="d6a92933-4a16-400e-8add-af899607e87c"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="13" width="194" height="13" uuid="61c5cd0a-6faf-438d-9bee-6b2b096628d6">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Date of purchase/acquisition]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="29" y="29" width="113" height="20" uuid="de8a83b2-6986-4937-8410-356ce94e74ce">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="40" y="42" width="11" height="10" uuid="5c662347-12f1-40fd-82b2-23d65929dd01"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[day]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="63" y="32" width="7" height="13" uuid="298c7bc0-b974-44b1-9e36-fb1347890efd"/>
+			</line>
+			<staticText>
+				<reportElement x="77" y="42" width="17" height="10" uuid="1c8c98e1-fd24-4723-abdc-1a03a708ae0e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[month]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="102" y="32" width="7" height="13" uuid="ce510b97-b2d0-422e-9a32-b8a5579548fd"/>
+			</line>
+			<staticText>
+				<reportElement x="120" y="42" width="17" height="10" uuid="a4d10646-e735-4582-ac32-f195aeda439a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="51" width="242" height="13" uuid="8f90e808-f099-46fc-b5a6-f134ae5015f0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Sale price or market value (whichever is greater)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="29" y="64" width="113" height="20" uuid="63c7a773-107f-4f48-8314-3533da354e63">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="85" width="136" height="12" uuid="7c5af660-b3ea-42bc-a40a-bd4d3e4f6dd1"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[9      Vehicle's garage address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="85" width="133" height="12" uuid="94c26136-eede-4660-87fe-1ee5393d9af0"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(where the vehicle will most often be kept)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="29" y="140" width="252" height="20" uuid="d024013c-6e96-4521-9bca-02a84bfe29de">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="197" y="144" width="40" height="13" uuid="1759e53b-ff91-440f-8244-ac4684c98617"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="144" width="24" height="13" uuid="35d9be5c-1d02-4fdf-a1a0-3e7d1913613c"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[State]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="29" y="120" width="252" height="20" uuid="417a33f7-134f-4340-a816-a33bbdbfa736">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="29" y="100" width="252" height="20" uuid="fff7ea4a-d50c-409b-923b-c9c537033a1f">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="162" width="250" height="12" uuid="d858b6de-d359-4bb0-a3ed-41ad5a56abfe">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[10     Type of use intended for the vehicle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="176" width="40" height="13" uuid="a5702a15-1b37-4725-a9a9-ad0ddcba3b58"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Private]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="177" width="11" height="11" uuid="13559e9f-7727-48d4-a5c5-2f42d55e1dd0">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="176" width="141" height="24" uuid="ea9c42f5-e64b-4933-8926-894a8f87de28"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[used substantially for social, pleasure or domestic purposes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="200" width="40" height="13" uuid="2178d0da-85ee-461e-b3b7-6d562f1653e3"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Business]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="202" width="11" height="11" uuid="2ffc3f5b-63e9-4f6e-b86f-4f4cd7c15a89">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="201" width="141" height="24" uuid="2e67075c-a915-4ad6-acbf-2d1c424ec236"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[business use unless covered by another usage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="225" width="40" height="13" uuid="62c47035-9bb5-4e68-b52c-7f822f6afce7"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Rental]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="226" width="11" height="11" uuid="d2bf9ad6-a9b3-46f7-9d8b-d8c767559388">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="226" width="141" height="24" uuid="5624d65b-d288-48d7-bcf7-2ead8d9ac4e9"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[a motor vehicle which is let out for hire without a driver]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="250" width="40" height="13" uuid="6768f156-d76b-4621-bc72-980d44d8345f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Resale]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="251" width="11" height="11" uuid="4fee45bd-42bf-4ea4-a3cc-260d66d29816">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="251" width="141" height="24" uuid="16ea54fd-2045-48ab-bede-b738dd4fb80e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[second hand vehicle held for resale by licensed motor dealers]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="275" width="63" height="13" uuid="5655c12c-7c7a-4b9f-9c80-b4b4ddf28947"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Demonstrator]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="276" width="11" height="11" uuid="1cce67a3-f28e-4886-a9b2-da19096a217a">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="276" width="141" height="24" uuid="a78ad0e0-aaf9-473b-b831-26b992a5c3b5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[demonstration vehicle used by licensed motor dealers]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="300" width="252" height="13" uuid="f19cb750-88fd-4fd3-a5b3-c4ff0fee9b7c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Accreditation or licence is required for the following:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="316" width="63" height="13" uuid="a8b17433-2e03-415a-9c45-f235ddb92c1e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Taxi]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="316" width="11" height="11" uuid="99f2c0e7-553e-4cdc-8162-42dd19545ff0">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="316" width="141" height="13" uuid="1e5c280d-cf14-41d3-a388-40e61721fc65">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[plate type T or TC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="332" width="89" height="23" uuid="094535e9-8981-425f-bfd6-7514a444c5cb"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Long distance, tourist or charter service]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="332" width="11" height="11" uuid="efbfdbba-6f28-4516-91b0-16571be06b8d">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="332" width="141" height="13" uuid="443e129e-4a4f-4a7c-8ef1-d30c00c62e1b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[plate type TV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="355" width="89" height="23" uuid="b7db6d73-0a43-4010-bb4c-cdf44599b5e6"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Regular passenger bus]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="355" width="11" height="11" uuid="bc1d7720-aca1-4343-bbbd-48d159776fd7">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="354" width="141" height="13" uuid="6f85a5a7-44c6-463f-a732-35b7dc654714"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[plate type MO or M/O]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="380" width="63" height="13" uuid="4822f342-b809-4783-8bdc-ba4e4490b692"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Hire Car]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="381" width="11" height="11" uuid="5c23d461-361a-4057-b4be-f0919e3dd6e2">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="380" width="141" height="13" uuid="e05aa134-8099-4646-b2b4-5eb89fddb18a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[plate type HC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="395" width="89" height="13" uuid="2cef5465-563a-44dc-8558-81fbddd4ea16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Private Hire Vehicle]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="396" width="11" height="11" uuid="d9d17675-9f5e-4731-bde0-aacd2e6530c6">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="139" y="395" width="142" height="13" uuid="f565ab17-7107-4d7b-a5ce-8abd1a26bbfe"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[general issue plate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="410" width="252" height="13" uuid="8753234c-3304-4d18-a2b9-537a16ce6ec4"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Tow truck operators licence is required for the following:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="425" width="89" height="13" uuid="cfddcbfb-14f7-4b1a-af69-8556c44c96c6"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Tow Truck]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="125" y="426" width="11" height="11" uuid="89d1e13a-e406-4d87-9ff6-10818a6f0377">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="140" y="425" width="141" height="13" uuid="15eae086-17bd-47bd-b28e-d3134c3844b8"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[plate type TT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="440" width="109" height="13" uuid="1af9810d-960d-4b31-86fb-1ceb5774b30d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Other - please specify]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="454" width="252" height="12" uuid="6f77cd4b-d8c9-4ef7-a75b-aed3743e8a98"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(e.g ambulance, road works, stand by taxi etc)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="29" y="467" width="251" height="20" uuid="198a64eb-9bad-4d90-ab63-38fe5f18750d">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="488" width="250" height="12" uuid="a57c9510-ef0b-484b-acb5-c7bd21a9ae30"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[11    For heavy vehicles over 4.5 tonnes GVM what is the]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="500" width="148" height="12" uuid="6c2a7695-d351-4891-9770-c39de328b53f"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Nominated Configuration Code?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="511" width="154" height="12" uuid="d22e6f91-8494-4ddd-a8f2-f71967e07aa0"/>
+				<textElement>
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(See nominated configuration code at]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="511" width="74" height="12" uuid="cb117106-8707-404b-8d97-35662ca7c19e"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[roads-maritime.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="521" width="95" height="12" uuid="161b0581-dba5-42b1-9552-cb0a1874e317"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[transport.nsw.gov.au)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="32" y="533" width="114" height="20" uuid="28845cc6-4d6c-4700-b287-f961cb6313bb">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="553" width="250" height="12" uuid="76635f91-73ac-4c09-aefe-09406054f86b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[12    Do you wish to apply for a concession on the]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="563" width="148" height="12" uuid="8af31e00-fe95-4673-a0cb-b5c0b6f0f27f"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[registration renewal costs?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="575" width="228" height="23" uuid="fbb361cf-f256-4118-9363-f43e9580ae3b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(For example: pensioner, primary producer, charitable organisation)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="600" width="12" height="13" uuid="4234d369-f793-4b27-9a38-6e0c0025ffe0"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="59" y="601" width="11" height="11" uuid="1e06d212-e564-4c26-a929-f7832e545d91">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="32" y="615" width="19" height="13" uuid="edaca737-0d24-4459-9f01-a08f4cd18e9d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[yes]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="59" y="616" width="11" height="11" uuid="02d1a727-f33f-409c-a229-5f0002d73b74">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="72" y="616" width="8" height="12" uuid="d5df35a0-62e1-4a8f-9183-bac6ef6a0390"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"Flecha.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="85" y="610" width="190" height="23" uuid="e3eabf83-90b8-44e3-b338-40127aaf59ad">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[You must prove that you are eligible and may be asked to sign a declaration]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="635" width="270" height="12" uuid="f8aae475-4324-4f90-9e91-562965a61c2e"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[13    Have you got the current certificate of registration for]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="647" width="85" height="12" uuid="1e2026d6-50ec-4feb-9c13-f04642820fa4"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[the vehicle?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="660" width="12" height="13" uuid="7667d5d7-ae89-42d2-9967-5e8c04e104fc"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="59" y="661" width="11" height="11" uuid="73d548f9-8a0d-4f6c-a898-75db8342f4b0">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="72" y="660" width="8" height="12" uuid="406a105a-446b-40e2-a109-f26a680a5ae3"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"Flecha.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="85" y="660" width="100" height="12" uuid="df998034-bc5d-4c70-b397-1e6b553d9f1c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[now go to 16]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="676" width="19" height="13" uuid="d2a505c0-bcb8-45f4-b67b-678f46d78857"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[yes]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="59" y="677" width="11" height="11" uuid="7d9a2d3f-fb1a-494b-936e-4e92e6a36129">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="694" width="270" height="12" uuid="1e7076bc-5a99-4dfd-ae78-6194d5ff9e27"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[14    Has the back of the certificate of registration been]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="705" width="85" height="12" uuid="0fb739db-22fe-4217-bb58-914becee71a6"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[signed?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="720" width="12" height="13" uuid="4adea380-348a-40c1-b1ec-f1e8dc748b82"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="59" y="721" width="11" height="11" uuid="800efbff-6236-4579-92bb-9824989bd878">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="72" y="720" width="8" height="12" uuid="f608ff1f-c768-4024-98a6-83ee9307d701"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"Flecha.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="85" y="720" width="100" height="12" uuid="94aaddbe-0d50-49ab-9a6b-67d816ef6cd5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[now go to 17]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="736" width="19" height="13" uuid="0f65f29f-a99b-4349-9a16-6f0c527bb37d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[yes]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="59" y="737" width="11" height="11" uuid="a065f586-439c-4038-a1db-87b15f7b5972">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="19" y="783" width="350" height="29" uuid="46a3b5ba-d8d8-4339-a9e8-858d2bf8f48d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"PiePagina.png"]]></imageExpression>
+			</image>
+			<break>
+				<reportElement x="0" y="817" width="100" height="1" uuid="f92ba086-705e-4f45-9b8d-3489a662c1bf"/>
+			</break>
+			<staticText>
+				<reportElement x="512" y="783" width="56" height="12" uuid="bcb1b803-9341-40fe-9559-30396f959e12"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Page 2 of 4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="10" width="250" height="12" uuid="41f9d2e8-29e8-4155-b50d-8e08e6ba5709"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[15      Is the certificate of registration in the seller's name?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="26" width="12" height="13" uuid="333633a1-c52b-44e2-ac01-fb4e475a6414"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="353" y="27" width="11" height="11" uuid="be5c1231-3d13-4cd6-9d59-1fbaf32e5564">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="366" y="26" width="8" height="12" uuid="b9cea5d8-34e2-4b7b-b3cd-27c77f44d5ff"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"Flecha.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="379" y="26" width="100" height="12" uuid="69e8e3f4-7724-47e6-a19c-272d118f811d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[now go to 18]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="353" y="44" width="11" height="11" uuid="cce84f74-78ae-4030-aa2e-3ccd7b4a6f42">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="379" y="43" width="100" height="12" uuid="ef14454b-e398-4894-832d-2f4edef8bdef">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[now go to 19]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="43" width="18" height="13" uuid="7a242337-6d99-4324-99f5-51e659fd793e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[yes]]></text>
+			</staticText>
+			<image>
+				<reportElement x="366" y="43" width="8" height="12" uuid="2c0b272a-121f-44a9-bf51-f3cbe381af74"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"Flecha.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="300" y="64" width="250" height="12" uuid="c26f33f4-7d61-4080-a8a5-13e3cd4b01d3"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[16      Vehicle details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="79" width="96" height="13" uuid="c3acc894-6a73-4240-aa18-20fd20f5c241">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Year of manufacture]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="90" width="91" height="20" uuid="4cef1b00-96db-456b-8640-2a55de78d9a3">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="438" y="79" width="96" height="13" uuid="8ddaf210-4558-4782-9f56-44340eaad4c1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Make (eg Ford)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="438" y="90" width="130" height="20" uuid="3844a109-3eaf-4752-b618-62947050417c">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="114" width="98" height="13" uuid="483b2660-3e93-4f6b-aafb-409868d4d9ec">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Model (eg Laser TX3)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="126" width="98" height="20" uuid="9cd0dfc2-9e13-472e-aab1-e022539b3ab8">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="438" y="114" width="96" height="13" uuid="c5054827-a3b4-470c-a3fc-68bdfed874cd">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Odometer reading]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="438" y="126" width="130" height="20" uuid="03cceb61-d48e-4a18-868f-264935d0c426">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="150" width="98" height="13" uuid="5f99d1ab-1b72-4762-869d-c123a5a311c4">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Colour(s)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="162" width="243" height="20" uuid="eb92319e-be0f-4ab1-8183-eaf417b70e46">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="187" width="98" height="13" uuid="2fbd640e-a69c-4122-96ad-879bcd40dcec">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[VIN or chassis number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="199" width="238" height="20" uuid="cec44285-b768-4410-a4b2-e3d6ad93b77b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="219" width="98" height="13" uuid="ff76d7d3-9153-4217-a15c-8ae5f9a24453">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Engine number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="232" width="243" height="20" uuid="f089da2d-8f1a-44f0-b940-555409524273">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="262" width="266" height="12" uuid="64e98a25-eb0d-4fac-ab54-a19af1640cfa">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[17      Have you got a signed receipt or letter from the seller?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="278" width="12" height="13" uuid="43572c3b-824a-4970-8837-94e6d9edebbb"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="352" y="279" width="11" height="11" uuid="7bc4322a-259c-4f9e-9fea-fdf1ee62a20f">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="365" y="278" width="8" height="12" uuid="aac42099-5897-46ae-bfdd-92b217018674"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"Flecha.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="378" y="278" width="146" height="12" uuid="130f1f7f-4434-4c06-8c7d-dec5924829df">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[please provide reason below]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="352" y="296" width="11" height="11" uuid="f4fb8860-4dba-4f52-b89c-c95d2a5e7b7c">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="378" y="295" width="100" height="12" uuid="f59ac20b-9dbd-43fa-a51a-f88a24cd999d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[now go to 19]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="295" width="18" height="13" uuid="c286fd17-f87c-4b5a-8146-45826339ce8b"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[yes]]></text>
+			</staticText>
+			<image>
+				<reportElement x="365" y="295" width="8" height="12" uuid="5b49f28f-9cfb-4a09-9407-d9f88f5803b3"/>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"Flecha.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="325" y="313" width="98" height="13" uuid="981fa572-27e0-4d71-9205-a01a77090ead"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Reason]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="324" width="243" height="20" uuid="dc52c768-5f74-42a7-b448-7e19a4217f38">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="350" width="266" height="12" uuid="5ea39b90-9772-4c98-ba1e-1ef77f45b55d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[18      Who did you buy the vehicle from?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="363" width="113" height="13" uuid="eefb799b-61bc-4d2a-b27a-3372332ce337">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Surname or organisation name]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="375" width="243" height="20" uuid="d010335b-0441-4201-9d62-eef1458af755">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="398" width="113" height="13" uuid="ba49cef9-5ce4-4f21-a668-98a86002a2f9"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Given names]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="410" width="243" height="20" uuid="07b339c3-21b4-414f-88bd-c6302f14bd93">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="433" width="113" height="13" uuid="f0f5c74f-8ada-4421-beab-5494404243b5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="466" width="243" height="20" uuid="862d2059-85a9-49a1-a34b-94bd84efa1ac">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="325" y="446" width="243" height="20" uuid="1e66472d-2311-4cc8-a0af-47839431b318">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="413" y="470" width="24" height="13" uuid="9fca62f2-2abb-435d-9f99-6a24098ce979"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[State]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="470" width="40" height="13" uuid="fff18467-b0cc-4910-b6bb-6a1a326ab653"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="490" width="266" height="12" uuid="ac70dee4-9e62-4ef0-b075-21eacee001e2"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[19      Declaration]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="507" width="243" height="42" uuid="5e0e7a47-ee7d-4f5f-9d46-be809c686157">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="326" y="508" width="236" height="12" uuid="613198d3-6000-44a4-acd0-de3c454da632"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[WARNING:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="516" width="230" height="32" uuid="2cfcb959-bd3e-4eaa-9f47-3b15ace2fdf3"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Any person who by false statement of misrepresentation obtains or attempts to obtain a certificate of registration is liable to a penalty that may be in excess of $2,200.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="551" width="113" height="13" uuid="ebdfacfd-0cfe-45f3-a018-bcbd22ef23bf">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[You declare that:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="564" width="209" height="64" uuid="156bfc37-ddf2-4af7-a953-537d8baa8764"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[The information on this form is true and complete
+
+If the vehicle has Special Number Plates you have read and accept the Number Plates Terms and Conditions for Special Number Plates available at any service centre or on the myplates website]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement mode="Opaque" x="332" y="567" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="801096ca-a67b-4eac-8d77-931696bf5872">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="332" y="587" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="a18bd69f-d8cc-4390-9641-2e272b497e18">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="325" y="628" width="242" height="35" uuid="d397288c-d2ab-41f5-b0bc-49f5ace489d7">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Under road transport legislation, it is an offence to attempt to register or renew the registration of a vehicle by a false statement or any misrepresentation or other dishonest means.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="668" width="113" height="13" uuid="00a487b1-ebe6-4c7c-9a66-59449d39d557">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="681" width="243" height="20" uuid="4d3d5964-b4f8-487d-9fdb-e15aa6bd7d8a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="703" width="110" height="24" uuid="14560563-1ca7-459d-8cdd-2cdeb1fd2f85">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Capacity if representative of a corporation]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="727" width="113" height="20" uuid="3aa94c3c-ecb2-428c-9ba7-6aa56f5a8e5f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="453" y="727" width="113" height="20" uuid="414ee9ed-5a69-404e-b330-21aae1f267b3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="501" y="740" width="17" height="10" uuid="f513d3a2-d1f2-48b3-8057-cd400ccb2b05">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[month]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="526" y="730" width="7" height="13" uuid="87285556-24e5-4372-90cb-a3c3b535e778"/>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="487" y="730" width="7" height="13" uuid="b612c452-0ddb-4a6f-93f2-1d47f2b6f00f"/>
+			</line>
+			<staticText>
+				<reportElement x="464" y="740" width="11" height="10" uuid="35b534db-ff15-4038-86b6-d2ec582cb276"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="544" y="740" width="17" height="10" uuid="fa77a470-cc3f-46cf-b684-496e01b02fe1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="703" width="110" height="24" uuid="550fb2d3-2e9d-4d82-9b79-58158562fa9d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="614" width="74" height="12" uuid="2dc22c88-203f-4543-a307-1b6256cab7df"/>
+				<textElement>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[myplates.com.au]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="29" y="29" width="32" height="13" uuid="dd96081b-316d-49f6-a33f-a9c3fa748023"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venta_dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="29" width="32" height="13" uuid="b9c2006a-30d0-4540-8327-e0b1b1eb4d20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venta_mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="29" width="32" height="13" uuid="800f0f75-3af7-4d59-922b-2ed790c6976d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venta_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="64" width="107" height="20" uuid="8f213fb3-35e6-48d7-8f64-2a2a5e1a541d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{carMontoConGST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="103" width="248" height="37" uuid="5f6238ab-a94e-47a0-8202-179fc9ddbe84"/>
+				<textElement>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clienteDireccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="141" width="48" height="16" uuid="ac249e65-99ef-4035-8ade-d87ebdc53014"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_state}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="140" width="42" height="17" uuid="ca0d6ce6-00c7-4811-ae95-8996efdffc0f"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_codigo_postal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="92" width="88" height="18" uuid="8cd16aea-2ea3-4016-8121-f8d0881b8c5f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{car_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="92" width="125" height="18" uuid="2af6d0c8-055e-40ec-adf2-ef06472f75b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{carMarca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="127" width="97" height="19" uuid="86f97177-5524-4aee-89e4-473d6448d86b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{carModel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="126" width="127" height="20" uuid="a05f68f8-f4cd-48b1-a4c1-efe87ef180e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{carOdometer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="200" width="229" height="19" uuid="c1d62fa0-15a3-4b1f-8b33-f3e7227ba579"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{carVIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="232" width="235" height="20" uuid="dfef66ca-6f0c-4d25-a6c8-f7dc36ff8b84"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{carNumeroMotor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="376" width="230" height="19" uuid="9461ddae-0092-4c08-ab48-4bd4e8bbcdec"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sucursalNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="446" width="240" height="20" uuid="8df4a709-f6be-4882-8133-3db6fc0a848f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sucursalDireccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="467" width="50" height="16" uuid="ceffe017-5b32-4a30-8bc6-98644322e40f"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sucursal_state}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="526" y="467" width="40" height="16" uuid="15dc2b3d-16fa-4bc1-9cda-87f162c5c22f"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sucursal_codigo_postal}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="820">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="10" y="11" width="270" height="12" uuid="ee3af49f-d97b-4632-aa74-16ed5ba21e30">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[20    Representative Authority]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="26" width="228" height="12" uuid="426ce972-76c2-4014-b938-97d27673790c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(see back page for more information)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="291" y="3" width="1" height="777" uuid="4165d3d9-2f6f-45d6-ba8d-fb61fa802f9c"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="37" width="243" height="73" uuid="1ea75373-6752-4db9-b819-8085eb23f9d0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[This authority must be completed if you are sending someone to transfer the registration into your name. However, if you are not already a Transport for NSW customer and recorded on the Transport for NSW computer system, you must attend a service centre in person and provide Proof of Identity.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="110" width="244" height="25" uuid="7471017c-520d-4787-9c54-5eac0daf222d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[I declare that the person named below is my authorised representative.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="30" y="207" width="113" height="20" uuid="2b510e4d-d077-4db9-b4fa-7e17ba3ec057">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="172" width="110" height="38" uuid="8f950c8f-8d4e-460f-94ca-78ed007ae71c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Representative's details
+NSW Driver licence/ Customer number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="137" width="113" height="13" uuid="4d3e32f7-2bd7-4b3f-90d2-4d2766aa2386">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="160" y="207" width="113" height="20" uuid="a3920c05-7422-4440-9fbd-e7ced0a6ee76">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="251" y="220" width="17" height="10" uuid="47a38b89-433a-46ff-a07b-d3721447d75d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[year]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="30" y="150" width="247" height="20" uuid="d245b7ff-37c1-47f3-9a32-27ee89cba787">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<line direction="BottomUp">
+				<reportElement x="194" y="210" width="7" height="13" uuid="1c1343ed-2f48-4f07-a8df-77669a96b5a5"/>
+			</line>
+			<staticText>
+				<reportElement x="171" y="220" width="11" height="10" uuid="99ada12e-0945-4b65-808b-b42daa6b468d"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="220" width="17" height="10" uuid="69a5acb0-fef5-4f43-af4e-831730591c5f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="195" width="110" height="12" uuid="f7db1bf5-d14a-4c1c-b66c-ea40e8fd6c4d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Date of birth]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="231" width="113" height="13" uuid="294fab7a-59cd-496b-b8bb-33623af5d29a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Surname]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="30" y="243" width="252" height="20" uuid="e671995d-9481-4e54-9df4-7da69021efd2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="266" width="113" height="13" uuid="053cf43b-85cd-4c63-a4e4-c8e924522820">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Given names]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="30" y="278" width="252" height="20" uuid="05394726-f08d-4e3d-bc29-bc2ec3d751cb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="30" y="313" width="252" height="20" uuid="5ea04743-a220-400f-bb66-9d967ebe84f8">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="30" y="333" width="252" height="20" uuid="fedcbcdc-8213-4eb3-9637-4fb14a40a381">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="30" y="353" width="252" height="20" uuid="1364984d-9a02-4033-80c3-abc60b255167">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="123" y="357" width="24" height="13" uuid="6b36f212-b972-4040-8ad7-4c2a2193e6cb"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[State]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="357" width="40" height="13" uuid="9d54dea2-d2a6-43f8-9233-d587cb09ab95"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="302" width="113" height="13" uuid="a8e69ef3-6953-43fb-8c93-2263c1024100">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="379" width="36" height="12" uuid="84a0b4f9-eed0-4c59-bd55-d3037de20d07">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Gender]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="379" width="24" height="12" uuid="c62b788d-91b0-4186-b07c-1ced647e4ced">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[male]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="117" y="380" width="11" height="11" uuid="f38b626b-a455-4eaa-8817-1e5bc15b1a4a">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="146" y="379" width="34" height="12" uuid="ba693efe-79c9-4b28-8e69-572191ca0f32">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[female]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="184" y="380" width="11" height="11" uuid="2a62fe59-a13a-4524-a36c-19a6337c4037">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="395" width="113" height="13" uuid="0fc034d2-95f3-4077-8d10-592e7ada20e0"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Representative's signature]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="30" y="408" width="252" height="20" uuid="34f18efb-3c44-4fab-ae91-1408ae9e7136">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="30" y="444" width="252" height="20" uuid="8a0e546b-54b8-43f1-976d-3f041d63fede">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="431" width="230" height="13" uuid="c287429d-6858-4aa0-a281-03560ad565ea"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Capacity if representative of a corporation]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="233" y="210" width="7" height="13" uuid="a60b62fa-203d-4a27-a1ab-42f82451269d"/>
+			</line>
+			<rectangle>
+				<reportElement x="30" y="482" width="113" height="20" uuid="4729a010-0102-4036-ad51-455880c25413">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="121" y="495" width="17" height="10" uuid="5f2d73b8-c3de-4fff-8b39-64e1fd6424f6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[year]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="64" y="485" width="7" height="13" uuid="cef3041d-29c8-4e6c-b405-1999ed1adf75"/>
+			</line>
+			<staticText>
+				<reportElement x="41" y="495" width="11" height="10" uuid="cb40b623-6daa-44bb-9545-510063e1db36"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="495" width="17" height="10" uuid="5ab920d9-3a93-45e0-8e7e-4db4eb2e33bf">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[month]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="103" y="485" width="7" height="13" uuid="caf0390a-cb0e-4f81-b9fe-c605c15ac05d"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="470" width="230" height="13" uuid="ad1d9d75-280b-42f4-b293-426216d50652"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="506" width="27" height="13" uuid="2ceb14fb-ec17-49b9-9484-6e0ebc828846">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Note:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="506" width="234" height="13" uuid="7fab9ab1-5184-4d84-83d0-03aff789e033"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Signatory capacity must be declared by a Limited Company]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="522" width="230" height="13" uuid="e0fa51f9-949c-4a96-aaf5-1fd651b26b11"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Personal Information Collection Notice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="533" width="246" height="60" uuid="4f1061cd-61e3-447f-ad88-c40db0dfe941"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Transport for NSW is committed to protecting your privacy and ensuring your personal and health information is managed according to law. Find out why we collect your personal information, including how we use and manage it, by reading our privacy statement at]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="578" width="90" height="13" uuid="8e9cbeeb-4420-44d2-9881-f96dd8c8efef"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[www.transport.nsw.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="590" width="114" height="13" uuid="61afb3ab-5083-4612-a64e-16f1cc5ccb56"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[gov.au/privacy-statement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="590" width="128" height="13" uuid="13011e4a-e1ae-484e-9f1c-f29b890fd5d4"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[or phone 13 22 13 to request a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="601" width="28" height="13" uuid="d7a7a052-5d82-472d-9645-c31b1bce48ac"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[copy.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="620" width="240" height="140" uuid="d41a56cb-7757-4b9e-93ff-35edff7ff349"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[In addition, where your application concerns Special Number Plates then we will also use your Personal Information in connection with the operation of our Special Number Plates business and we may disclose your Personal Information to any Concessionaire appointed by us to manage our Special Number Plate business to allow the Concessionaire to manage the Special Number Plate business. If the Special Number Plates attract an Annual Fee, we or our Concessionaire, may send you Special Number Plate customer service information and marketing information unless you elect to opt-out. To opt-out please notify the Special Number Plates Concessionaire using the]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="757" width="146" height="13" uuid="d910285f-f222-4e76-89f7-64b17a34b589"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[“contact us” information available at]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="757" width="83" height="13" uuid="46c7505f-086f-4879-a49f-90dc645268b0"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[myplates.com.au]]></text>
+			</staticText>
+			<image>
+				<reportElement x="19" y="783" width="350" height="29" uuid="f8055d5f-e63c-4855-8505-4d67fe431234">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"PiePagina.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="300" y="11" width="164" height="12" uuid="160d1cc3-2a96-4fa0-bfec-87d1204f5195">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Office use - BUNDLE B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="30" width="221" height="12" uuid="bd417842-4d8b-421d-8880-d81c5952c519">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Mailing address checked on DRIVES (if applicable)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="543" y="31" width="11" height="11" uuid="5edbea76-3ba2-43cb-b4ea-5788fcbe2b9c">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="66" width="164" height="12" uuid="13cc9195-ca10-4eea-9bc7-2c2bf3b1c8fa">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Proof of identity record]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="95" width="164" height="12" uuid="8358bb5a-9202-42de-8157-56a0c76e9ee4">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Person]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="108" width="207" height="13" uuid="c5577eb2-3dfb-4f53-8034-770cd4bce928">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Stand-alone or primary proof]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="121" width="243" height="20" uuid="8dda04a5-5be4-4069-a329-51e40b4e124b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="145" width="207" height="13" uuid="7172dd80-0107-460d-8835-14193ab58668">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Document number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="160" width="123" height="20" uuid="bc50d4e7-0f4b-4f45-b3d0-fff075061362">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="183" width="70" height="13" uuid="dbb95a62-c6c3-4d04-b0ff-48748d4558d6">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Secondary proof]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="183" width="70" height="13" uuid="752077ea-00aa-484e-bc82-5aac8ea886ee">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(if necessary)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="196" width="243" height="20" uuid="2bcc94bc-b9f2-4dcd-b365-6bfc96760739">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="223" width="212" height="12" uuid="a9f2cbc0-4055-47a3-b85a-f5dec5872d13">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Proof of registration entitlement (PORE)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="235" width="242" height="25" uuid="53299e0e-8b3b-4743-ab71-cc0a5537164b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(proof of source-registration certificate, receipt, bill of sale, consignment note, etc)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="260" width="243" height="20" uuid="284d44ea-dfb8-4644-b4b7-46c18bc9d790">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="286" width="74" height="12" uuid="fede45b1-6d30-457d-a68f-a2d4ad245ec3">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Corporation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="298" width="218" height="13" uuid="fc52e8f5-5290-4774-b0c4-a1bae45e08ee">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[ACN verified from: (specify document)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="310" width="243" height="20" uuid="50fbfb81-e154-441b-ba43-33891e380e65">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="345" width="74" height="12" uuid="fa17725b-ad7a-415a-b65b-26dcd3d8d365">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Verified by:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="359" width="218" height="13" uuid="192c9bc1-3826-429b-95b5-0b18ae5c2d6f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="373" width="243" height="20" uuid="4cc82149-4eef-409b-bad2-741919dfd7b7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="395" width="218" height="13" uuid="b7128e3f-c7b2-40e8-9333-e9323be42af2">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Customer service representative number or dealer number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="325" y="408" width="243" height="20" uuid="7853e2c2-6935-47e0-a39f-bcedb6d3365b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="512" y="783" width="56" height="12" uuid="9397d4cf-1c04-4301-a717-359250041aa6"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Page 3 of 4]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="816" width="100" height="1" uuid="1495007c-8903-4fa6-b9d8-0dea5e13a885"/>
+			</break>
+		</band>
+		<band height="820">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="10" y="11" width="270" height="18" uuid="4b207ef8-1eb2-4633-a825-5dfda622047f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Applying for transfer of registration]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="30" width="220" height="35" uuid="560d8771-f6c1-4a1c-a58a-df80a04500c1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[You must apply for transfer of registration at a service centre within 14 days of purchasing/ acquiring a vehicle.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="291" y="2" width="1" height="777" uuid="c4ca93b5-0e3d-4b1c-8d43-8c6db2f3eee5"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="65" width="220" height="15" uuid="5ec96248-33c9-451c-a5b8-eaa8a75ed291">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[(applications will not be accepted by mail)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="80" width="240" height="30" uuid="f87682a0-a55b-4c3c-a627-31cb7c799251"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[You should have the current certificate of registration for the vehicle. Make sure it is signed on the back by the seller.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="110" width="240" height="50" uuid="2eacacef-625e-4fdf-9e11-b0a37e0a4eff"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[If you do not have the current certificate of registration, you will need to provide proof of entitlement to transfer the registration, for example, an original receipt for the vehicle which clearly shows:]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement mode="Opaque" x="32" y="170" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="e62bebf8-0747-4af6-8fe1-ae585e16a503">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="43" y="166" width="240" height="12" uuid="47c591a6-b266-44e1-b4a1-54f95e188bcd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Your name]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement mode="Opaque" x="32" y="183" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="03ba271b-b27b-4697-a544-92debcdc0489">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="32" y="196" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="95b4b3b1-f343-4997-8048-cd4105e5fbc9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="32" y="208" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="2ca828c7-0d46-4afa-b8cc-6f603245bca8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="32" y="221" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="cce15b24-f84b-49df-849c-efb3f62ad9db">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="32" y="234" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="f86de1f2-a623-43f1-8542-beed741f3bd6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="43" y="179" width="240" height="12" uuid="d17a7be7-9165-4ef3-b97b-82c0b2c85b08">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[The seller's name, address and signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="192" width="240" height="12" uuid="65c20677-46c4-4565-957c-1106d631ca58">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[The registration number of the vehicle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="205" width="240" height="12" uuid="ea724060-af9a-4ae9-82ad-adb6733b6353">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[The VIN or chassis number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="218" width="240" height="12" uuid="4dcad763-53f3-4eb6-b9ea-5eab127f69f5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[The date that you bought the vehicle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="231" width="240" height="12" uuid="f5026a20-3ddd-4abf-948c-167be9fb930f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[How much you paid for it.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="246" width="247" height="24" uuid="3fdb10c6-4945-4672-a8fd-d444e3872e49">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[If you can not provide any proof of entitlement to transfer the registration your application may be refused.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="270" width="107" height="12" uuid="0806e3dd-ff14-4279-a452-e34abedc69cd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[For more information visit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="270" width="139" height="13" uuid="ba52bdb2-3762-4758-a0d7-544f7407412e"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[roads-maritime.transport.nsw.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="282" width="139" height="13" uuid="3686b5ae-7531-49ca-bfe0-52de913dfa36"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[gov.au]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="300" width="270" height="12" uuid="38e47ac4-6e6b-459d-b47b-712461ec7bdc"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Heavy Vehicle over 4.5 tonnes GVM:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="314" width="241" height="36" uuid="05636dfb-37c4-4842-b431-f2c094a59cf2"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[If you are transferring the registration of a heavy vehicle over 4.5 tonnes GVM, you must also indicate the Nominated Configuration Code at question 11.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="354" width="270" height="12" uuid="ec251226-af38-463f-965f-36f9d0734a0c"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Proof of Identity (POI):]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="35" y="370" width="236" height="35" uuid="84ba3b2a-a803-4681-94ad-acc359758aa6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="57" y="370" width="196" height="35" uuid="5bf6a555-d871-44e5-8f69-b7fc7cea116d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Your POI documents must be originals and must include your signature and your residential address.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="410" width="241" height="50" uuid="49890494-a0d5-44c7-a273-a244bd3d06e8"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[When you attend a service centre, you need to show proof of identity (POI). You can use your current NSW driver photo licence or one which expired within the last two years. For a list of acceptable POI documents visit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="444" width="44" height="13" uuid="8be96962-477d-4816-8508-64ca755ee377"/>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[roads-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="457" width="134" height="12" uuid="e93100bf-31ba-4ae6-993b-0a01ed60504c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[maritime.transport.nsw.gov.au]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="457" width="102" height="12" uuid="f1e22f05-7587-477e-a872-79de93f96c1a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[or call Service NSW on]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="467" width="102" height="12" uuid="f52643b6-46fa-4193-9792-1e1ed881fb5c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[13 22 13.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="482" width="241" height="35" uuid="d82e7307-2e3a-4d5d-8bd4-44c304d4ecc9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Corporations are required to provide one of the following when being established as a Transport for NSW customer for the first time, or to change its name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="520" width="225" height="25" uuid="78efaba9-de83-4611-823d-71f12d0fbd97"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Certificate of Registration, with Australian Company Number (ACN)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="548" width="225" height="12" uuid="5d191814-207e-4672-bf8c-23a73f653c70"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[A current Extract of the Company, with ACN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="563" width="225" height="12" uuid="3778bc75-5d86-4bf0-89c6-1e891f3d6f22"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Certificate of Registration on Change of Name with ACN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="578" width="225" height="25" uuid="f328c6ea-3f62-4a4e-9c02-07a979a9b8ac">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[A printed extract from the Australian Securities Investment Commission (ASIC) website with ACN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="607" width="225" height="35" uuid="5bc88df4-d8bf-4069-bf1c-ed32fa86b2bf"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Certificate of Incorporation issued by the NSW Fair Trading or an Association Summary from NSW Fair Trading's online search facility.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="645" width="225" height="35" uuid="6cac5ef8-fcdb-41aa-ae62-a6a7065ea024"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Certificate of Registration of a Foreign Company, with Australian Registered Body Number (ARBN) for companies incorporated overseas.]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement mode="Opaque" x="40" y="524" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="cf60e357-1b1e-4779-b87b-f15573131027">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="40" y="552" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="3ea794a8-bfbd-4c9b-874e-ca7011def866">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="40" y="567" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="0727389e-f4d5-4f32-a5b8-ab58aaaea906">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="40" y="582" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="971ed5df-b8be-4f66-bfd9-fa1eb2b6142b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="40" y="612" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="22891a7d-b45b-4f08-bd37-d58a7b74022b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<ellipse>
+				<reportElement mode="Opaque" x="40" y="649" width="4" height="4" forecolor="#000000" backcolor="#000000" uuid="ba4b2990-49ff-44d2-a783-5ff4f7f20aec">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="36" y="684" width="241" height="66" uuid="d389c9bc-5359-486a-8dcd-dd9f4ae0b28e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Government authorities or organisations incorporated under legislation must provide on letterhead the name of the Act under which they are incorporated when being established as a Transport for NSW customer for the first time, or to change its name.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="19" y="783" width="350" height="29" uuid="ca50bf50-f7c7-4cfe-b60b-eff32b1f4b7e">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"PiePagina.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="300" y="11" width="212" height="12" uuid="37367ec7-d439-4cca-9bf2-40cd8b161698">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Hearing or speech impaired?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="24" width="224" height="34" uuid="074864e9-2252-409a-a088-7d82b4bd72a4"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Call on the National Relay Service: TTY users phone 133 677 then ask for 13 22 13. Speak and Listen users phone 1300 555 727 then ask for 13 22 13.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="68" width="212" height="12" uuid="01d07a32-a093-438b-a605-6ba6cc3436f0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Courtesy name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="83" width="224" height="46" uuid="095c9efa-85f3-4615-ad17-1df3bfaf2ddc"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[This field may be used to record an organisation name. This name will be recorded on the Certificate of Registration. The name recorded in this field is not the registered operator of the vehicle.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="146" width="212" height="12" uuid="fe8f5a90-47b1-44e0-9c1b-ce1705c94670">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Representative Authority]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="162" width="236" height="115" uuid="933f698c-8cf0-4068-a50b-800ea20240a6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[If you send someone else to the service centre to apply to transfer the registration to your name, fill in the Representative Authority section of this form. If the vehicle is being registered in the name of a corporation, the Representative Authority must be filled in. For a company, the Director or an authorised delegate must complete and sign the Representative Authority. In the case of incorporated association, the public officer must sign. In all cases, the authorised representative must provide proof of their identity.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="278" width="236" height="40" uuid="19193220-f3de-45ad-8d1a-15943516c552">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[If you are not already recorded on the Transport for NSW computer system, you must attend the service centre in person and provide POI.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="323" width="212" height="12" uuid="730740ac-2318-43bc-983c-cd3d88e4559b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Transfer and Stamp Duty charges:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="340" width="242" height="50" uuid="484522e1-47f7-468b-84f8-00532084dadb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[The transfer fee is at least $34. If you do not apply to transfer the registration within 14 days of purchasing /acquiring the vehicle, a late application fee of at least $121 also applies.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="396" width="212" height="27" uuid="e979cab7-fc2e-41ce-80f7-6f8c339f8e23">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Costs shown are correct at the time of printing, but can be subject to change without notice.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="430" width="212" height="12" uuid="9aa2ddc5-7029-407e-a2a2-3084799d596f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Please note:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="448" width="242" height="31" uuid="48ec1846-52ef-40c6-8c39-5f7f1f4202fb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[If the vehicle is registered with a concession additional costs also apply.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="478" width="242" height="68" uuid="b30a2af7-c56c-4008-8ab5-2d8ce34aca53">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Stamp duty is collected by Transport for NSW on behalf of Revenue NSW when registration is issued to a different person or corporation. Stamp duty is based on the market value of the vehicle or the price you paid, whichever is greater. Stamp duty is calculated at $3 per $100, or part of the vehicle's value.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="549" width="242" height="93" uuid="edc520c6-7a40-4da4-a3b2-a71392679cbc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[For passenger vehicles valued over $45,000 with seating for up to 9 occupants, including: a sedan, station wagon, coupe, convertible, four wheel drive vehicle with seats and windows, two wheel drive panel van with seats and windows, three wheel car, forward control passenger vehicle, small bus, motor home, or snow vehicle the rate of stamp duty is $1,350 plus $5 per $100, or part, of the vehicle's value over $45,000.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="643" width="242" height="23" uuid="e7130b62-fd50-4d55-9a69-be4e9ed8fd0e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[You can use this method to calculate the amount of stamp duty payable for your vehicle, or you can use the motor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="666" width="95" height="13" uuid="981cd3e9-589d-47bf-8fa1-050ec0d9dcca">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[revenue.nsw.gov.au]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="512" y="783" width="56" height="12" uuid="12ff326a-e4e1-4e62-8498-ac77224017cc"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Page 4 of 4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="666" width="150" height="13" uuid="1cc6127b-4848-42bb-981a-25e0c108f7a5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[vehicle registration duty calculator at]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

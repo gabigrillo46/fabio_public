@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Payments report</h1>
+                        </dir>
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel for="fechaInicio" value="Date from:" style="font-weight: bold"/>
+                            <p:calendar id="fechaInicio" navigator="true" pattern="dd-MM-yyyy" value="#{reportPaymentsController.fechaDesde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="Date to:" style="font-weight: bold"/>
+                            <p:calendar id="fechaFin" navigator="true" pattern="dd-MM-yyyy" value="#{reportPaymentsController.fechaHasta}" />
+                            <p:column/>
+
+                            <h:outputLabel value="Status:" for="cmbStatus" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbStatus" value="#{reportPaymentsController.status}" style="width:200px">
+                                <f:selectItem itemLabel="All" itemValue="" />
+                                <f:selectItem itemLabel="Approved" itemValue="Approved" />
+                                <f:selectItem itemLabel="Declined" itemValue="Declined" />   
+                            </p:selectOneMenu>
+                            <p:column/>
+
+
+                            <h:outputLabel for="cmbTipoPago" value="Method of payment:" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbTipoPago" value="#{reportPaymentsController.idFormaPago}">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItems value="#{reportPaymentsController.listaTipoPago}" var="tipoPagoSelecc"
+                                               itemLabel="#{tipoPagoSelecc.nombre}" itemValue="#{tipoPagoSelecc.id}"/>
+                            </p:selectOneMenu>
+                            <p:column/>   
+
+                            <h:outputLabel for="txtReference" value="Agreement #:" style="font-weight: bold"/>
+                            <p:inputText id="txtReference" value="#{reportPaymentsController.referencia}" />
+                            <p:column/>   
+
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{reportPaymentsController.buscarPorFiltro}" update="carTable labelResultado"/>
+                        </p:panelGrid>
+                        <p:outputLabel id="labelResultado" value="Number of results returned: #{reportPaymentsController.cantidad}"/>
+                        <p:dataTable      var="pago" value="#{reportPaymentsController.listaPagos}" id="carTable" sortBy="#{pago.agrupacion}" >                  
+                            <p:column  headerText="Fecha" >                                               
+                                <h:outputText value="#{pago.fecha_hora}" >
+                                    <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Reference" >
+                                <h:outputText value="#{pago.alquiler.id}"/>
+                            </p:column>
+                            <p:column headerText="Status" style="#{reportPaymentsController.esPagoAprovado(pago)? 'background-color: #33cc33;':''} ;#{reportPaymentsController.esPagoDeclined(pago)? 'background-color: #ff3300;':''}"  >
+                                <h:outputText  value="#{pago.status}" />
+                            </p:column>
+                            <p:column headerText="Amount" >
+                                <h:outputText value="$#{pago.monto} (#{pago.tipoPago.nombre})" />
+                            </p:column>
+                            <p:summaryRow>
+                                <p:column colspan="3" style="text-align:right">
+                                    <h:outputText value="Total:" />
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value="#{reportPaymentsController.dineroIngresado}">
+                                        <f:convertNumber type="currency" currencySymbol="$" />
+                                    </h:outputText>
+                                </p:column>
+                            </p:summaryRow>                                
+                        </p:dataTable>
+
+                    </div>
+
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

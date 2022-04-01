@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form id="form" >
+                        <p:growl id="growl" life="2000" />
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Messages</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+
+                            <h:outputLabel value="From user:" for="cmbUsuario" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbUsuario"  value="#{grillaMensajeController.id_usuario_filtro}"
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItems value="#{grillaMensajeController.listaUsuarios}" var="usuarioSelecc"
+                                               itemLabel="#{usuarioSelecc.nombre}" itemValue="#{usuarioSelecc.id}"/>
+                            </p:selectOneMenu>
+                            <p:column/>
+
+
+                            <h:outputLabel for="txtReferencia" value="Reference number:" style="font-weight:bold"/>
+                            <p:inputText id="txtReferencia" value="#{grillaMensajeController.referencia}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtPalabra" value="Word in message" style="font-weight:bold"/>
+                            <p:inputText id="txtPalabra" value="#{grillaMensajeController.palabra}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="txtApellido" value="Last name:" style="font-weight:bold"/>
+                            <p:inputText id="txtApellido" value="#{grillaMensajeController.apellido}"/>
+                            <p:column/>
+
+                            <h:outputLabel for="fechaInicio" value="From:" style="font-weight: bold"/>
+                            <p:calendar id="fechaInicio" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaMensajeController.fecha_desde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="To:" style="font-weight: bold"/>
+                            <p:calendar id="fechaFin" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaMensajeController.fecha_hasta}" />
+                            <p:column/>
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaMensajeController.buscarPorFiltro()}"  update="alquilerTable labelResultado"/>
+                        </p:panelGrid>
+                        <p:panel>
+                            <p:outputLabel id="labelResultado" value="Number of results returned: #{grillaMensajeController.cantidadResultados}"/>
+                            <div align="right">
+                                <p:commandButton style="width: auto" value="Add new messagge" icon="ui-icon-plusthick" action="DatosMensaje"/>
+                            </div>
+                        </p:panel>
+
+                        <p:panel>
+                            <p:dataTable   var="mensaje"  value="#{grillaMensajeController.listaMensajeResultado}"    id="alquilerTable" >
+                                <p:column headerText="Date" sortBy="#{grillaMensajeController.getFechaFormat(mensaje)}" filterBy="#{grillaMensajeController.getFechaFormat(mensaje)}" >
+                                    <h:outputText  value="#{grillaMensajeController.getFechaFormat(mensaje)}"/>
+                                </p:column>
+
+                                <p:column headerText="User" sortBy="#{mensaje.usuario.nombre}"  filterBy="#{mensaje.usuario.nombre}">
+                                    <h:outputText value="#{mensaje.usuario.nombre}" />
+                                </p:column>
+                                <p:column headerText="Client" sortBy="#{mensaje.cliente.nombre} #{mensaje.cliente.apellido}" filterBy="#{mensaje.cliente.nombre} #{mensaje.cliente.apellido}">
+                                    <h:outputText value="#{mensaje.cliente.nombre} #{mensaje.cliente.apellido}" />
+                                </p:column>
+                                <p:column headerText="Reference" sortBy="#{grillaMensajeController.getReferenceNumberMensaje(mensaje)}" filterBy="#{grillaMensajeController.getReferenceNumberMensaje(mensaje)}">
+                                    <h:outputText value="#{grillaMensajeController.getReferenceNumberMensaje(mensaje)}" />
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

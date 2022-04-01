@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipalCliente.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario">
+
+                    <dir style="text-align: center">
+                        <h1>Pre-booking</h1>
+                    </dir>
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl> 
+                    <p:panel rendered="#{clickandcollectController.datosGuardados}">
+                        <h4>
+                            Your information has been recorded, we will contact you shortly.
+                            Thanks
+                        </h4>
+                        <p:commandButton value="Go back to website"  action="#{clickandcollectController.redirect()}" immediate="true" style="width: auto"/>
+                    </p:panel>
+                    <p:panel rendered="#{clickandcollectController.datosGuardados==false}">
+                        <p:panelGrid id="grid" layout="grid" columns="6"  >
+                            <h:outputLabel value="Mobile:" for="txtTelefono" style="font-weight: bold; width: 200px"/>
+                            <p:inputText id="txtTelefono" value="#{clickandcollectController.clienteInteresado.movil}" style="width: 300px">
+                                <p:ajax event="keyup" listener="#{clickandcollectController.ingresoNumero()}" update="formulario" />
+                            </p:inputText>
+                            <p:column rendered="#{clickandcollectController.mostrarBotonEnviar==false}" />
+                            <p:commandButton id="botonEnviarCodigo" rendered="#{clickandcollectController.mostrarBotonEnviar}"  value="Send code" actionListener="#{clickandcollectController.enviarCodigoVerificacion()}"  style="width: auto" />
+                            <h:outputLabel value="Verification code:" for="txtCodigoVerificacion" style="font-weight: bold; width: 200px"/>
+                            <p:inputText id="txtCodigoVerificacion" value="#{clickandcollectController.codigoVerificacion}" style="width: 300px"/>
+                            <p:column/>                            
+                            
+                            <h:outputLabel for="txtNombreCliente" value="Name:" style="font-weight:bold; width: 200px"/>
+                            <p:inputText id="txtNombreCliente" value="#{clickandcollectController.clienteInteresado.nombre}" style="width: 300px"  />
+                            <p:column/>
+                            <h:outputLabel for="txtApellidoCliente" value="Last name:" style="font-weight:bold"/>
+                            <p:inputText id="txtApellidoCliente" value="#{clickandcollectController.clienteInteresado.apellido}" style="width: 300px"/>
+                            <p:column/>
+                            <h:outputLabel for="txtNumeroLicencia" value="License number:" style="font-weight:bold; width: 200px"/>
+                            <p:inputText id="txtNumeroLicencia" value="#{clickandcollectController.clienteInteresado.licencia_numero}" style="width: 300px"/>
+                            <p:column/>
+                            <h:outputLabel for="txtOtorgadaEN" value="Granted in" style="font-weight:bold"/>
+                            <p:inputText id="txtOtorgadaEN" value="#{clickandcollectController.clienteInteresado.otorgadaEN}" style="width: 300px"/>
+                            <p:column/>
+                            <h:outputLabel value="Email:" for="txtEmail" style="font-weight: bold; width: 200px"/>
+                            <p:inputText id="txtEmail" value="#{clickandcollectController.clienteInteresado.email}" style="width: 300px"/>
+                            <p:column/>
+                            <h:outputLabel for="fechaNacimiento" value="DOB:" style="font-weight: bold" />
+                            <p:calendar  mask="true" yearRange="c-100:c" id="fechaNacimiento" navigator="true" pattern="dd-MM-yyyy" value="#{clickandcollectController.clienteInteresado.DOB}" style="width: 300px"/>
+                            <p:column/>
+                            <h:outputLabel value="Address:" for="txtDireccion" style="font-weight: bold"/>
+                            <p:inputText id="txtDireccion" value="#{clickandcollectController.clienteInteresado.direccion}" style="width: 300px"/>
+                            <p:column/>
+                            <h:outputLabel value="Postal Code:" for="txtCodigoPostal" style="font-weight: bold; width: 200px"/>
+                            <p:inputText id="txtCodigoPostal" value="#{clickandcollectController.codigoPostal}" style="width: 300px" >
+                                <p:ajax event="blur" listener="#{clickandcollectController.ingresoCodigoPostal()}" update="cmbSuburb txtState"/>
+                            </p:inputText>
+                            <p:column/>
+                            <h:outputLabel for="cmbSuburb" value="Suburb:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbSuburb" value="#{clickandcollectController.codigoPostalCliente.id}" 
+                                             style="width:300px" required="true" requiredMessage="Must select one">
+                                <p:ajax listener="#{clickandcollectController.eligioSuburbio()}" update="txtState"/>
+                                <f:selectItem itemLabel="Select One" itemValue="-1"/>
+                                <f:selectItems value="#{clickandcollectController.listaCodigoPostal}" var="StateSelecc" 
+                                               itemLabel="#{StateSelecc.suburbio}" itemValue="#{StateSelecc.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <h:outputLabel for="txtState" value="State:" style="font-weight:bold; width: 200px"/>
+                            <p:inputText id="txtState" value="#{clickandcollectController.state}" readonly="true" style="width: 300px" />
+                            <p:column/>
+
+
+                            <h:outputLabel for="cmbCar" value="Car:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbCar" value="#{clickandcollectController.autoSeleccionado.id}"  panelStyle="width:180px" effect="fade" 
+                                             style="width:300px" var="auto" filter="true" filterMatchMode="startsWith" >
+                                <f:selectItem itemLabel="Must select one" itemValue="-1"/>
+                                <f:selectItems value="#{clickandcollectController.listaAutosDisponibles}" var="autoSelecc" 
+                                               itemLabel="#{clickandcollectController.getDescripcionAuto(autoSelecc)}" itemValue="#{autoSelecc.id}" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+                            <p:column/>
+                            <h:outputLabel for="txtMensaje" value="Note:" style="font-weight:bold"/>
+                            <p:inputTextarea id="txtMensaje" value="#{clickandcollectController.preBooking.mensaje}" rows="6" cols="70" />
+                            <p:column/>
+                        </p:panelGrid>
+
+                    </p:panel>
+                    <p:panel style="text-align: center" rendered="#{clickandcollectController.datosGuardados==false}">
+                        <p:panelGrid id="grillaBotonesAceptar" columns="3"  layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <p:commandButton  value="Submit" actionListener="#{clickandcollectController.registrarPreBooking()}" update="formulario" style="width: auto" />
+                            <p:commandButton value="Cancel"  action="#{clickandcollectController.redirect()}" immediate="true" style="width: auto"/>
+                            <p:commandButton value="Go back to website"  action="#{clickandcollectController.redirect()}" immediate="true" style="width: auto"/>
+                        </p:panelGrid>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

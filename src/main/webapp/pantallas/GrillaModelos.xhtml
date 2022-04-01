@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                    
+                    <dir style="text-align: center">
+                        <h1>Model list</h1>
+                    </dir>
+                    <p:panel>
+                        <p:commandButton value="Add new model" icon="ui-icon-plusthick" action="DatosModelo"/>
+                    </p:panel>
+                    <p:panel>
+                        <p:dataTable var="modelo" value="#{grillaModelosController.listaModelos}"    id="carTable" >
+                            <p:column headerText="Number" sortBy="#{modelo.id}" filterBy="#{modelo.id}">
+                                <h:commandLink  action="DatosModelo" actionListener="#{grillaModelosController.setModeloSeleccionada(modelo)}">
+                                    <h:outputText value="#{modelo.id}" />
+                                </h:commandLink>
+                            </p:column>
+                            <p:column headerText="Brand" sortBy="#{modelo.marca.nombre}" filterBy="#{modelo.marca.nombre}">
+                                <h:outputText value="#{modelo.marca.nombre}" />
+                            </p:column>
+                            <p:column headerText="Model" sortBy="#{modelo.nombre}" filterBy="#{modelo.nombre}">
+                                <h:outputText value="#{modelo.nombre}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

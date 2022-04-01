@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <p:panel>
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <h:outputLabel for="txtNumero" value="Number" style="font-weight: bold"/>
+                            <p:inputText id="txtNumero" value="#{grillaDealerLicenciaController.numero}"/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaDealerLicenciaController.buscarPorFiltro()}"  update="licenceTable"/>
+                        </p:panelGrid>
+                        <br/>                        
+                        <p:commandButton style="width: auto" value="Add new licence" icon="ui-icon-plusthick" action="DatosDealerLicence"/>
+                    </p:panel>
+                    <p:panel>
+                        <p:dataTable reflow="true" scrollable="true"   style="height: 60vh" var="licencia" value="#{grillaDealerLicenciaController.listaLicencias}"  id="licenceTable" >
+                            <p:column headerText="Name" sortBy="#{licencia.nombre}" filterBy="#{licencia.nombre}">
+                                <h:commandLink   action="DatosDealerLicence" actionListener="#{grillaDealerLicenciaController.verDetalleDealerLicence(licencia.id)}">
+                                    <h:outputText value="#{licencia.nombre}" />
+                                </h:commandLink>
+                            </p:column>
+                            <p:column headerText="Number" sortBy="#{licencia.numero}" filterBy="#{licencia.numero}">
+                                <h:outputText value="#{licencia.numero}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <p:panel>
+                            <p:panelGrid id="grid" columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                <h:outputLabel for="txtNombreProveedor" value="Supplier name:" style="font-weight: bold"/>
+                                <p:autoComplete id="txtNombreProveedor" value="#{expensasAutoController.proveedorActual.apellido}"  completeMethod="#{expensasAutoController.completeTextNombreProveedor}">
+                                    <p:ajax event="itemSelect" listener="#{expensasAutoController.onProveedorSelectNombre}" update="formulario:grid" />                                 
+                                </p:autoComplete>
+
+                                <h:outputLabel for="fechaOrden" value="Order Date:" style="font-weight: bold"/>
+                                <p:calendar mask="true" id="fechaOrden" navigator="true" pattern="dd-MM-yyyy" value="#{expensasAutoController.invoiceMecanicoActual.fecha}"/>
+
+
+                                <p:commandButton value="New supplier" style="width: auto" action="#{expensasAutoController.nuevoProveedor()}" />
+                                <p:column/>
+
+                                <h:outputLabel for="montoExpenses" value="Amount" style="font-weight: bold"/>                                    
+                                <p:inputNumber id="montoExpenses" value="#{expensasAutoController.invoiceMecanicoDetalleActual.subtotal_sin_gst}" symbol="$" 
+                                               symbolPosition="p" required="true" emptyValue="empty">
+                                    <p:ajax update="messages"/>
+                                </p:inputNumber>
+
+                                <h:outputLabel for="checkGST" value="Inc GST:" style="font-weight: bold" />
+                                <p:selectBooleanCheckbox value="#{expensasAutoController.invoiceMecanicoDetalleActual.inc_gst}" >
+                                    <p:ajax listener="#{expensasAutoController.seleccionoIncGST()}" update="txtGST txtSubtotal montoExpenses"/>
+                                </p:selectBooleanCheckbox>
+
+                                <h:outputLabel for="txtGST" value="Gst:" style="font-weight: bold" />
+                                <p:inputNumber id="txtGST" value="#{expensasAutoController.invoiceMecanicoDetalleActual.gst}" symbol="$" 
+                                               symbolPosition="p" required="true" emptyValue="empty"/>
+
+
+                                <h:outputLabel for="txtSubtotal" value="Total:" style="font-weight: bold" />
+                                <p:inputNumber id="txtSubtotal" value="#{expensasAutoController.invoiceMecanicoDetalleActual.subtotal}" symbol="$" 
+                                               symbolPosition="p" required="true" emptyValue="empty">
+                                    <p:ajax update="messages"/>
+                                </p:inputNumber>
+
+                                <h:outputLabel for="txtDescription" value="Description:" style="font-weight: bold" />
+                                <p:inputText id="txtDescription" value="#{expensasAutoController.invoiceMecanicoDetalleActual.descripcion}" />
+
+                                <h:outputLabel for="txtInvoiceNumber" value="Invoice Number:" style="font-weight: bold" />
+                                <p:inputText id="txtInvoiceNumber" value="#{expensasAutoController.invoiceMecanicoActual.invoice_number}" />
+
+                                <p:commandButton value="Submit" style="width: auto" actionListener="#{expensasAutoController.confirmAndCloseDialog()}"  action="#{datosAutoController.cerroeldialogo()}" />
+                            </p:panelGrid>
+                        </p:panel>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,5 @@
+basic
+user=T40760_SEC_pzxpw9n4pzgt4uw3i5rtvzc4jxqqx99ecxhfdrvbfqdp8mtm2d2hwqffueew:
+silent
+show-error
+fail

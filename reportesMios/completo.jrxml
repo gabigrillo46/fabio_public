@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="completo" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="0a5964b7-6717-4dfb-ab7f-b3ac61ece125">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="registroNumero" class="java.lang.Integer"/>
+	<parameter name="serialNumber" class="java.lang.Long"/>
+	<parameter name="entryNumber" class="java.lang.Long"/>
+	<parameter name="stockNumber" class="java.lang.Long"/>
+	<parameter name="creationDate" class="java.lang.String"/>
+	<parameter name="dealerName" class="java.lang.String"/>
+	<parameter name="dealerLicence" class="java.lang.String"/>
+	<parameter name="dealerAddress" class="java.lang.String"/>
+	<parameter name="dateFabricacion" class="java.lang.String"/>
+	<parameter name="marca" class="java.lang.String"/>
+	<parameter name="modelo" class="java.lang.String"/>
+	<parameter name="registracion" class="java.lang.String"/>
+	<parameter name="precio" class="java.lang.Float"/>
+	<parameter name="kilometros" class="java.lang.String"/>
+	<parameter name="vin" class="java.lang.String"/>
+	<parameter name="numeroMotor" class="java.lang.String"/>
+	<parameter name="writtenOff" class="java.lang.Boolean"/>
+	<parameter name="waterDamage" class="java.lang.Boolean"/>
+	<parameter name="majorModifications" class="java.lang.Boolean"/>
+	<parameter name="ppsr" class="java.lang.String"/>
+	<parameter name="guarantee" class="java.lang.Boolean"/>
+	<parameter name="importedSecondHand" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ventaFecha" class="java.lang.String"/>
+	<parameter name="ventaKM" class="java.lang.String"/>
+	<parameter name="ventaPrecio" class="java.lang.String"/>
+	<parameter name="ventaRMS" class="java.lang.String"/>
+	<parameter name="ventaTradeIN" class="java.lang.String"/>
+	<parameter name="ventaCompradorDetalles" class="java.lang.String"/>
+	<parameter name="cancelado" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<parameter name="rmsDate" class="java.lang.String"/>
+	<parameter name="rmsNumber" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="listaTopCopy" class="java.util.List"/>
+	<field name="listaRmsCopy" class="java.util.List"/>
+	<field name="listaCustomerCopy" class="java.util.List"/>
+	<field name="listaFileCopy" class="java.util.List"/>
+	<field name="listaInvoice" class="java.util.List"/>
+	<field name="listaContrato" class="java.util.List"/>
+	<field name="lista_transferencia" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="822">
+			<printWhenExpression><![CDATA[$F{listaContrato}.size()>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="2" y="0" width="570" height="822" uuid="17bc5eae-905e-46f5-bd12-27b29a031c75">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{listaContrato})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} +"ContratoVenta.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="822">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{listaInvoice}.size()>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="2" y="0" width="570" height="822" uuid="29424116-292a-4f2f-8827-f2cdf7ea3980">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{listaInvoice})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} +"InvoiceVenta.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="822" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{listaTopCopy}.size()>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="2" y="0" width="570" height="822" uuid="5de0b7ff-2982-4bdf-aa22-b61e6f58b8f3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{listaTopCopy})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} +"f5_topCopy.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="822">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{listaRmsCopy}.size()>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="2" y="0" width="570" height="822" uuid="1a21c8b5-153b-4098-8240-bdfafb188905">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{listaRmsCopy})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} +"f5_rmsCopy.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="822">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{listaCustomerCopy}.size()>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="2" y="0" width="570" height="822" uuid="59df3fc9-d326-43f4-8e95-af3d577ed83d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{listaCustomerCopy})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} +"f5_customerCopy.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="822">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{listaFileCopy}.size()>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="2" y="0" width="570" height="822" uuid="3363ba2c-a51b-4734-ae83-bbc77f0464dd"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{listaFileCopy})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} +"f5_fileCopy.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="822">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{lista_transferencia}.size()>0]]></printWhenExpression>
+			<subreport>
+				<reportElement x="2" y="0" width="570" height="822" uuid="849240b1-e221-4a0b-9492-9abf518c14f2"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{lista_transferencia})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} +"transferRegistration.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

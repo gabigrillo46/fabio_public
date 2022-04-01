@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <body>
+
+
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true"  />
+
+                    <p:panel>
+                        <p:panelGrid id="grid" columns="4" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel for="fechaInicio" value="Date:" style="font-weight: bold"/>
+                            <p:calendar id="fechaInicio" navigator="true" pattern="dd-MM-yyyy" value="#{principalRentalController.primerFecha}">
+                                <p:ajax event="dateSelect" listener="#{principalRentalController.cargarColumnas}" update="datat" />
+                            </p:calendar>
+                        </p:panelGrid>
+                    </p:panel>
+
+
+
+                    <p:dataTable scrollable="true" scrollHeight="600" id="datat" var="car" value="#{principalRentalController.listaAutosDisponibles}" sortBy="#{car.categoria.id}" expandableRowGroups="true"
+                                 selection="#{principalRentalController.autoSeleccionado}"  rowKey="#{car.id}" 
+                                 emptyMessage="No cars found with given criteria"  style="width: 100%; border: none"
+                                 >
+
+
+
+                        <p:headerRow >
+                            <p:column colspan="3">
+                                <h:outputText value="#{car.categoria.nombre}" />
+                            </p:column>
+                        </p:headerRow>
+                        <p:column selectionMode="single" style="width:16px;text-align:center"/>
+
+                        <p:column headerText="Modelo" filterBy="#{car.modelo.nombre}" filterMatchMode="contains">
+                            <h:outputText value="#{car.modelo.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Rego" filterBy="#{car.rego}" filterMatchMode="contains" style="margin-left: 80px">
+                            <h:outputText value="#{car.rego}" style="border: none"/>
+                        </p:column>
+
+                        <p:column headerText="#{principalRentalController.nombreColumna(0)}"  >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(0, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(0, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(0, car)}" />
+                            </h:outputLabel>
+                        </p:column>
+                        
+                        
+                  
+                        
+
+                        <p:column headerText="#{principalRentalController.nombreColumna(1)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(1, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(1, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(1, car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+
+                        <p:column headerText="#{principalRentalController.nombreColumna(2)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(2, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(2, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(2,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(3)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(3, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(3, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(3,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(4)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(4, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(4, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(4,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(5)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(5, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(5, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(5,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(6)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(6, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(6, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(6,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(7)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(7, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(7, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(7,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(8)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(8, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(8, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(8,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(9)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(9, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(9, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(9,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(10)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(10, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(10, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(10,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(11)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(11, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(11, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(11,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(12)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(12, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(12, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(12,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+                        <p:column headerText="#{principalRentalController.nombreColumna(13)}"     >
+                            <h:outputLabel  style="#{principalRentalController.reservadoAuto(13, car)? 'background-color: #ff6600;':''}  display: block;#{principalRentalController.alquiladoAuto(13, car)? 'background-color: #6600ff;':''} display: block;  width: 200px; height: 30px ; margin: -10px; border: none">
+                                <p:commandLink  update=":form:msgs" style="display:block; height:30px; width:150px" actionListener="#{principalRentalController.setDatosSeleccionado(13,car)}"/>
+                            </h:outputLabel>
+                        </p:column>
+
+
+
+
+                    </p:dataTable>
+
+
+
+
+
+
+                </h:form>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

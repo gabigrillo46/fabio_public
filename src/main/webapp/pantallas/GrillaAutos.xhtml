@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Cars list</h1>
+                        </dir>
+                        <p:panel>
+
+
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                <h:outputLabel for="cmbMarca" value="Brand:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbMarca" value="#{grillaAutosController.idMarca}" >
+                                    <f:selectItem itemLabel="All" itemValue="-1"/>
+                                    <f:selectItems value="#{grillaAutosController.listaMarcas}" var="marcaSelecc" 
+                                                   itemLabel="#{marcaSelecc.nombre}" itemValue="#{marcaSelecc.id}" />
+                                    <p:ajax update="cmbModelo"/>
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <h:outputLabel for="cmbModelo" value="Model:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbModelo" value="#{grillaAutosController.idModelo}" >
+                                    <f:selectItem itemLabel="All" itemValue="-1"/>
+                                    <f:selectItems value="#{grillaAutosController.listaModelo}" var="modeloSelecc" 
+                                                   itemLabel="#{modeloSelecc.nombre}" itemValue="#{modeloSelecc.id}" />
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <h:outputLabel for="txtVin" value="VIN:" style="font-weight:bold"/>
+                                <p:inputText  id="txtVin" value="#{grillaAutosController.vin}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtRego" value="Rego:" style="font-weight: bold"/>
+                                <p:inputText id="txtRego" value="#{grillaAutosController.rego}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtStock" value="Stock number:" style="font-weight: bold"/>
+                                <p:inputText id="txtStock" value="#{grillaAutosController.stock}"/>
+                                <p:column/>
+
+                                <p:column/>
+                                <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaAutosController.buscarPorFiltro}"  update="carTable tbl resultados"/>
+                                <p:column/>
+
+                            </p:panelGrid>
+                            <br/>
+                            <p:commandButton style="width: auto" value="Add new car" icon="ui-icon-plusthick" action="DatosAuto"/>
+                            <h:outputText id="resultados" value="Quantity: #{grillaAutosController.cantidadResultado}"/>
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable reflow="true" scrollable="true"   style="height: 60vh" var="auto" value="#{grillaAutosController.listaAutos}"  id="carTable"  
+                                         selectionMode="multiple" selection="#{grillaAutosController.listaAutosSeleccionados}" rowKey="#{auto.id}" >
+                                <p:column headerText="Stock number" sortBy="#{auto.stock}" filterBy="#{auto.stock}" style="width: 60px">
+                                    <h:commandLink value="#{auto.stock}" action="DatosAuto" actionListener="#{grillaAutosController.verDetalleAuto(auto.id)}"/>
+                                </p:column>
+                                <p:column headerText="Name" style="width: 50px">
+                                    <p:graphicImage name="#{grillaAutosController.getUrlImagen(auto)}" 
+                                                    width="45" style="vertical-align: middle"/>
+                                </p:column>
+
+                                <p:column headerText="Brand" sortBy="#{auto.marca.nombre}" filterBy="#{auto.marca.nombre}">
+                                    <h:outputText value="#{auto.marca.nombre}" />
+                                </p:column>                      
+                                <p:column headerText="Model" sortBy="#{auto.modelo.nombre}" filterBy="#{auto.modelo.nombre}">
+                                    <h:outputText value="#{auto.modelo.nombre}" />
+                                </p:column>
+                                <p:column headerText="Year" sortBy="#{auto.año}" filterBy="#{auto.año}">
+                                    <h:outputText value="#{auto.año}" />
+                                </p:column>
+                                <p:column headerText="Rego" sortBy="#{auto.rego}" filterBy="#{auto.rego}" style="width: 100px">
+                                    <h:outputText value="#{auto.rego}" />
+                                </p:column>
+                                <p:column headerText="Price"  style="width: 100px" sortBy="#{grillaAutosController.getPrecioAutoFloat(auto.id)}">
+                                    <h:outputText value="#{grillaAutosController.getPrecioAutoCurrent(auto.id)}" />
+                                </p:column>
+                                <p:column headerText="Car cost"  style="width: 100px" sortBy="#{grillaAutosController.getCostoAutoCurrentFloat(auto.id)}">
+                                    <h:outputText value="#{grillaAutosController.getCostoAutoCurrent(auto.id)}" />
+                                </p:column>
+                                <p:column headerText="Status" sortBy="#{grillaAutosController.getDisponibilidad(auto)}" filterBy="#{grillaAutosController.getDisponibilidad(auto)}" style="#{auto.disponible? 'background-color: #33cc33;':''} ;#{(auto.disponible==false)? 'background-color: #ff3300;':''};#{(auto.estado==4)? 'background-color: #4287f5;':''}">
+                                    <h:outputText value="#{grillaAutosController.getDisponibilidad(auto)}" />
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:panel>
+                        <p:contextMenu for="carTable">
+                            <p:menuitem value="Available" icon="ui-icon-check" action="#{grillaAutosController.todosDisponibles()}" update="carTable" />
+                            <p:menuitem value="Not available" icon="ui-icon-close" action="#{grillaAutosController.todosNODisponibles()}" update="carTable"/>
+                        </p:contextMenu>
+
+                        <p:dataTable id="tbl" var="auto" value="#{grillaAutosController.listaAutosDisponiblesWeb}" styleClass="p-mt-2" rendered="false">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="stock"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.id}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="year"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.año}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="make"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.marca.nombre}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="model"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.modelo.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="body"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.tipo_body.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="km"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.kilometraje}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="drivetrain"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.drivetrain.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="seat"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.asientos}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="color"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.color}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="images"/>
+                                </f:facet>
+                                <h:outputText value="#{grillaAutosController.getImagenesString(auto)}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="price"/>
+                                </f:facet>
+                                <h:outputText value="#{grillaAutosController.getPrecioAuto(auto)}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="secondary title"/>
+                                </f:facet>
+                                <h:outputText value="#{grillaAutosController.getDescripcionPrecios(auto)}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="overview"/>
+                                </f:facet>
+                                <h:outputText value="#{grillaAutosController.getDetallePublicidad(auto)}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="options"/>
+                                </f:facet>
+                                <h:outputText value="#{grillaAutosController.getOpciones(auto)}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="sold"/>
+                                </f:facet>
+                                <h:outputText value="#{grillaAutosController.getEtiquetaSold(auto)}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="fuel"/>
+                                </f:facet>
+                                <h:outputText value="#{grillaAutosController.getFuel_type(auto)}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="cilindros"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.cilindros}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="engine"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.motor}"/>
+                            </p:column>                            
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="doors"/>
+                                </f:facet>
+                                <h:outputText value="#{auto.puertas}"/>
+                            </p:column>                            
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="transmision"/>
+                                </f:facet>
+                                <h:outputText value="#{grillaAutosController.getTransmisionAuto(auto)}"/>
+                            </p:column>                            
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="video"/>
+                                </f:facet>
+                                <h:outputText value="https://youtu.be/4aR36am_Qz0"/>
+                            </p:column>                            
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="badge"/>
+                                </f:facet>
+                                <h:outputText value=""/>
+                            </p:column>                            
+
+                        </p:dataTable>
+
+
+                    </div>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

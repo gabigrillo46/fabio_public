@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form id="form" >
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+
+                        <dir style="text-align: center">
+                            <h1>Invoice list</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <h:outputLabel for="txtRego" value="Rego:" style="font-weight:bold"/>
+                            <p:inputText id="txtRego" value="#{grillaInvoiceMecanicoController.rego}"/>
+                            <p:column/>
+
+                            <h:outputLabel value="Type:" for="cmbTipo" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbTipo"  value="#{grillaInvoiceMecanicoController.id_tipo}">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItem itemValue="1" itemLabel="Our car"/>
+                                <f:selectItem itemValue="2" itemLabel="External car"/>
+                                <f:selectItem itemValue="3" itemLabel="Stock"/>
+                                <f:selectItem itemValue="4" itemLabel="Income"/>
+                            </p:selectOneMenu>
+                            <p:column/>                            
+
+
+
+                            <h:outputLabel for="fechaInicio" value="From:" style="font-weight: bold"/>
+                            <p:calendar id="fechaInicio" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaInvoiceMecanicoController.fechaDesde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="To:" style="font-weight: bold"/>
+                            <p:calendar id="fechaFin" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaInvoiceMecanicoController.fechaHasta}" />
+                            <p:column/>
+                            
+                            <h:outputLabel for="invoiceNumber" value="Invoice number:" style="font-weight: bold"/>
+                            <p:inputText id="invoiceNumber" value="#{grillaInvoiceMecanicoController.invoiceNumber}"/>
+                            <p:column/>
+                            
+                            <p:column/>
+                            <p:column/>
+                            <p:column/>
+
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaInvoiceMecanicoController.buscarPorFiltro}"  update="alquilerTable labelResultado"/>
+                        </p:panelGrid>
+                        <p:panel>
+                            <p:outputLabel id="labelResultado" value="Number of results returned: #{grillaInvoiceMecanicoController.cantidadResultados}"/>
+                            <div align="right">
+                                <p:commandButton style="width: auto" actionListener="#{grillaInvoiceMecanicoController.ingresarInvoice()}" value="Add new invoice" icon="ui-icon-plusthick" action="DatosInvoiceMecanico"/>
+                            </div>
+                        </p:panel>
+
+                        <p:panel>
+                            <p:dataTable   var="detalleInvoice"  value="#{grillaInvoiceMecanicoController.listaInvoiceMecanicoDetalle}"    id="alquilerTable" sortBy="#{detalleInvoice.nuestro}" >
+                                <p:column headerText="Reference" sortBy="#{detalleInvoice.invoiceMecanico.invoice_number}" filterBy="#{detalleInvoice.invoiceMecanico.invoice_number}" >
+                                    <h:commandLink action="DatosInvoiceMecanico"  actionListener="#{grillaInvoiceMecanicoController.verDetalleInvoice(detalleInvoice.invoiceMecanico.id)}" value="#{detalleInvoice.invoiceMecanico.invoice_number}"/>
+                                </p:column>
+                                <p:column style="#{grillaInvoiceMecanicoController.esGasto(detalleInvoice)? 'background-color: #87CEFA;':''} ;#{grillaInvoiceMecanicoController.esIngreso(detalleInvoice)? 'background-color: #FFD700;':''}; width: 200px" headerText="Status" >
+                                    <h:outputText value="#{grillaInvoiceMecanicoController.getDescripcionTipo(detalleInvoice.tipo)}" />
+                                </p:column>
+                                <p:column headerText="Date" >
+                                    <h:outputText value="#{detalleInvoice.invoiceMecanico.fecha}">
+                                        <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Rego" sortBy="#{detalleInvoice.rego}" filterBy="#{detalleInvoice.rego}">
+                                    <h:outputText value="#{detalleInvoice.rego}" />
+                                </p:column>
+                                <p:column headerText="Detail">
+                                    <h:outputText value="#{detalleInvoice.descripcion}" />
+                                </p:column>
+                                <p:column headerText="Amount income">
+                                    <h:outputText value="#{grillaInvoiceMecanicoController.getDineroIngresado(detalleInvoice)}" />
+                                </p:column>
+                                <p:column headerText="Spent money">
+                                    <h:outputText value="#{grillaInvoiceMecanicoController.getDineroGastado(detalleInvoice)}" />
+                                </p:column>
+                                <p:column headerText="Balance">
+                                    <h:outputText value="" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="5" style="text-align:right">
+                                        <h:outputText value="Total:" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText value="#{grillaInvoiceMecanicoController.dineroIngresado}">
+                                            <f:convertNumber type="currency" currencySymbol="$" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{grillaInvoiceMecanicoController.dineroEgresado}">
+                                            <f:convertNumber type="currency" currencySymbol="$" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText value="#{grillaInvoiceMecanicoController.balanceString()}"/>
+                                    </p:column>
+
+                                </p:summaryRow>
+
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

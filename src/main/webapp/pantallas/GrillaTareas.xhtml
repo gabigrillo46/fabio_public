@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form id="form" >
+                        <p:growl id="growl" life="2000" />
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Tasks list</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                            <h:outputLabel for="cmbState" value="State:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbState" value="#{grillaTareaController.realizado}">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItem itemLabel="Done" itemValue="1" />
+                                <f:selectItem itemLabel="Pending" itemValue="0" />
+                            </p:selectOneMenu>
+
+                            <p:column/>
+
+                            <h:outputLabel for="cmbVigencia" value="Validity:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbVigencia" value="#{grillaTareaController.caducado}">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItem itemLabel="Expired" itemValue="1" />
+                                <f:selectItem itemLabel="Valid" itemValue="0" />
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <h:outputLabel for="fechaExp" value="Expiration date:" style="font-weight: bold"/>
+                            <p:calendar id="fechaExp" navigator="true" pattern="dd-MM-yyyy" value="#{grillaTareaController.fechaVencimiento}" />
+                            <p:column/>
+
+                            <h:outputLabel for="cmbUsuario" value="Assigned User:" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbUsuario" value="#{grillaTareaController.id_usuario}" >
+                                <f:selectItem itemLabel="All" itemValue="-1"/>
+                                <f:selectItems value="#{grillaTareaController.listaUsuarios}" var="userSelecc" 
+                                               itemLabel="#{userSelecc.nombre} #{userSelecc.apellido} " itemValue="#{userSelecc.id}" />
+                            </p:selectOneMenu>
+
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+                            <p:column/>
+                            <p:column/>
+
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaTareaController.buscarPorFiltro}"  update="tareasTable"/>
+                        </p:panelGrid>
+                        <p:panel>
+                            <p:commandButton style="width: auto" value="Add new task" icon="ui-icon-plusthick" action="DatosTarea"/>
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable   var="tarea"  value="#{grillaTareaController.listaTareas}"    id="tareasTable" >
+                                <p:column headerText="Name" sortBy="#{tarea.nombre}" filterBy="#{tarea.nombre}" >
+                                    <h:commandLink action="DatosTarea" actionListener="#{grillaTareaController.verDetalleTarea(tarea.id)}" value="#{tarea.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Assigned User" sortBy="#{tarea.usuarioAsignado.nombre} #{tarea.usuarioAsignado.apellido}" filterBy="#{tarea.usuarioAsignado.nombre} #{tarea.usuarioAsignado.apellido}">
+                                    <h:outputText value="#{tarea.usuarioAsignado.nombre} #{tarea.usuarioAsignado.apellido}" />
+                                </p:column>
+                                <p:column headerText="Expiration date" sortBy="#{tarea.fecha_vencimiento}" filterBy="#{tarea.fecha_vencimiento}">
+                                    <h:outputText value="#{tarea.fecha_vencimiento}">
+                                        <f:convertDateTime  locale="us" timeStyle="short" type="both" dateStyle="full"/>
+                                    </h:outputText>
+                                </p:column>  
+                                <p:column headerText="State" sortBy="#{grillaTareaController.getEstadoStr(tarea)}" filterBy="#{grillaTareaController.getEstadoStr(tarea)}">
+                                    <h:outputText value="#{grillaTareaController.getEstadoStr(tarea)}" />
+                                </p:column>                                
+                                <p:column headerText="Validity" sortBy="#{grillaTareaController.getCaducadoStr(tarea)}" style="#{tarea.caducado? 'background-color: red;':''}"  filterBy="#{grillaTareaController.getCaducadoStr(tarea)}">
+                                    <h:outputText value="#{grillaTareaController.getCaducadoStr(tarea)}" />
+                                </p:column>                                
+                                <p:column >
+                                    <p:commandButton style="width: auto" value="Done" action="#{grillaTareaController.tareaRealizada(tarea.id)}" update="tareasTable" >
+                                        <p:confirm header="Confirmation"  message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                                    </p:commandButton>
+                                    <p:confirmDialog global="true" >
+                                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                    </p:confirmDialog>
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

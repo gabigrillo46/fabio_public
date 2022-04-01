@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Registration Transfer</h1>
+                        </dir>
+                        <p:panel>
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+
+
+                                <h:outputLabel for="cmbSucursal" value="Branch:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbSucursal" value="#{reportTransferController.idSucursalSelecc}" >
+                                    <f:selectItem itemLabel="All" itemValue="-1"/>
+                                    <f:selectItems value="#{reportTransferController.listaSucursales}" var="sucursalSelecc" 
+                                                   itemLabel="#{sucursalSelecc.nombre}" itemValue="#{sucursalSelecc.id}" />
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <h:outputLabel for="txtRego" value="Rego or Stock number:" style="font-weight: bold"/>
+                                <p:inputText id="txtRego" value="#{reportTransferController.palabraBuscar}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="chkWEB" value="Show cars already transferred:" style="font-weight: bold"/>
+                                <p:selectBooleanCheckbox id="chkWEB" value="#{reportTransferController.autoTransferidos}" />
+                                <p:column/>
+
+                                <p:column/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+                                <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{reportTransferController.buscarProFiltro()}"  update="carTable resultados grid"/>
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <h:outputLabel value="Representative: "  for="txtRepresentante" style="font-weight: bold"/>
+                                <p:inputText id="txtRepresentante" value="#{reportTransferController.representante}" />
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <!--rendered="{reportTransferController.mostrarBotonImprimir}"-->
+                                <p:commandButton id="botonPrint" update="form" value="Print" ajax="false"  onclick="this.form.target = '_blank'" action="#{reportTransferController.imprimir()}"   style="width: auto"  />
+
+
+                            </p:panelGrid>
+                            <h:outputText id="resultados" value="Quantity: #{reportTransferController.cantidadResultado}"/>
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable reflow="true" scrollable="true"   style="height: 60vh" var="auto" value="#{reportTransferController.listaAutoResultado}"  id="carTable"   rowKey="#{auto.id}">
+                                <f:facet name="header">
+                                    Checkbox
+                                </f:facet>
+                                <p:column   style="width:16px;text-align:center">
+                                    <p:selectBooleanCheckbox >
+                                        <p:ajax update="form:messages" listener="#{reportTransferController.seleccionoUnRegistro(auto)}" />
+                                    </p:selectBooleanCheckbox>
+                                </p:column>
+                                <p:column headerText="Stock number" >
+                                    <h:outputText value="#{auto.stock}" />
+                                </p:column>
+                                <p:column headerText="Car" >
+                                    <h:outputText value="#{auto.marca.nombre} #{auto.modelo.nombre}" />
+                                </p:column>                      
+                                <p:column headerText="Purchase date" >
+                                    <h:outputText value="#{reportTransferController.getFechaFormateada(auto.fecha_compra)}" />
+                                </p:column>                      
+                                <p:column headerText="Rego" sortBy="#{reportTransferController.getRegistracionAuto(auto)}" filterBy="#{reportTransferController.getRegistracionAuto(auto)}">
+                                    <h:outputText value="#{reportTransferController.getRegistracionAuto(auto)}" />
+                                </p:column>
+                                <p:column headerText="Rego Expiry">
+                                    <h:outputText value="#{reportTransferController.getFechaRegoFormateada(auto)}" />
+                                </p:column>                                
+                                <p:column headerText="Printed"  style="#{reportTransferController.isEsImpresa(auto)? 'background-color: #33cc33;':'background-color: #ff3300;'}" >
+                                    <h:outputText value="#{reportTransferController.getTransferenciaImpresa(auto)}" />
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </div>
+
+
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

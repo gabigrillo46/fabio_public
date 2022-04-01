@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form>
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Task data</h1>
+                        </dir>
+                        <p:panel>
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                <h:outputLabel for="txtNombre" value="Name:" style="font-weight:bold"/>
+                                <p:inputText id="txtNombre" value="#{datosTareaController.tareaActual.nombre}" required="true" requiredMessage="Must enter a name"/>
+                                <p:message for="txtNombre"/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <h:outputLabel for="cmbUsuarioAsignado" value="Assigned User:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbUsuarioAsignado" value="#{datosTareaController.tareaActual.usuarioAsignado.id}" 
+                                                 required="true" requiredMessage="Must select one">
+                                    <f:selectItems value="#{datosTareaController.listausuarios}" var="usuarioSelecc" 
+                                                   itemLabel="#{usuarioSelecc.nombre} #{usuarioSelecc.apellido}" itemValue="#{usuarioSelecc.id}" />
+                                </p:selectOneMenu>
+                                <p:message for="cmbUsuarioAsignado"/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <h:outputLabel for="cmbFechaVencimiento" value="Expiration Date:" style="font-weight: bold"/>
+                                <p:calendar id="cmbFechaVencimiento" navigator="true" pattern="dd-MM-yyyy" value="#{datosTareaController.tareaActual.fecha_vencimiento}" required="true" requiredMessage="You have to enter the expiration date" />
+                                <p:message for="cmbFechaVencimiento
+                                           "/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <h:outputLabel for="observacion" value="Notes:" style="font-weight: bold"/>
+                                <p:inputTextarea value="#{datosTareaController.tareaActual.descripcion}" id="observacion" rows="5" cols="30" counter="display" maxlength="100" counterTemplate="{0} characters remaining." autoResize="false" />
+                                <p:column/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <p:column/>
+                                <p:selectBooleanCheckbox value="#{datosTareaController.tareaActual.realizado}" itemLabel="Done" >
+                                    <p:ajax update="grid"/>
+                                </p:selectBooleanCheckbox>
+                                <p:column/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <h:outputLabel id="labelNotaResolucion" for="notaResolucion" value="Resolution note:" style="font-weight: bold" rendered="#{datosTareaController.tareaActual.realizado}"/>
+                                <p:inputTextarea value="#{datosTareaController.tareaActual.nota_resolucion}" rendered="#{datosTareaController.tareaActual.realizado}" id="notaResolucion" rows="5" cols="30" counter="display" maxlength="100" counterTemplate="{0} characters remaining." autoResize="false" />
+                                <p:column/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+
+                                <p:column/>
+
+                                <h:outputText id="display" rendered="#{datosTareaController.tareaActual.realizado}" />
+                            </p:panelGrid>
+
+                        </p:panel>
+                        <p:panel style="text-align: center">
+                            <p:panelGrid columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton style="width: auto" value="Submit" update="grid"  rendered="#{datosTareaController.accion=='R'}" actionListener="#{datosTareaController.registrarTarea}"/>
+                                <p:commandButton style="width: auto" value="Submit" update="grid" onkeydown="if (event.keyCode === 13) {
+                                            datosAutoController.editarAuto();
+                                            return false;
+                                        }" 
+                                                 actionListener="#{datosTareaController.editarTarea}" rendered="#{datosTareaController.accion=='M'}"/>
+                                <p:commandButton style="width: auto" value="Cancel" action="GrillaTareas" immediate="true"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

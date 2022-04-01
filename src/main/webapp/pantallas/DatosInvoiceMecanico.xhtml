@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulariol">
+                    <p:messages id="msgs" showDetail="true" closable="true" severity="info,warn"/>
+                    <p:growl id="mensajes" showDetail="true" severity="info, warn">
+                        <p:autoUpdate/>
+                    </p:growl>
+
+                    <p:panelGrid columns="2" id="gridBotones" style="width: 100%" >
+                        <p:selectOneRadio id="console" value="#{datosInvoiceMecanicoController.sentido}" layout="responsive" columns="2">
+                            <p:ajax listener="#{datosInvoiceMecanicoController.eligioTipo()}" update="panelGeneral"/>
+                            <f:selectItem itemLabel="Income" itemValue="0" />
+                            <f:selectItem itemLabel="Spending" itemValue="1" />
+                        </p:selectOneRadio>
+                    </p:panelGrid>
+                    <p:panel id="panelGeneral">
+
+
+                        <p:panelGrid   id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel rendered="#{datosInvoiceMecanicoController.esGasto()}" for="txtNombreProveedor" value="Supplier:" style="font-weight: bold"/>
+                            <p:autoComplete rendered="#{datosInvoiceMecanicoController.esGasto()}" id="txtNombreProveedor" value="#{datosInvoiceMecanicoController.proveedorActual.apellido}" completeMethod="#{datosInvoiceMecanicoController.completeTextProveedor}">
+                                <p:ajax event="itemSelect" listener="#{datosInvoiceMecanicoController.onProveedorSelect}" update="grid" />                                                                 
+                            </p:autoComplete>
+                            <p:message for="txtNombreProveedor" rendered="#{datosInvoiceMecanicoController.esGasto()}"/>
+
+                            <p:commandButton rendered="#{datosInvoiceMecanicoController.esGasto()}" style="width: auto" value="Add new supplier" icon="ui-icon-plusthick" action="#{datosInvoiceMecanicoController.nuevoProveedor()}"/>
+                            <p:column rendered="#{datosInvoiceMecanicoController.esGasto()}"/>
+                            <p:column rendered="#{datosInvoiceMecanicoController.esGasto()}"/>
+                            <h:outputLabel for="fechaVenta" value="Invoice date:" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaVenta" navigator="true" pattern="dd-MM-yyyy" value="#{datosInvoiceMecanicoController.invoiceActual.fecha}"/>
+                            <p:message for="fechaVenta"/>
+                            <h:outputLabel for="numeroInvoice" value="Invoice number:" style="font-weight: bold"/>
+                            <p:inputText id="numeroInvoice" value="#{datosInvoiceMecanicoController.invoiceActual.invoice_number}" />
+                            <p:message for="numeroInvoice"/>
+
+                            <h:outputLabel for="totalBeforeGST" value="Total before GST:" style="font-weight: bold"/>
+                            <h:outputLabel id="totalBeforeGST" value="$#{datosInvoiceMecanicoController.invoiceActual.total_sin_gst}" />
+
+                            <h:outputLabel for="gst" value="GST:" style="font-weight: bold"/>
+                            <h:outputLabel id="gst" value="$#{datosInvoiceMecanicoController.invoiceActual.gst}"/>
+
+                            <h:outputLabel for="totalAfterGST" value="Total with GST:" style="font-weight: bold"/>
+                            <h:outputLabel id="totalAfterGST" value="$#{datosInvoiceMecanicoController.invoiceActual.total}"/>
+                        </p:panelGrid>
+                        <p:panelGrid   id="invoiceDetalle" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel rendered="#{datosInvoiceMecanicoController.esGasto()}" for="cmbTipo" value="Type:" style="font-weight: bold"/>
+                            <p:selectOneMenu rendered="#{datosInvoiceMecanicoController.esGasto()}" id="cmbTipo" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.tipo}">
+                                <p:ajax listener="#{datosInvoiceMecanicoController.seleccionoTipoDetalle()}" update="invoiceDetalle"/>
+                                <f:selectItem itemValue="-1" itemLabel="Select one"/>
+                                <f:selectItem itemValue="1" itemLabel="Our car"/>
+                                <f:selectItem itemValue="2" itemLabel="External car"/>
+                                <f:selectItem itemValue="3" itemLabel="Stock"/>
+                            </p:selectOneMenu>
+
+                            <p:column rendered="#{datosInvoiceMecanicoController.esIngreso()}" />
+                            <p:column rendered="#{datosInvoiceMecanicoController.esIngreso()}" />
+
+                            <h:outputLabel for="VIN" value="VIN:" style="font-weight: bold" rendered="#{datosInvoiceMecanicoController.esAutoNuestro()}"/>
+                            <p:autoComplete id="VIN" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.vin}" completeMethod="#{datosInvoiceMecanicoController.completeTextVIN}" rendered="#{datosInvoiceMecanicoController.esAutoNuestro()}">
+                                <p:ajax event="itemSelect" listener="#{datosInvoiceMecanicoController.onAutoSelectVIN}" update="invoiceDetalle" />
+                            </p:autoComplete>
+
+                            <h:outputLabel for="txtRego" value="Rego:" style="font-weight: bold" rendered="#{datosInvoiceMecanicoController.esAuto()}"/>
+                            <p:autoComplete id="txtRego" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.rego}" completeMethod="#{datosInvoiceMecanicoController.completeTextRego}" rendered="#{datosInvoiceMecanicoController.esAuto()}">
+                                <p:ajax event="itemSelect" listener="#{datosInvoiceMecanicoController.onAutoSelectRego}" update="invoiceDetalle" />
+                            </p:autoComplete>
+
+
+                            <h:outputLabel for="txtYear" value="Year:" style="font-weight: bold" rendered="#{datosInvoiceMecanicoController.esAuto()}"/>
+                            <p:inputText id="txtYear" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.year}" rendered="#{datosInvoiceMecanicoController.esAuto()}"/>
+
+
+                            <h:outputLabel for="txtColor" value="Color:" style="font-weight: bold" rendered="#{datosInvoiceMecanicoController.esAuto()}"/>
+                            <p:inputText id="txtColor" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.color}" rendered="#{datosInvoiceMecanicoController.esAuto()}"/>
+
+
+                            <h:outputLabel for="cmMarca" value="Brand:" style="font-weight:bold" rendered="#{datosInvoiceMecanicoController.esAuto()}"/>
+                            <p:selectOneMenu id="cmMarca" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.marca.id}"  rendered="#{datosInvoiceMecanicoController.esAuto()}">
+                                <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                <f:selectItems value="#{datosInvoiceMecanicoController.listaMarca}" var="marcaSelecc" 
+                                               itemLabel="#{marcaSelecc.nombre}" itemValue="#{marcaSelecc.id}" />
+                                <p:ajax update="cmbModelo"/>
+                            </p:selectOneMenu>
+
+                            <h:outputLabel for="cmbModelo" value="Model:" style="font-weight:bold" rendered="#{datosInvoiceMecanicoController.esAuto()}"/>
+                            <p:selectOneMenu id="cmbModelo" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.modelo.id}"  rendered="#{datosInvoiceMecanicoController.esAuto()}">
+                                <f:selectItem itemLabel="Select one" itemValue="-1" />
+                                <f:selectItems value="#{datosInvoiceMecanicoController.listaModelos}" var="modeloSelecc" 
+                                               itemLabel="#{modeloSelecc.nombre}" itemValue="#{modeloSelecc.id}" />
+                            </p:selectOneMenu>
+
+
+                            <p:column rendered="#{datosInvoiceMecanicoController.esAutoExterno()}"/>
+                            <p:column rendered="#{datosInvoiceMecanicoController.esAutoExterno()}"/>
+
+
+                            <h:outputLabel for="txtDescripcion" value="Detail:" style="font-weight: bold;width: 800px" />
+                            <p:inputText  id="txtDescripcion"  value="#{datosInvoiceMecanicoController.invoiceActualDetalle.descripcion}" />
+
+                            <h:outputLabel for="txtCantidad" value="Quantity:" style="font-weight: bold"/>
+                            <p:inputText id="txtCantidad" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.cantidad}">
+                                <p:ajax event="blur" listener="#{datosInvoiceMecanicoController.calcularSubtotal()}" update="txtTotalSinGST"/>
+                            </p:inputText>
+
+                            <h:outputLabel for="txtPrecioUnitario" value="Unit price:" style="font-weight: bold" />
+                            <p:inputText id="txtPrecioUnitario" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.precio_unitario}" >
+                                <p:ajax event="blur" listener="#{datosInvoiceMecanicoController.calcularSubtotal()}" update="txtTotalSinGST"/>
+                            </p:inputText>
+
+                            <h:outputLabel for="txtTotalSinGST" value="Total without gst:" style="font-weight: bold" />
+                            <p:inputText id="txtTotalSinGST" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.subtotal_sin_gst}" >
+                                <p:ajax update="msgs"/>
+                            </p:inputText>
+
+                            <h:outputLabel for="checkGST" value="Inc GST:" style="font-weight: bold" />
+                            <p:selectBooleanCheckbox value="#{datosInvoiceMecanicoController.invoiceActualDetalle.inc_gst}" >
+                                <p:ajax listener="#{datosInvoiceMecanicoController.seleccionoIncGST()}" update="txtGST txtTotal txtTotalSinGST"/>
+                            </p:selectBooleanCheckbox>
+                            <h:outputLabel for="txtGST" value="Gst:" style="font-weight: bold" />
+                            <p:inputText id="txtGST" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.gst}" />
+
+                            <h:outputLabel for="txtTotal" value="Total:" style="font-weight: bold" />
+                            <p:inputText id="txtTotal" value="#{datosInvoiceMecanicoController.invoiceActualDetalle.subtotal}" >
+                                <p:ajax update="msgs"/>
+                            </p:inputText>
+
+
+                            <p:commandButton style="width: auto" value="Add new detail" update="panelGeneral" icon="ui-icon-plusthick" action="#{datosInvoiceMecanicoController.agregarDetalle()}"/>
+
+
+                        </p:panelGrid>
+
+                        <p:panel>
+                            <p:dataTable  resizableColumns="true" scrollable="true"   var="detalle" value="#{datosInvoiceMecanicoController.listaInvoiceDetalle}"    id="detalleTable" >
+                                <p:column  headerText="Type" style="width: auto">
+                                    <h:outputText value="#{grillaInvoiceMecanicoController.getDescripcionTipo(detalle.tipo)}" />
+                                </p:column>
+                                <p:column  headerText="Car" style="width: 300px">
+                                    <h:outputText value="#{datosInvoiceMecanicoController.getAuto(detalle)}" />
+                                </p:column>
+                                <p:column  headerText="Detail" sortBy="#{detalle.descripcion}" filterBy="#{detalle.descripcion}" style="width: auto">
+                                    <h:outputText value="#{detalle.descripcion}" />
+                                </p:column>
+                                <p:column headerText="Quantity" sortBy="#{detalle.cantidad}" filterBy="#{detalle.cantidad}">
+                                    <h:outputText value="#{detalle.cantidad}"/>
+                                </p:column>
+                                <p:column headerText="Unit price" sortBy="#{detalle.precio_unitario}" filterBy="#{detalle.precio_unitario}" style="width: auto">
+                                    <h:outputText value="#{detalle.precio_unitario}" />                                    
+                                </p:column>
+                                <p:column headerText="Subtotal before GST" sortBy="#{detalle.subtotal_sin_gst}" filterBy="#{detalle.subtotal_sin_gst}">
+                                    <h:outputText value="$#{detalle.subtotal_sin_gst}" />
+                                </p:column>
+                                <p:column headerText="GST" sortBy="#{detalle.gst}" filterBy="#{detalle.gst}">
+                                    <h:outputText value="#{detalle.gst}" />
+                                </p:column>
+                                <p:column headerText="Subtotal" sortBy="#{detalle.subtotal}" filterBy="#{detalle.subtotal}">
+                                    <h:outputText value="#{detalle.subtotal}" />
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton immediate="true" value="Remove" style="width: auto" update="detalleTable"  actionListener="#{datosInvoiceMecanicoController.eliminarDetalleFactura(detalle)}"/>
+                                </p:column>                                
+                            </p:dataTable>
+                        </p:panel>
+
+                        <p:panel style="text-align: center">
+                            <p:panelGrid id="grillaBotonesAceptar" columns="2" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                                <p:commandButton value="Submit" style="width: auto" update="formulariol"  rendered="#{datosInvoiceMecanicoController.accion=='R'}" actionListener="#{datosInvoiceMecanicoController.registrarInvoice()}"/>
+                                <p:commandButton value="Submit" style="width: auto" update="formulariol" actionListener="#{datosInvoiceMecanicoController.editarInvoice()}" rendered="#{datosInvoiceMecanicoController.accion=='M'}"/>
+                                <p:commandButton value="Cancel" action="GrillaInvoiceMecanico" immediate="true" style="width: auto"/>
+                            </p:panelGrid>
+                        </p:panel>                        
+
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

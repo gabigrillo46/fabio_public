@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="reportStatus">
+                    <p:growl id="messages" showDetail="true" />
+                    <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2" ajax="false">
+                        <p:dataExporter type="pdf" target="alquilerTable" fileName="Insurance"/>
+                    </p:commandButton>
+                    <p:commandButton value="XLS" styleClass="p-mr-2 p-mb-2" ajax="false">
+                        <p:dataExporter type="xls" target="alquilerTable" fileName="Insurance"/>
+                    </p:commandButton>
+                    <h:outputLabel id="cantidad" value="Quantity: #{reportInsuranceController.cantidadResultado}" style="font-weight:bold"/>
+                    <br/>
+                    <p:dataTable  emptyMessage=""   value="#{reportInsuranceController.listaAlquilerInsurance}" var="alquilerResultado" id="alquilerTable" sortBy="#{alquilerResultado.id}" 
+                                  rowIndexVar="fila">
+                        <p:column headerText="Number" >
+                            <h:outputText value="#{fila+1}"/>
+                        </p:column>
+                        <p:column headerText="Stock #"  >
+                            <h:outputText value="#{alquilerResultado.id}" />
+                        </p:column>
+                        <p:column headerText="Surname" >
+                            <h:outputText value="#{alquilerResultado.apellido}" />
+                        </p:column>
+                        <p:column headerText="Year" >
+                            <h:outputText value="#{alquilerResultado.auto.año}" />
+                        </p:column>
+                        <p:column headerText="Make" >
+                            <h:outputText value="#{alquilerResultado.auto.marca.nombre}" />
+                        </p:column>
+                        <p:column headerText="Model" >
+                            <h:outputText value="#{alquilerResultado.auto.modelo.nombre}" />
+                        </p:column>
+                        <p:column headerText="Rego" >
+                            <h:outputText value="#{alquilerResultado.auto.rego}" />
+                        </p:column>
+                        <p:column headerText="VIN" >
+                            <h:outputText value="#{alquilerResultado.auto.VIN}" />
+                        </p:column>
+                        <p:column headerText="Location" >
+                            <h:outputText value="#{alquilerResultado.auto.sucursal.nombre}" />
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

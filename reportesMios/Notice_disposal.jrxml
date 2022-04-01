@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Notice_disposal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="812" leftMargin="15" rightMargin="15" topMargin="10" bottomMargin="10" uuid="b5738963-952b-440c-9218-09852d317a0e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="dealerName" class="java.lang.String"/>
+	<parameter name="dealerLicence" class="java.lang.String"/>
+	<parameter name="dealerPhone" class="java.lang.String"/>
+	<parameter name="dealerDireccion" class="java.lang.String"/>
+	<parameter name="representante" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="listaDetalles" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="188">
+			<image>
+				<reportElement x="9" y="9" width="30" height="35" uuid="6aff7bc8-cdcf-4ff2-9c22-6406b4b295bb">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{SUBREPORT_DIR}+"LogoNSW.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="4" width="809" height="1" uuid="73ede672-0fa6-4b60-a388-7d022e2b468a"/>
+			</line>
+			<staticText>
+				<reportElement x="50" y="5" width="100" height="16" uuid="73a39490-4b86-40b6-aad6-d186bb2fc248">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Transport]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="20" width="100" height="27" uuid="8d3dfc04-2927-459e-9665-0c65168ad00d"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Road & Maritime Services]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="50" width="809" height="1" uuid="3b82dc7e-2a8c-4351-95ae-f2320da14370"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="150" y="4" width="657" height="42" uuid="f22fa979-38a7-4d54-aa1a-3ab2bc367218"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Bulk Notice of Disposal for Dealers and Auction Houses]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="47" width="809" height="1" uuid="8346760d-7625-402e-92a1-3c3c89596698"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="51" width="90" height="15" uuid="9e1336da-b8bf-444b-8166-eabe891496f2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dealer's details]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="587" y="92" width="221" height="17" uuid="f4077a71-420a-4374-8da0-8c48fa9eec52">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="587" y="51" width="220" height="22" uuid="386e75ef-645f-4dd6-90f1-076970ae646a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[I hereby authorise the transfer of the vehicles shown on
+this schedule]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="587" y="79" width="62" height="12" uuid="f1323a72-be1d-4e6d-9df3-3f1a1d86cdb3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="79" width="62" height="12" uuid="75eaf0ab-cc54-4080-be77-b1598cefa9d4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="92" width="240" height="17" uuid="d372e47e-d439-4f29-822e-c9e3d4efef4a">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="249" y="92" width="226" height="17" uuid="791279f6-dd31-4256-8dec-7dfbc9645989">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="249" y="79" width="62" height="12" uuid="9fb673cd-6d1c-43ee-9f06-0036c8ef9a1e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="117" width="110" height="12" uuid="da281d17-2274-40dc-a2bb-29a33cf69301">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dealer Licence number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="130" width="110" height="17" uuid="242e9478-657c-4e1d-b276-ca745faf2559">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="129" y="130" width="110" height="17" uuid="b61d3871-f788-40aa-ab83-8d22e8028289">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="129" y="117" width="110" height="12" uuid="f99b7dbc-bac1-4ef3-bae0-d6846eddfa21">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fax number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="249" y="130" width="141" height="17" uuid="9704f7ce-9e9c-4578-a55f-e1ead868fe48">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="249" y="118" width="110" height="12" uuid="65cfc177-e39a-4a7a-bb98-9a1d6c6b7941">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Phone number]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="399" y="130" width="240" height="17" uuid="44d908fc-95e7-49ef-91c0-541ab443ace2">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="399" y="117" width="99" height="12" uuid="6296c91d-ae74-4496-b4ab-339141d3bcec">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sender's name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="117" width="99" height="12" uuid="0944755b-9afc-41ca-9ce4-c071d506f144">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date sent to registry]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="660" y="130" width="146" height="17" uuid="c0578d1a-b04e-4ee6-97e3-6bc99c31dd90">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="663" y="131" width="128" height="16" uuid="1d3104ba-f6f6-4e9b-9108-2ff843d01abc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="160" width="70" height="28" uuid="a8b63755-dc0a-43e9-ba57-14ca01535833">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="160" width="59" height="28" uuid="45f5e219-5493-483b-926a-b262cf773db7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="129" y="160" width="70" height="28" uuid="52d6981f-df41-4146-a277-4bafc6f9ef2e">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="199" y="160" width="150" height="28" uuid="9423f84b-3bad-4c29-99e1-d1e44cd34e84"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="349" y="160" width="59" height="28" uuid="34039b20-0f22-45fd-8d9d-aff57dabff3d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="408" y="160" width="127" height="28" uuid="b654d4df-7870-4e49-b737-e734ae962542">
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="535" y="160" width="144" height="28" uuid="c427ae53-9953-4640-bcdc-06f05138a160"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="679" y="160" width="127" height="28" uuid="cce19a27-e5a8-4cc4-95c0-ce48022bc6de"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="160" width="69" height="28" uuid="b9b6f270-c4ac-4726-851f-a9414139ace8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Registration
+number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="72" y="160" width="57" height="28" uuid="51d6ee44-6f24-4dd7-a3f5-5774befdce8c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Date sold]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="160" width="68" height="28" uuid="ff124cdf-4f84-41c3-92ec-3c0b230edf71"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Market value]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="202" y="160" width="138" height="28" uuid="6b28dd4b-56a1-4e64-bf4d-42c9d45ddc14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[VIN/Chassis/Frame number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="161" width="57" height="27" uuid="ff95aee7-e38a-4f8d-b07a-7ee342f0e1b4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Odometer
+reading]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="160" width="120" height="28" uuid="c93face9-fe85-4581-be99-b65177e1ed6d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Buyer's full name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="537" y="160" width="100" height="28" uuid="8796ef82-d5af-4805-802e-9657b720825a"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Buyer's address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="682" y="161" width="100" height="27" uuid="e74c961e-aea8-4e56-be42-1cb9d59ce280"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Driver Licence No./
+Dealer Licence No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="4" y="92" width="226" height="17" uuid="0560aaea-ad07-4c9a-b587-cfca7d0da7b7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dealerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="252" y="92" width="218" height="17" uuid="2bea6e39-c10f-4403-89be-439a62bfc1f2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dealerDireccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="130" width="107" height="17" uuid="da61c424-7727-4d75-98bf-0ba2ec9379bc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dealerLicence}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="131" width="129" height="16" uuid="cad60705-ab70-4758-83be-64bf11a18f05"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dealerPhone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="131" width="228" height="16" uuid="ee6dfeec-f929-4fb4-a1cc-546c3ff210b5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{representante}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport>
+				<reportElement x="-1" y="0" width="806" height="30" uuid="e948ef1d-fd44-4e60-b338-b7af70c00547"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{listaDetalles})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} +"Notice_disposalDetalle.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="110">
+			<staticText>
+				<reportElement x="1" y="6" width="549" height="34" uuid="7cd98c65-d0cd-4ae7-8833-094449c30e0f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Show the name of the private buyers as it is shown on their driver's licence. Fax this sheet to your local motor registry within 5 days of the first sale listed
+on this sheet. Do NOT wait until the sheet is full. If any details are incorrect or illegible the Roads and Maritime Services (RMS) will return this sheet to
+you for correction. The form is available through the 'Motor Dealers Guide to Vehicle Registration' on the RMS Internet.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="80" width="252" height="30" uuid="190b6f5b-ba8b-41fa-bc36-6b2ff5bba785"/>
+				<text><![CDATA[Catalogue No. 45071228, Form No. 1392 (05/2021)]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

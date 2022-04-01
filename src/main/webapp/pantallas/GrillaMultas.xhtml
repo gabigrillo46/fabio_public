@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <div class="ui-fluid">
+                    <h:form id="form" >                    
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Infringement list</h1>
+                        </dir>
+                        <p:panel>
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                                <h:outputLabel for="txtApellido" value="Last name:" style="font-weight:bold"/>
+                                <p:inputText id="txtApellido" value="#{grillaMultasController.apellido}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtReferencia" value="Reference number:" style="font-weight:bold"/>
+                                <p:inputText id="txtReferencia" value="#{grillaMultasController.referencia}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtRego" value="Rego:" style="font-weight:bold"/>
+                                <p:inputText id="txtRego" value="#{grillaMultasController.rego}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="txtNumeroMulta" value="Infringement number:" style="font-weight:bold"/>
+                                <p:inputText id="txtNumeroMulta" value="#{grillaMultasController.numeroMulta}"/>
+                                <p:column/>
+                                <h:outputLabel for="cmbModelo" value="Printed:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbModelo" value="#{grillaMultasController.impreso}" >
+                                    <f:selectItem itemLabel="All" itemValue="-1"/>
+                                    <f:selectItem itemLabel="NO" itemValue="0"/>
+                                    <f:selectItem itemLabel="YES" itemValue="1"/>
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaMultasController.buscarPorFiltro()}"  update="multasTable"/>
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable reflow="true" scrollable="true"   style="height: 60vh" var="multa" value="#{grillaMultasController.listaMultas}" id="multasTable" 
+                                         selectionMode="single" selection="#{grillaMultasController.multaSeleccionada}" rowKey="#{multa.id}">
+
+                                <p:column headerText="Number" sortBy="#{multa.numero}" filterBy="#{multa.numero}">
+                                    <h:outputText value="#{multa.numero}" />
+                                </p:column>
+                                <p:column headerText="Rego" sortBy="#{multa.rego}" filterBy="#{multa.rego}">
+                                    <h:outputText value="#{multa.rego}" />
+                                </p:column>
+                                <p:column headerText="Authority" sortBy="#{multa.autoridad.nombre}" filterBy="#{multa.autoridad.nombre}">
+                                    <h:outputText value="#{multa.autoridad.nombre}" />
+                                </p:column>
+                                <p:column headerText="Date of Offence" sortBy="#{multa.fechaMulta}" filterBy="#{multa.fechaMulta}">
+                                    <h:outputText value="#{multa.fechaMulta}" />
+                                </p:column>
+                                <p:column headerText="Last name" sortBy="#{multa.clienteInfraccion.apellido}" filterBy="#{multa.clienteInfraccion.apellido}">
+                                    <h:outputText value="#{multa.clienteInfraccion.apellido}" />
+                                </p:column>
+                                <p:column headerText="Date Processed" sortBy="#{grillaMultasController.getFechaMostrar(multa.fechaCargada)}" filterBy="#{grillaMultasController.getFechaMostrar(multa.fechaCargada)}">
+                                    <h:outputText value="#{grillaMultasController.getFechaMostrar(multa.fechaCargada)}" />
+                                </p:column>
+                                <p:column headerText="Declared by" sortBy="#{multa.usuario.nombre} #{multa.usuario.apellido}" filterBy="#{multa.usuario.nombre} #{multa.usuario.apellido}">
+                                    <h:outputText value="#{multa.usuario.nombre} #{multa.usuario.apellido}" />
+                                </p:column>
+                                <p:column>   
+                                    <p:commandButton update="multasTable" value="Print" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{grillaMultasController.imprimir(multa.id)}" style="width: auto"  />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:contextMenu for="multasTable">
+                                <p:menuitem value="View"  icon="pi pi-search" action="#{grillaMultasController.setIdMulta}"/>
+                                <p:menuitem value="Delete"  icon="pi pi-times" action="#{grillaMultasController.eliminarMulta()}" update="multasTable">
+                                    <p:confirm header="Confirmation"  message="Are you sure?" icon="pi pi-exclamation-triangle" /> 
+                                </p:menuitem>
+                            </p:contextMenu>
+
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                            </p:confirmDialog>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

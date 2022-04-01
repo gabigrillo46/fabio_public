@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form" >
+                    <div class="ui-fluid">
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+                        <dir style="text-align: center">
+                            <h1>Notice of disposal</h1>
+                        </dir>
+                        <p:panel>
+                            <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+
+
+                                <h:outputLabel for="cmbSucursal" value="Branch:" style="font-weight:bold"/>
+                                <p:selectOneMenu id="cmbSucursal" value="#{reportDisposalController.idSucursalSelecc}" >
+                                    <f:selectItem itemLabel="All" itemValue="-1"/>
+                                    <f:selectItems value="#{reportDisposalController.listaSucursales}" var="sucursalSelecc" 
+                                                   itemLabel="#{sucursalSelecc.nombre}" itemValue="#{sucursalSelecc.id}" />
+                                </p:selectOneMenu>
+                                <p:column/>
+
+                                <h:outputLabel for="txtRego" value="Rego or Stock number:" style="font-weight: bold"/>
+                                <p:inputText id="txtRego" value="#{reportDisposalController.palabraBuscar}"/>
+                                <p:column/>
+
+                                <h:outputLabel for="chkWEB" value="Show cars already transferred:" style="font-weight: bold"/>
+                                <p:selectBooleanCheckbox id="chkWEB" value="#{reportDisposalController.autoTransferidos}" />
+                                <p:column/>
+
+                                <p:column/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+                                <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{reportDisposalController.buscarProFiltro()}"  update="carTable resultados"/>
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>                                
+                                <h:outputLabel value="Representative: "  for="txtRepresentante"/>
+                                <p:inputText id="txtRepresentante" value="#{reportDisposalController.representante}" />
+                                <p:column/>
+                                <p:column/>
+
+                                <p:column/>
+                                <p:column/>
+                                <p:column/>
+                                <p:commandButton id="botonPrint" update="form" value="Print" ajax="false" onclick="this.form.target = '_blank'" actionListener="#{reportDisposalController.imprimir()}"  style="width: auto"  />
+
+                            </p:panelGrid>
+                            <h:outputText id="resultados" value="Quantity: #{reportDisposalController.cantidadResultado}"/>
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable reflow="true" scrollable="true"   style="height: 60vh" var="auto" value="#{reportDisposalController.listaAutoResultado}"  id="carTable"  rowKey="#{auto.id}">
+                                <f:facet name="header">
+                                    Checkbox
+                                </f:facet>
+                                <p:column   style="width:16px;text-align:center">
+                                    <p:selectBooleanCheckbox >
+                                        <p:ajax update="form:messages" listener="#{reportDisposalController.seleccionoUnRegistro(auto)}" />
+                                    </p:selectBooleanCheckbox>
+                                </p:column>
+
+                                <p:column headerText="Stock number" sortBy="#{auto.stock}" filterBy="#{auto.stock}">
+                                    <h:outputText value="#{auto.stock}" />
+                                </p:column>
+                                <p:column headerText="Brand" sortBy="#{auto.marca.nombre}" filterBy="#{auto.marca.nombre}">
+                                    <h:outputText value="#{auto.marca.nombre}" />
+                                </p:column>                      
+                                <p:column headerText="Model" sortBy="#{auto.modelo.nombre}" filterBy="#{auto.modelo.nombre}">
+                                    <h:outputText value="#{auto.modelo.nombre}" />
+                                </p:column>
+                                <p:column headerText="Year" sortBy="#{auto.año}" filterBy="#{auto.año}">
+                                    <h:outputText value="#{auto.año}" />
+                                </p:column>
+                                <p:column headerText="Rego" sortBy="#{auto.rego}" filterBy="#{auto.rego}">
+                                    <h:outputText value="#{auto.rego}" />
+                                </p:column>
+                                <p:column headerText="Printed"  style="#{reportDisposalController.isEsImpresa(auto)? 'background-color: #33cc33;':'background-color: #ff3300;'}" >
+                                    <h:outputText value="#{reportDisposalController.getDisposalImpreso(auto)}" />
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </div>
+
+                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                        <p:panelGrid id="gridDialog" columns="3" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <p:column/>
+                            <p:column/>
+
+                        </p:panelGrid>
+                    </p:dialog> 
+
+                </h:form>                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

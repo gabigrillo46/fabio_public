@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <style type="text/css">
+            .panelGridCenter {
+                margin: 0 auto;
+            }
+        </style>
+
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formulario">
+                    <p:messages id="msgs" showDetail="true" closable="true" severity="info,warn"/>
+                    <p:growl id="mensajes" showDetail="true" severity="info, warn">
+                        <p:autoUpdate/>
+                    </p:growl>
+
+                    <p:outputLabel  style="font-weight:bold" value="#{summaryAlquilerPagos.cabecera}"/>    
+                    <p:commandButton value="Internal Notes" icon="pi pi-home" action="#{summaryAlquilerPagos.viewInternalNotes}" style="margin: 5px" />
+                    <p:commandButton value="SMS History" icon="pi pi-home" action="#{summaryAlquilerPagos.viewCarsCustomized}" style="margin: 5px" />
+                    <p:commandButton value="View Details" icon="pi pi-home" actionListener="#{summaryAlquilerPagos.verDetalleAlquiler()}" action="DatosRentalNew" style="margin: 5px" />
+
+                    <p:dataTable id="tablaImpuestos"  value="#{summaryAlquilerPagos.listaAlquilerImpuestos}" var="imp" sortBy="#{imp.alquiler.id}">
+                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column headerText="Rate and Fees"/>
+                                <p:column headerText="Weeks"/>
+                                <p:column headerText="Qty"/>
+                                <p:column headerText="Rate"/>
+                                <p:column headerText="Total"/>
+                            </p:row>
+                            <p:row>
+                                <p:column  headerText="Rate" style="background-color: #cccccc;
+                                           background-image: none !important; text-align: left;
+                                           color: #000000 !important; border: none"/>
+                                <p:column headerText="#{summaryAlquilerPagos.alquilerBD.semanas}" rendered="#{summaryAlquilerPagos.alquilerBD.diario==false}" style="background-color: #cccccc; 
+                                          background-image: none !important; text-align: left;
+                                          color: #000000 !important; border: none"/>
+                                <p:column headerText="#{summaryAlquilerPagos.alquilerBD.dias}" rendered="#{summaryAlquilerPagos.alquilerBD.diario}" style="background-color: #cccccc; 
+                                          background-image: none !important; text-align: left;
+                                          color: #000000 !important; border: none"/>
+                                <p:column headerText="-" style="background-color: #cccccc;
+                                          background-image: none !important; text-align: left;
+                                          color: #000000 !important; border: none"/>
+                                <p:column headerText="$#{summaryAlquilerPagos.alquilerBD.rate_per_day}" style="background-color: #cccccc;
+                                          background-image: none !important; text-align: left;
+                                          color: #000000 !important; border: none"/>
+                                <p:column headerText="$#{summaryAlquilerPagos.alquilerBD.total}" style="background-color: #cccccc;
+                                          background-image: none !important; text-align: left;
+                                          color: #000000 !important; border: none"/>
+                            </p:row>
+                        </p:columnGroup>
+                        <p:column>
+                            <h:outputText value="#{imp.impuesto.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="-"/>
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="#{imp.cantidad}"/>
+                        </p:column>                                
+                        <p:column>
+                            <h:outputText value="$#{imp.precio}"/>
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="$#{imp.subtotal}"/>
+                        </p:column>
+                        <p:summaryRow>
+                            <p:column colspan="4" style="text-align:right">
+                                <h:outputText value="Total:" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{summaryAlquilerPagos.alquilerBD.gran_total}">
+                                    <f:convertNumber type="currency" currencySymbol="$" />
+                                </h:outputText>
+                            </p:column>
+                        </p:summaryRow>
+
+                    </p:dataTable>
+
+                    <p:panel>
+                        <p:panelGrid columns="3"  style="margin-top:20px; width: 100%" styleClass="ui-noborder"  >
+
+                            <h:outputLabel value="General" style="font-weight:bold"/>
+                            <h:outputLabel value="Quantity" style="font-weight:bold"/>
+                            <h:outputLabel value="Total" style="font-weight:bold"/>
+
+
+
+                            <h:outputLabel value="Registered" />
+                            <p:column/>
+                            <h:outputLabel value="$#{summaryAlquilerPagos.totalGeneral}" />
+
+                            <h:outputLabel value="Payments" />
+                            <h:outputLabel value="#{summaryAlquilerPagos.cantidadPagosGeneral}" />
+                            <h:outputLabel value="$#{summaryAlquilerPagos.pagoGeneral}" />
+
+                            <p:column/>
+                            <p:column/>
+                            <p:separator/>
+                            <h:outputLabel value="Debt " />
+                            <p:column/>
+                            <h:outputLabel value="$#{summaryAlquilerPagos.deudaGeneral}" style="color: red" />
+
+                        </p:panelGrid>
+                    </p:panel>
+                    <p:panel id="current">
+                        <p:panelGrid columns="5"  style="margin-top:20px; width: 60%" id="situacionActual" styleClass="ui-noborder"  >
+                            <h:outputLabel style="width: 100px" value="Debt until today" />
+                            <p:column/>
+                            <p:column/>
+
+                            <h:outputLabel value="Expenses: "/>
+                            <h:outputLabel value="#{summaryAlquilerPagos.getExpensesCliente()}" />
+
+                            <h:outputLabel style="width: 100px" value="#{summaryAlquilerPagos.semanasCurrentPorRate}" />
+                            <h:outputLabel value="$#{summaryAlquilerPagos.totalSemanaCurrentPorRate}" />                            
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+
+                            <h:outputLabel style="width: 100px" value="Total fee" />
+                            <h:outputLabel value="$#{summaryAlquilerPagos.sumaTodosImpuestos}" />
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:separator/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+
+
+                            <h:outputLabel style="width: 100px" value="Current total debt" />
+                            <h:outputLabel value="$#{summaryAlquilerPagos.deudaTotalCurrent}" />
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+
+
+                            <h:outputLabel style="width: 100px" value="Total all payments" />
+                            <h:outputLabel value="$#{summaryAlquilerPagos.pagoGeneral}" />
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:separator/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+
+                            <h:outputLabel style="width: 100px" value="Current debt" />
+                            <h:outputLabel value="$#{summaryAlquilerPagos.deudaNetoCurrent}" style="color: red" />
+
+                        </p:panelGrid>                        
+                    </p:panel>
+                    <p:panel id="panelPago">
+                        <p:commandButton style="width: auto"  value="Add new payment"  icon="ui-icon-plusthick"  actionListener="#{summaryAlquilerPagos.setMostrarPago(true)}" update="panelPago" />
+                        <p:commandButton style="width: auto"  value="Charge late payment fee"  icon="ui-icon-plusthick"  actionListener="#{summaryAlquilerPagos.setMostrarChargeLatePayment(true)}" update="panelPago" />
+                        <p:panelGrid rendered="#{summaryAlquilerPagos.mostrarPago}" id="nuevoPago"  columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel value="Branch:" for="cmbSucursalPago" style="font-weight: bold "/>
+                            <p:selectOneMenu id="cmbSucursalPago"  value="#{summaryAlquilerPagos.pagoActual.sucursal.id}"
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{summaryAlquilerPagos.listaSucursales}" var="sucursalInicioSelecc"
+                                               itemLabel="#{sucursalInicioSelecc.nombre}" itemValue="#{sucursalInicioSelecc.id}"/>
+                            </p:selectOneMenu>
+                            <p:column/>
+                            <h:outputLabel value="Type:" for="cmbTypePago" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbTypePago"  value="#{summaryAlquilerPagos.pagoActual.tipoPago.id}"
+                                             required="true" requiredMessage="Must select one">
+                                <f:selectItems value="#{summaryAlquilerPagos.listaTipoPago}" var="tipoPagoSelecc"
+                                               itemLabel="#{tipoPagoSelecc.nombre}" itemValue="#{tipoPagoSelecc.id}"/>
+                            </p:selectOneMenu>
+                            <p:column/>
+
+                            <h:outputLabel value="Amount:"  for="txtMontoPago" style="font-weight: bold"/>
+                            <p:inputNumber id="txtMontoPago" disabled="#{summaryAlquilerPagos.pagoActual.automatico==1}" decimalPlaces="2" value="#{summaryAlquilerPagos.pagoActual.monto}" maxValue="2000000" label="$" />
+                            <p:message for="txtMontoPago"/>
+
+                            <h:outputLabel for="fechaPago"  value="Date:"  style="font-weight: bold"/>
+                            <p:calendar id="fechaPago" mask="true"  yearRange="c:c+20"  navigator="true" pattern="dd-MM-yyyy" value="#{summaryAlquilerPagos.pagoActual.fecha_hora}" />
+                            <p:column/>
+
+                            <h:outputLabel for="txtReference" value="Reference:" style="font-weight: bold"/>
+                            <p:inputText id="txtReference" value="#{summaryAlquilerPagos.pagoActual.nota}"  />
+                            <p:message for="txtReference"/>
+
+                            <p:column/>
+                            <p:column/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:commandButton value="Save"  actionListener="#{summaryAlquilerPagos.guardarPago}" update="panelPago formulario tablaImpuestos"  />
+                            <p:column/>
+                            <p:commandButton  value="Cancel"  actionListener="#{summaryAlquilerPagos.cancelarPago}" update="panelPago"   />
+                            <p:column/>
+
+                        </p:panelGrid>
+
+                    </p:panel>
+
+                    <p:panel>
+                        <p:dataTable reflow="true" var="pago"    style="border: 1px solid black" value="#{summaryAlquilerPagos.todosLosPagos}" id="pagosTable" >
+                            <p:column headerText="Fecha" sortBy="#{pago.fecha_hora}" filterBy="#{pago.fecha_hora}"  >                                               
+                                <h:outputText value="#{pago.fecha_hora}">
+                                    <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Receipt Number" sortBy="#{pago.recibo_numero}" filterBy="#{pago.recibo_numero}">
+                                <h:outputText value="#{pago.recibo_numero}" />
+                            </p:column>
+                            <p:column headerText="Status" style="#{summaryAlquilerPagos.esPagoAprovado(pago)? 'background-color: #33cc33;':''} ;#{summaryAlquilerPagos.esPagoDeclined(pago)? 'background-color: #ff3300;':''} ;#{summaryAlquilerPagos.esPagoWarning(pago)? 'background-color: #f0fc03;':''};#{summaryAlquilerPagos.esPagoWarningBalanceado(pago)? 'background-color: #42cef5;':''}"  sortBy="#{pago.status}" filterBy="#{pago.status}">
+                                <h:outputText  value="#{pago.status}" />
+                            </p:column>
+                            <p:column headerText="Type" sortBy="#{pago.tipoPago.nombre}" filterBy="#{pago.tipoPago.nombre}">
+                                <h:outputText value="#{pago.tipoPago.nombre}" />
+                            </p:column>
+                            <p:column headerText="Note" sortBy="#{pago.nota}" filterBy="#{pago.nota}" style="width: 300px">
+                                <h:outputText value="#{pago.nota} By: (#{pago.usuario.nombre} #{pago.usuario.apellido})" />
+                            </p:column>
+
+                            <p:column headerText="Paid Amount" sortBy="#{pago.monto}" filterBy="#{pago.monto}">
+                                <h:outputText value="$#{pago.monto}" />
+                            </p:column>
+                            <p:column>
+                                <p:commandLink  value="Edit" actionListener="#{summaryAlquilerPagos.editarPago(pago.id)}" update="formulario:panelPago"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

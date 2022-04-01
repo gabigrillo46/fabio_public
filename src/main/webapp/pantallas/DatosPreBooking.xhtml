@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">           
+            <ui:define name="content">
+                <h:form id="formulario">
+                    <p:panelGrid id="grid" columns="6" layout="grid"  columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid"  >
+                        <h:outputLabel value="PreBooking Number:" style="font-weight:bold; width: 300px"/>
+                        <h:outputLabel value="#{datosPreBooking.preBookingActual.id}" style="font-weight:bold; width: 300px"/>
+                        <p:column/>
+                        <h:outputLabel value="Name:" style="font-weight:bold;width: 300px "/>
+                        <h:outputLabel value="#{datosPreBooking.preBookingActual.cliente.nombre}" style="width: 300px"/>
+                        <p:column/>
+                        <h:outputLabel for="txtApellidoCliente" value="Last name:" style="font-weight:bold;width: 300px"/>
+                        <h:outputText id="txtApellidoCliente" value="#{datosPreBooking.preBookingActual.cliente.apellido}" style="width: 300px" />
+                        <p:column/>
+                        <h:outputLabel for="txtNumeroLicencia" value="License number:" style="font-weight:bold;width: 300px"/>
+                        <h:outputText id="txtNumeroLicencia" value="#{datosPreBooking.preBookingActual.cliente.licencia_numero}" style="width:  300px" />
+                        <p:column/>
+                        <h:outputLabel for="txtOtorgadaEN" value="Granted in" style="font-weight:bold; width: 300px"/>
+                        <h:outputText id="txtOtorgadaEN" value="#{datosPreBooking.preBookingActual.cliente.otorgadaEN}" style="width:  300px" />
+                        <p:column/>
+                        <h:outputLabel value="Email:" for="txtEmail" style="font-weight: bold; width: 300px"/>
+                        <h:outputText id="txtEmail" value="#{datosPreBooking.preBookingActual.cliente.email}" style="width:  300px" />
+                        <p:column/>
+                        <h:outputLabel for="fechaNacimiento" value="DOB:" style="font-weight: bold;width: 300px" />
+                        <h:outputText id="fechaNacimiento" value="#{datosPreBooking.getFechaPrebookingBarras()}" style="width: 300px" />                    
+                        <p:column/>
+                        <h:outputLabel value="Mobile:" for="txtTelefono" style="font-weight: bold;width: 300px"/>
+                        <h:outputText id="txtTelefono" value="#{datosPreBooking.preBookingActual.cliente.movil}" style="width: 300px" />
+                        <p:column/>
+                        <h:outputLabel value="Address:" for="txtDireccion" style="font-weight: bold;width: 300px"/>
+                        <h:outputText id="txtDireccion" value="#{datosPreBooking.preBookingActual.cliente.direccion}" style="width:  300px"/>
+                        <p:column/>
+                        <h:outputLabel value="Postal Code:" for="txtCodigoPostal" style="font-weight: bold;width: 300px"/>
+                        <h:outputText id="txtCodigoPostal" value="#{datosPreBooking.preBookingActual.cliente.codigo_postal}" style="width:  300px"/>
+                        <p:column/>
+                        <h:outputLabel for="cmbSuburb" value="Suburb:" style="font-weight:bold;width: 300px"/>
+                        <h:outputText id="cmbSuburb" value="#{datosPreBooking.preBookingActual.cliente.suburbio}" style="width:  300px" />
+                        <p:column/>
+                        <h:outputLabel for="txtState" value="State:" style="font-weight:bold;width: 300px"/>
+                        <h:outputText id="txtState" value="#{datosPreBooking.preBookingActual.cliente.state.nombre}" style="width: 300px"/>
+                        <p:column/>
+
+                        <h:outputLabel for="cmbCar" value="Car:" style="font-weight:bold;width: 300px"/>
+                        <h:outputText id="cmbCar" value="#{datosPreBooking.getDescripcionAuto()}" style="width: auto" />
+                        <p:column/>
+                        <p:column/>
+                        <p:column/>
+                        <p:column/>
+
+                        <h:outputLabel for="txtMensaje" value="Note:" style="font-weight:bold"/>
+                        <p:inputTextarea readonly="true" id="txtMensaje" value="#{datosPreBooking.preBookingActual.mensaje}" rows="6" style="width: 100%"  />
+                        <p:column/>
+                    </p:panelGrid>
+                    <p:panelGrid id="gridComentario" layout="grid" columns="6" >
+                        <h:outputLabel for="txtNota" value="Note:" style="font-weight:bold"/>
+                        <p:inputText id="txtNota" value="#{datosPreBooking.nota}" style="width: 100%;margin-right: auto"  />
+                        <p:commandButton style="width: auto"  value="Add note"  icon="ui-icon-plusthick"  actionListener="#{datosPreBooking.agregarNota()}" update="comentarioPreBooking gridComentario" />
+                    </p:panelGrid>
+                    <p:dataTable reflow="true" var="comentario"    style="border: 1px solid black" value="#{datosPreBooking.listaComentarios}" id="comentarioPreBooking" >
+                        <p:column headerText="Fecha">
+                            <h:outputText value="#{comentario.fecha}">
+                                <f:convertDateTime  locale="us" pattern="dd-MM-yyyy HH:mm"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="User" >
+                            <h:outputText value="#{comentario.usuario.nombre} #{comentario.usuario.apellido}" />
+                        </p:column>
+                        <p:column headerText="Note" >
+                            <h:outputText value="#{comentario.mensaje}" />
+                        </p:column>
+                        <p:column>
+                            <p:commandButton immediate="true" value="Remove" style="width: auto" update="formulario"  actionListener="#{datosPreBooking.eliminarComentario(comentario)}"/>
+                        </p:column>
+
+                    </p:dataTable>                
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

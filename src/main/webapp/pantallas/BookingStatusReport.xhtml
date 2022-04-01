@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+                <h:form id="reportStatus">
+                    <p:messages id="msgs" showDetail="true" showSummary="true" severity="info,warning"/>
+                    <p:panel id="filtros">
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+                            <h:outputLabel for="fechaInicio" value="From (Date pickup)" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaInicio" navigator="true" pattern="dd-MM-yyyy" value="#{bookingStatusReportController.fechaDesde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="To (Date pickup)" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaFin" navigator="true" pattern="dd-MM-yyyy" value="#{bookingStatusReportController.fechaHasta}" />
+                            <p:commandButton value="Clear" action="#{bookingStatusReportController.limpiarFechaPickup()}" update="filtros"/>
+
+                            <h:outputLabel value="Type:" for="cmbType" style="font-weight:bold"/>
+                            <p:selectOneMenu id="cmbType" value="#{bookingStatusReportController.estado}" style="width:125px">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItem itemLabel="Hired" itemValue="2" />
+                                <f:selectItem itemLabel="Reservation" itemValue="1" />
+                                <f:selectItem itemLabel="Returned" itemValue="3" />
+                                <f:selectItem itemLabel="Cancelled" itemValue="4" />
+                                <f:selectItem itemLabel="Sold" itemValue="6" />
+                                <f:selectItem itemLabel="Repo" itemValue="7" />
+                                <f:selectItem itemLabel="Courtesy" itemValue="8" />
+                            </p:selectOneMenu>
+                            <p:column/>
+                            <h:outputLabel for="cmbSucursal" value="Branch:" style="font-weight: bold"/>
+                            <p:selectOneMenu id="cmbSucursal" value="#{bookingStatusReportController.idSucursalFiltro}">
+                                <f:selectItem itemLabel="All" itemValue="-1" />
+                                <f:selectItems value="#{bookingStatusReportController.listaSucursales}" var="sucursalSelecc"
+                                               itemLabel="#{sucursalSelecc.nombre}" itemValue="#{sucursalSelecc.id}"/>
+                            </p:selectOneMenu>
+                            <p:column/>    
+                            <h:outputLabel for="fechaInicioDrop" value="From (Date dropoff)" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaInicioDrop" navigator="true" pattern="dd-MM-yyyy" value="#{bookingStatusReportController.fechaDesdeDrop}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFinDrop" value="To (Date dropoff)" style="font-weight: bold"/>
+                            <p:calendar mask="true" id="fechaFinDrop" navigator="true" pattern="dd-MM-yyyy" value="#{bookingStatusReportController.fechaHastaDrop}" />
+                            <p:commandButton value="Clear" style="width: auto" action="#{bookingStatusReportController.limpiarFechaDropoff()}" update="filtros"/>
+
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{bookingStatusReportController.buscarPorFiltro}"  update="reportStatus:alquilerTable reportStatus:cantidad"/>
+                        </p:panelGrid>
+                    </p:panel>
+
+                    <h:outputLabel id="cantidad" value="Quantity: #{bookingStatusReportController.cantidadResultado}" style="font-weight:bold"/>
+                    <br/>
+                    <p:dataTable  emptyMessage=""   value="#{bookingStatusReportController.alquileresResultado}" var="alquilerFiltrado" id="alquilerTable" sortBy="#{alquilerFiltrado.agrupacion}" >                                          
+                        <p:column headerText="Reference" sortBy="#{alquilerFiltrado.id}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:commandLink action="#{bookingStatusReportController.viewCarsCustomized(alquilerFiltrado)}" value="#{alquilerFiltrado.id}"/>
+                        </p:column>
+                        <p:column headerText="Rego" sortBy="#{alquilerFiltrado.rego}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}" >
+                            <h:outputText value="#{alquilerFiltrado.rego}" />
+                        </p:column>
+                        <p:column headerText="Client" sortBy="#{alquilerFiltrado.apellido}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="#{alquilerFiltrado.apellido}" />
+                        </p:column>
+                        <p:column headerText="Status" sortBy="#{bookingStatusReportController.getEstadoStr(alquilerFiltrado)}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="#{bookingStatusReportController.getEstadoStr(alquilerFiltrado)}" />
+                        </p:column>
+                        <p:column headerText="Pickup Location" sortBy="#{alquilerFiltrado.sucursal_origen.nombre}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}" >
+                            <h:outputText value="#{alquilerFiltrado.sucursal_origen.nombre}" />
+                        </p:column>
+                        <p:column headerText="Pick up date" sortBy="#{alquilerFiltrado.fecha_inicio}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="#{alquilerFiltrado.fecha_inicio}">
+                                <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Dropoff Location" sortBy="#{alquilerFiltrado.sucursal_destino.nombre}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="#{alquilerFiltrado.sucursal_destino.nombre}" />
+                        </p:column>
+                        <p:column headerText="Dropoff Date" sortBy="#{alquilerFiltrado.fecha_fin}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="#{alquilerFiltrado.fecha_fin}">
+                                <f:convertDateTime  locale="us" pattern="dd-MM-yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Money entered" sortBy="#{alquilerFiltrado.gran_total}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="$#{alquilerFiltrado.dineroIngresado}"/>
+                        </p:column>
+
+                        <p:column headerText="Booking total" sortBy="#{alquilerFiltrado.gran_total}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="$#{alquilerFiltrado.gran_total}"/>
+                        </p:column>
+                        <p:column headerText="Rental fee" sortBy="#{alquilerFiltrado.total}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="$#{alquilerFiltrado.total}"/>
+                        </p:column>
+
+                        <p:column headerText="Balance due" sortBy="#{alquilerFiltrado.deuda}" style="#{bookingStatusReportController.esAlquilerRepo(alquilerFiltrado)? 'background-color: #F51010;':''};#{bookingStatusReportController.esAlquilerReturn(alquilerFiltrado)? 'background-color: #1F9EFB;':''};#{bookingStatusReportController.esAlquilerCancelado(alquilerFiltrado)? 'background-color: #FFA07A;':''}">
+                            <h:outputText value="$#{alquilerFiltrado.deuda}"/>
+                        </p:column>
+                        <p:summaryRow>
+                            <p:column colspan="8" style="text-align:right">
+                                <h:outputText value="Total:" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{bookingStatusReportController.dineroIngresado}">
+                                    <f:convertNumber type="currency" currencySymbol="$" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column>
+                                <h:outputText value="#{bookingStatusReportController.totalGranTotal}">
+                                    <f:convertNumber type="currency" currencySymbol="$" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{bookingStatusReportController.totalRentalFee}">
+                                    <f:convertNumber type="currency" currencySymbol="$" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{bookingStatusReportController.totalDeuda}">
+                                    <f:convertNumber type="currency" currencySymbol="$" />
+                                </h:outputText>
+                            </p:column>
+
+                        </p:summaryRow>
+                    </p:dataTable>
+
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

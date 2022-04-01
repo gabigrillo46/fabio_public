@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+
+                <h:form id="formulario">
+                    <p:growl id="messages" showDetail="true" >
+                        <p:autoUpdate/>
+                    </p:growl>                                        
+                    <h:panelGrid id="gridTemplate" columns="3" style="margin-left:  200px;margin-bottom: 10px">
+
+                        <h:outputLabel for="cmbTemplate" value="Model:" style="font-weight:bold"/>
+                        <p:selectOneMenu id="cmbTemplate" value="#{datosMensajeController.templateSeleccionado.id}" 
+                                         required="true" requiredMessage="Must select one" >
+                            <p:ajax event="change" update="gridTemplate"
+                                    listener="#{datosMensajeController.templateSelecc}" />
+                            <f:selectItem itemLabel="Custom" itemValue="-1" />
+                            <f:selectItems value="#{datosMensajeController.listaTemplate}" var="templateSelecc" 
+                                           itemLabel="#{templateSelecc.nombre}" itemValue="#{templateSelecc.id}" />
+                        </p:selectOneMenu>
+                        <p:message for="cmbTemplate"/>
+
+
+                        <h:outputLabel id="label" for="txtMensajeCustom" value="Message: " rendered="#{datosMensajeController.mostrarMensajeCustom}" style="font-weight:bold"/>
+                        <p:inputTextarea rows="2" cols="50" id="txtMensajeCustom" value="#{datosMensajeController.mensajeCustom}" rendered="#{datosMensajeController.mostrarMensajeCustom}"/>
+                        <p:message for="txtMensajeCustom" rendered="#{datosMensajeController.mostrarMensajeCustom}" />
+                        <h:outputText value="Show:" style="font-weight:bold"/>
+                        <p:selectOneMenu id="cmbTipo" value="#{datosMensajeController.tipoMostrar}" 
+                                         required="true" requiredMessage="Must select one" >
+                            <p:ajax event="change" update="formulario"
+                                    listener="#{datosMensajeController.tipoSelecc()}" />
+                            <f:selectItem itemLabel="Active agreements" itemValue="0" />
+                            <f:selectItem itemLabel="Good Customer" itemValue="1" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <!--  </h:form>
+                    <h:panelGrid id="gridImage" columns="3" style="margin-left:  200px;margin-bottom: 10px">
+                         <h:form enctype="multipart/form-data" style="width:500px" rendered="{datosMensajeController.mostrarMensajeCustom}">
+                             <p:fileUpload value="{datosMensajeController.file}" mode="simple" multiple="false"
+                                           fileUploadListener="{datosMensajeController.fileUploadListener}" />
+                             <p:commandButton value="Upload" update="formulario"  ajax="false" action="{datosMensajeController.upload}" styleClass="p-mt-3 ui-button-outlined p-d-block"/>                            
+                             <h:outputText value="{datosMensajeController.nombreImagen}" style="font-weight:bold"/>
+                         </h:form>
+                     </h:panelGrid>
+                     <h:form id="formularioLIsta">-->
+
+
+                    <p:pickList rendered="#{datosMensajeController.mostrarAlquileresActivos}" id="PojoPickList" value="#{datosMensajeController.themes}" var="alq" effect="bounce"  converter="empConverter"
+                                itemValue="#{alq}" itemLabel="#{datosMensajeController.valorListaAlq(alq)}" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" responsive="true">
+
+                        <f:facet name="sourceCaption">All clients</f:facet>
+                        <f:facet name="targetCaption">Selected clients</f:facet>
+
+                        <p:ajax event="transfer" />
+                        <p:ajax event="select" />
+                        <p:ajax event="unselect"/>
+                        <p:ajax event="reorder" />
+
+
+
+                        <p:column style="width:85%;">
+                            <h:outputText value="#{datosMensajeController.valorListaAlq(alq)}" />
+                        </p:column>
+                    </p:pickList>
+                    <p:pickList rendered="#{datosMensajeController.mostrarBuenCliente}" id="PojoPickListCliente" value="#{datosMensajeController.themesCliente}" var="cli" effect="bounce"  converter="empConverterCliente"
+                                itemValue="#{cli}" itemLabel="#{datosMensajeController.valorListaCli(cli)}" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" responsive="true">
+
+                        <f:facet name="sourceCaption">All clients</f:facet>
+                        <f:facet name="targetCaption">Selected clients</f:facet>
+
+                        <p:ajax event="transfer" />
+                        <p:ajax event="select" />
+                        <p:ajax event="unselect"/>
+                        <p:ajax event="reorder" />
+
+
+
+                        <p:column style="width:85%;">
+                            <h:outputText value="#{datosMensajeController.valorListaCli(cli)}" />
+                        </p:column>
+                    </p:pickList>                    
+                    <p:dataList id="listaMensajes" value="#{datosMensajeController.listaMensajes}" var="car" type="ordered">
+                        <f:facet name="header">
+                            Outcome
+                        </f:facet>
+                        #{car}
+                    </p:dataList>
+
+                    <p:commandButton id="pojoSubmit" value="Send" actionListener="#{datosMensajeController.summit}" update="listaMensajes"/>
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

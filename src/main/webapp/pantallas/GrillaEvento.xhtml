@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templeates/plantillaPrincipal.xhtml">
+
+            <ui:define name="content">
+
+                <div class="ui-fluid">
+                    <h:form id="form" >
+                        <p:growl id="messages" showDetail="true" >
+                            <p:autoUpdate/>
+                        </p:growl>                    
+
+                        <dir style="text-align: center">
+                            <h1>Event list</h1>
+                        </dir>
+
+                        <p:panelGrid id="grid" columns="6" layout="grid" columnClasses="p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4, p-col-12 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4" styleClass="customPanelGrid">
+
+                             <h:outputLabel for="fechaInicio" value="From:" style="font-weight: bold"/>
+                             <p:calendar id="fechaInicio" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaEventoController.fechaDesde}" />
+                            <p:column/>
+                            <h:outputLabel for="fechaFin" value="To:" style="font-weight: bold"/>
+                            <p:calendar id="fechaFin" navigator="true" mask="true" pattern="dd-MM-yyyy" value="#{grillaEventoController.fechaHasta}" />
+                            <p:column/>
+                            
+                            <h:outputLabel for="txtEmail" value="Email:" style="font-weight:bold"/>
+                            <p:inputText id="txtEmail" value="#{grillaEventoController.email}"/>
+                            <p:column/>
+
+                            <p:column/>
+                            <p:column/>
+                            <p:column/>
+                            
+                            
+                            <p:column/>
+                            <p:commandButton style="width: auto" value="Search" icon="ui-icon-plusthick" action="#{grillaEventoController.buscarPorFiltro()}"  update="eventoTable labelResultado"/>
+                        </p:panelGrid>
+                        <p:panel>
+                            <p:outputLabel id="labelResultado" value="Number of results returned: #{grillaEventoController.cantidadResultados}"/>
+                        </p:panel>
+                        <p:panel>
+                            <p:dataTable   var="evento"  value="#{grillaEventoController.listaEventos}"    id="eventoTable" >
+                                <p:column headerText="Name" filterBy="#{evento.usuario.email}">
+                                    <h:outputText value="#{evento.usuario.email}" />
+                                </p:column>
+                                <p:column headerText="Date" sortBy="#{evento.fecha}" filterBy="#{evento.fecha_hora}">
+                                    <h:outputText value="#{evento.fecha_hora}"/>
+                                </p:column>
+                                <p:column headerText="Type" >
+                                    <h:outputText value="#{grillaEventoController.getTipoEvento(evento)}" />
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+                </div>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
